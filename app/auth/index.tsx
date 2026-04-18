@@ -6,6 +6,7 @@ import { Href, router } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
 const loginRoute = "/screens/login" as Href;
+const signupRoute = "/screens/signup" as Href;
 
 export default function AuthIndex() {
   return (
@@ -19,7 +20,11 @@ export default function AuthIndex() {
 
       <View style={styles.footer}>
         <AppButton label="Sign in" onPress={() => router.push(loginRoute)} />
-        <AppButton label="Create account" variant="secondary" />
+        <AppButton
+          label="Create account"
+          variant="secondary"
+          onPress={() => router.push(signupRoute)}
+        />
       </View>
     </AppScreen>
   );
