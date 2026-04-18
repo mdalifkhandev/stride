@@ -11,17 +11,58 @@ import { UnitToggle } from "../../../components/signup/UnitToggle";
 import { colors, spacing, textStyles } from "../../../theme/theme";
 
 const WEIGHT_OPTIONS = [
-  { left: "60", right: "10" },
-  { left: "100", right: "55" },
-  { left: "80", right: "00" },
-  { left: "90", right: "25" },
-  { left: "300", right: "05" },
+  "060",
+  "061",
+  "062",
+  "063",
+  "064",
+  "065",
+  "066",
+  "067",
+  "068",
+  "069",
+  "070",
+  "071",
+  "072",
+  "073",
+  "074",
+  "075",
+  "076",
+  "077",
+  "078",
+  "079",
+  "080",
+  "081",
+  "082",
+  "083",
+  "084",
+  "085",
+  "086",
+  "087",
+  "088",
+  "089",
+  "090",
+] as const;
+
+const WEIGHT_DECIMALS = [
+  "00",
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
 ] as const;
 
 export default function SignupWeightScreen() {
   const router = useRouter();
   const [unit, setUnit] = useState<"Pounds" | "Kg">("Kg");
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedLeftIndex, setSelectedLeftIndex] = useState(20);
+  const [selectedRightIndex, setSelectedRightIndex] = useState(0);
 
   return (
     <AppScreen>
@@ -32,9 +73,12 @@ export default function SignupWeightScreen() {
         <UnitToggle options={["Pounds", "Kg"] as const} value={unit} onChange={setUnit} />
 
         <ScrollMeasurePicker
-          values={WEIGHT_OPTIONS}
-          selectedIndex={selectedIndex}
-          onChange={setSelectedIndex}
+          leftValues={WEIGHT_OPTIONS}
+          rightValues={WEIGHT_DECIMALS}
+          selectedLeftIndex={selectedLeftIndex}
+          selectedRightIndex={selectedRightIndex}
+          onChangeLeft={setSelectedLeftIndex}
+          onChangeRight={setSelectedRightIndex}
         />
       </View>
 

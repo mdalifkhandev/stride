@@ -28,7 +28,6 @@ export default function SignupProfileScreen() {
           placeholder="example@gamil.com"
           keyboardType="email-address"
         />
-
       </ScrollView>
 
       <AppButton
@@ -52,8 +51,8 @@ const styles = StyleSheet.create({
     ...textStyles.h1,
     color: colors.text.primary,
     fontWeight: "700",
-    lineHeight: 52,
-    maxWidth: 250,
+    lineHeight: 42,
+    // maxWidth: 250,
     marginBottom: spacing[8],
   },
 });

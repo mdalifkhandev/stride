@@ -4,15 +4,13 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { colors, radius, spacing, textStyles } from "../../theme/theme";
 
-type PickerValue = {
-  left: string;
-  right: string;
-};
-
 type ScrollMeasurePickerProps = {
-  values: readonly PickerValue[];
-  selectedIndex: number;
-  onChange: (index: number) => void;
+  leftValues: readonly string[];
+  rightValues: readonly string[];
+  selectedLeftIndex: number;
+  selectedRightIndex: number;
+  onChangeLeft: (index: number) => void;
+  onChangeRight: (index: number) => void;
 };
 
 const ITEM_HEIGHT = 56;
@@ -20,77 +18,117 @@ const VISIBLE_ROWS = 3;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ROWS;
 
 export function ScrollMeasurePicker({
-  values,
-  selectedIndex,
-  onChange,
+  leftValues,
+  rightValues,
+  selectedLeftIndex,
+  selectedRightIndex,
+  onChangeLeft,
+  onChangeRight,
 }: ScrollMeasurePickerProps) {
-  const scrollRef = useRef<ScrollView>(null);
-  const spacerHeight = useMemo(
-    () => (CONTAINER_HEIGHT - ITEM_HEIGHT) / 2,
-    [],
-  );
+  const leftScrollRef = useRef<ScrollView>(null);
+  const rightScrollRef = useRef<ScrollView>(null);
+  const spacerHeight = useMemo(() => (CONTAINER_HEIGHT - ITEM_HEIGHT) / 2, []);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      scrollRef.current?.scrollTo({
-        y: selectedIndex * ITEM_HEIGHT,
+      leftScrollRef.current?.scrollTo({
+        y: selectedLeftIndex * ITEM_HEIGHT,
+        animated: false,
+      });
+      rightScrollRef.current?.scrollTo({
+        y: selectedRightIndex * ITEM_HEIGHT,
         animated: false,
       });
     }, 0);
 
     return () => clearTimeout(timeoutId);
-  }, [selectedIndex]);
+  }, [selectedLeftIndex, selectedRightIndex]);
 
-  const handleMomentumEnd = (offsetY: number) => {
-    const nextIndex = Math.max(
-      0,
-      Math.min(values.length - 1, Math.round(offsetY / ITEM_HEIGHT)),
-    );
-
-    if (nextIndex !== selectedIndex) {
-      onChange(nextIndex);
-    } else {
-      scrollRef.current?.scrollTo({
-        y: nextIndex * ITEM_HEIGHT,
-        animated: true,
-      });
-    }
+  const getNextIndex = (offsetY: number, length: number) => {
+    return Math.max(0, Math.min(length - 1, Math.round(offsetY / ITEM_HEIGHT)));
   };
+
+  const handleLeftMomentumEnd = (offsetY: number) => {
+    const nextIndex = getNextIndex(offsetY, leftValues.length);
+
+    if (nextIndex !== selectedLeftIndex) {
+      onChangeLeft(nextIndex);
+      return;
+    }
+
+    leftScrollRef.current?.scrollTo({
+      y: nextIndex * ITEM_HEIGHT,
+      animated: true,
+    });
+  };
+
+  const handleRightMomentumEnd = (offsetY: number) => {
+    const nextIndex = getNextIndex(offsetY, rightValues.length);
+
+    if (nextIndex !== selectedRightIndex) {
+      onChangeRight(nextIndex);
+      return;
+    }
+
+    rightScrollRef.current?.scrollTo({
+      y: nextIndex * ITEM_HEIGHT,
+      animated: true,
+    });
+  };
+
+  const renderColumn = (
+    values: readonly string[],
+    selectedIndex: number,
+    scrollRef: React.RefObject<ScrollView | null>,
+    onMomentumEnd: (offsetY: number) => void,
+  ) => (
+    <ScrollView
+      ref={scrollRef}
+      style={styles.column}
+      contentContainerStyle={[
+        styles.content,
+        { paddingTop: spacerHeight, paddingBottom: spacerHeight },
+      ]}
+      showsVerticalScrollIndicator={false}
+      snapToInterval={ITEM_HEIGHT}
+      decelerationRate="fast"
+      bounces={false}
+      onMomentumScrollEnd={(event) =>
+        onMomentumEnd(event.nativeEvent.contentOffset.y)
+      }>
+      {values.map((value, index) => {
+        const selected = index === selectedIndex;
+
+        return (
+          <View key={`${value}-${index}`} style={styles.item}>
+            <Text style={[styles.value, selected && styles.valueSelected]}>
+              {value}
+            </Text>
+          </View>
+        );
+      })}
+    </ScrollView>
+  );
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.selectionBox} />
 
-      <ScrollView
-        ref={scrollRef}
-        style={styles.scroll}
-        contentContainerStyle={[
-          styles.content,
-          { paddingTop: spacerHeight, paddingBottom: spacerHeight },
-        ]}
-        showsVerticalScrollIndicator={false}
-        snapToInterval={ITEM_HEIGHT}
-        decelerationRate="fast"
-        bounces={false}
-        onMomentumScrollEnd={(event) =>
-          handleMomentumEnd(event.nativeEvent.contentOffset.y)
-        }>
-        {values.map((item, index) => {
-          const selected = index === selectedIndex;
+      {renderColumn(
+        leftValues,
+        selectedLeftIndex,
+        leftScrollRef,
+        handleLeftMomentumEnd,
+      )}
 
-          return (
-            <View key={`${item.left}-${item.right}-${index}`} style={styles.item}>
-              <Text style={[styles.value, selected && styles.valueSelected]}>
-                {item.left}
-              </Text>
-              <Text style={styles.divider}>|</Text>
-              <Text style={[styles.value, selected && styles.valueSelected]}>
-                {item.right}
-              </Text>
-            </View>
-          );
-        })}
-      </ScrollView>
+      <Text style={styles.divider}>|</Text>
+
+      {renderColumn(
+        rightValues,
+        selectedRightIndex,
+        rightScrollRef,
+        handleRightMomentumEnd,
+      )}
     </View>
   );
 }
@@ -102,6 +140,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     position: "relative",
     justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   },
   selectionBox: {
     position: "absolute",
@@ -116,7 +156,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     pointerEvents: "none",
   },
-  scroll: {
+  column: {
     flex: 1,
   },
   content: {
@@ -124,11 +164,9 @@ const styles = StyleSheet.create({
   },
   item: {
     height: ITEM_HEIGHT,
-    width: 160,
-    flexDirection: "row",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    gap: spacing[4],
     zIndex: 1,
   },
   value: {
@@ -144,5 +182,7 @@ const styles = StyleSheet.create({
   divider: {
     ...textStyles.bodyLarge,
     color: "#bcbcbc",
+    width: 12,
+    textAlign: "center",
   },
 });

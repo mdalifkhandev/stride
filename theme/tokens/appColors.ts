@@ -1,0 +1,51 @@
+export const appColors = {
+  blue50: "#e1effe",
+  blue100: "#b5cde8",
+  blue200: "#8aafd9",
+  blue300: "#548bc8",
+  blue400: "#3375bd",
+  blue500: "#0052ad",
+  blue600: "#004b9d",
+  blue700: "#003a7b",
+  blue800: "#002d5f",
+  blue900: "#002249",
+
+  bongchon50: "#edf6ff",
+  bongchon100: "#c8e2ff",
+  bongchon200: "#add4ff",
+  bongchon300: "#88c1ff",
+  bongchon400: "#71b5ff",
+  bongchon500: "#4da2ff",
+  bongchon600: "#4693e8",
+  bongchon700: "#3773b5",
+  bongchon800: "#2a598c",
+  bongchon900: "#20446b",
+
+  green50: "#e8f5e9",
+  green100: "#2e7d32",
+  green500: "#1b5e20",
+
+  red50: "#fdecea",
+  red100: "#d32f2f",
+  red500: "#9a0007",
+
+  orange50: "#fff4e5",
+  orange100: "#ed6c02",
+  orange500: "#a24b00",
+
+  gray0: "#ffffff",
+  gray50: "#e9e9e9",
+  gray100: "#bababa",
+  gray200: "#989898",
+  gray300: "#696969",
+  gray400: "#4c4c4c",
+  gray500: "#1f1f1f",
+  gray600: "#1c1c1c",
+  gray700: "#161616",
+  gray800: "#111111",
+  gray900: "#0d0d0d",
+  gray950: "#121212",
+
+  extraColor1: "#f8f9fc",
+} as const;
+

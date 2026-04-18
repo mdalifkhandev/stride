@@ -11,19 +11,32 @@ import { UnitToggle } from "../../../components/signup/UnitToggle";
 import { colors, spacing, textStyles } from "../../../theme/theme";
 
 const HEIGHT_OPTIONS = [
-  { left: "4'", right: '32"' },
-  { left: "4'", right: '58"' },
-  { left: "5'", right: '10"' },
-  { left: "5'", right: '33"' },
-  { left: "5'", right: '66"' },
-  { left: "6'", right: '02"' },
-  { left: "6'", right: '34"' },
+  "4'",
+  "5'",
+  "6'",
+  "7'",
+] as const;
+
+const HEIGHT_DECIMALS = [
+  '00"',
+  '01"',
+  '02"',
+  '03"',
+  '04"',
+  '05"',
+  '06"',
+  '07"',
+  '08"',
+  '09"',
+  '10"',
+  '11"',
 ] as const;
 
 export default function SignupHeightScreen() {
   const router = useRouter();
   const [unit, setUnit] = useState<"Inches" | "Ft">("Inches");
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedLeftIndex, setSelectedLeftIndex] = useState(1);
+  const [selectedRightIndex, setSelectedRightIndex] = useState(9);
 
   return (
     <AppScreen>
@@ -34,9 +47,12 @@ export default function SignupHeightScreen() {
         <UnitToggle options={["Inches", "Ft"] as const} value={unit} onChange={setUnit} />
 
         <ScrollMeasurePicker
-          values={HEIGHT_OPTIONS}
-          selectedIndex={selectedIndex}
-          onChange={setSelectedIndex}
+          leftValues={HEIGHT_OPTIONS}
+          rightValues={HEIGHT_DECIMALS}
+          selectedLeftIndex={selectedLeftIndex}
+          selectedRightIndex={selectedRightIndex}
+          onChangeLeft={setSelectedLeftIndex}
+          onChangeRight={setSelectedRightIndex}
         />
       </View>
 
