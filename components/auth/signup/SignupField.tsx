@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme/theme";
 
 type SignupFieldProps = {
   label: string;
@@ -21,9 +21,22 @@ export function SignupField({
   trailingIcon,
 }: SignupFieldProps) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputWrap}>
+    <View style={{ gap: spacing[8] }}>
+      <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+        {label}
+      </Text>
+      <View
+        style={{
+          minHeight: 54,
+          borderWidth: 1,
+          borderColor: "#d7d7d7",
+          borderRadius: radius.md,
+          paddingHorizontal: spacing[16],
+          flexDirection: "row",
+          alignItems: "center",
+          gap: spacing[12],
+          backgroundColor: colors.surface.primary,
+        }}>
         <TextInput
           value={value}
           onChangeText={onChangeText}
@@ -31,7 +44,7 @@ export function SignupField({
           placeholderTextColor={colors.text.secondary}
           keyboardType={keyboardType}
           autoCapitalize="none"
-          style={styles.input}
+          style={{ flex: 1, color: colors.text.primary, fontSize: 15 }}
         />
         {trailingIcon ? (
           <Ionicons name={trailingIcon} size={20} color={colors.text.action} />
@@ -40,30 +53,3 @@ export function SignupField({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    gap: spacing[8],
-  },
-  label: {
-    ...textStyles.titleSmall,
-    color: colors.text.primary,
-    fontWeight: "700",
-  },
-  inputWrap: {
-    minHeight: 54,
-    borderWidth: 1,
-    borderColor: "#d7d7d7",
-    borderRadius: radius.md,
-    paddingHorizontal: spacing[16],
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing[12],
-    backgroundColor: colors.surface.primary,
-  },
-  input: {
-    flex: 1,
-    color: colors.text.primary,
-    fontSize: 15,
-  },
-});

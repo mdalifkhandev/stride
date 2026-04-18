@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 
-import { AuthInputField } from "../../../components/auth/AuthInputField";
-import { AuthLogoHeader } from "../../../components/auth/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../components/auth/AuthScaffold";
-import { AppButton } from "../../../components/ui/AppButton";
-import { spacing } from "../../../theme/theme";
+import { AuthInputField } from "../../../../components/auth/login/AuthInputField";
+import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import { AppButton } from "../../../../components/ui/AppButton";
+import { spacing } from "../../../../theme/theme";
 
 export default function AuthPhoneScreen() {
   const router = useRouter();
@@ -28,10 +28,10 @@ export default function AuthPhoneScreen() {
         <AppButton
           label="Next"
           disabled={phone.trim().length < 7}
-          onPress={() => router.push("/screens/login/phone-verify")}
+          onPress={() => router.push("/screens/auth/login/phone-verify")}
         />
       }>
-      <View style={styles.form}>
+      <View style={{ gap: spacing[16], marginTop: spacing[8] }}>
         <AuthInputField
           label="Phone Number"
           placeholder="Enter your phone number"
@@ -43,10 +43,3 @@ export default function AuthPhoneScreen() {
     </AuthScaffold>
   );
 }
-
-const styles = StyleSheet.create({
-  form: {
-    gap: spacing[16],
-    marginTop: spacing[8],
-  },
-});

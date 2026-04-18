@@ -4,17 +4,18 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { Ionicons } from "@expo/vector-icons";
-import { Platform, ScrollView, Pressable, StyleSheet, Text, View } from "react-native";
-import { useRouter } from "expo-router";
+import { Platform, ScrollView, Pressable, Text, View } from "react-native";
+import { Href, useRouter } from "expo-router";
 
-import { AuthChoiceCard } from "../../../components/auth/AuthChoiceCard";
-import { AppButton } from "../../../components/ui/AppButton";
-import { AppScreen } from "../../../components/ui/AppScreen";
-import { SignupProgressHeader } from "../../../components/signup/SignupProgressHeader";
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
+import { AppButton } from "../../../../components/ui/AppButton";
+import { AppScreen } from "../../../../components/ui/AppScreen";
+import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
+import { colors, radius, spacing, textStyles } from "../../../../theme/theme";
 
 export default function SignupSexScreen() {
   const router = useRouter();
+  const heightRoute = "/screens/auth/myself/height" as Href;
   const [sex, setSex] = useState<"male" | "female">("male");
   const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [showPicker, setShowPicker] = useState(false);
@@ -34,21 +35,41 @@ export default function SignupSexScreen() {
       <SignupProgressHeader progress={20} />
 
       <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.content}
+        style={{ flex: 1, marginTop: 22 }}
+        contentContainerStyle={{ gap: spacing[20], paddingBottom: spacing[24] }}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.ageFieldWrap}>
-          <Text style={styles.sectionTitle}>Age</Text>
-          <Pressable onPress={() => setShowPicker(true)} style={styles.ageField}>
-            <Text style={ageValue ? styles.ageValue : styles.agePlaceholder}>
+        <View style={{ gap: spacing[8] }}>
+          <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+            Age
+          </Text>
+          <Pressable
+            onPress={() => setShowPicker(true)}
+            style={{
+              minHeight: 54,
+              borderWidth: 1,
+              borderColor: "#d7d7d7",
+              borderRadius: radius.md,
+              paddingHorizontal: spacing[16],
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              backgroundColor: colors.surface.primary,
+            }}>
+            <Text
+              style={[
+                textStyles.bodySmall,
+                { color: ageValue ? colors.text.primary : colors.text.secondary },
+              ]}>
               {ageValue || "Select from calendar"}
             </Text>
             <Ionicons name="calendar-clear-outline" size={20} color={colors.text.action} />
           </Pressable>
         </View>
 
-        <View style={styles.sexSection}>
-          <Text style={styles.sectionTitle}>Sex</Text>
+        <View style={{ gap: spacing[12] }}>
+          <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+            Sex
+          </Text>
           <AuthChoiceCard
             title="Male"
             selected={sex === "male"}
@@ -62,12 +83,12 @@ export default function SignupSexScreen() {
         </View>
       </ScrollView>
 
-      <View style={styles.footer}>
-        <View style={styles.buttonWrap}>
+      <View style={{ flexDirection: "row", gap: spacing[16] }}>
+        <View style={{ flex: 1 }}>
           <AppButton label="Previous" variant="secondary" onPress={() => router.back()} />
         </View>
-        <View style={styles.buttonWrap}>
-          <AppButton label="Continue" onPress={() => router.push("/screens/signup/height")} />
+        <View style={{ flex: 1 }}>
+          <AppButton label="Continue" onPress={() => router.push(heightRoute)} />
         </View>
       </View>
 
@@ -95,51 +116,3 @@ function getAge(date: Date) {
 
   return age;
 }
-
-const styles = StyleSheet.create({
-  scroll: {
-    flex: 1,
-    marginTop: 22,
-  },
-  content: {
-    gap: spacing[20],
-    paddingBottom: spacing[24],
-  },
-  ageFieldWrap: {
-    gap: spacing[8],
-  },
-  ageField: {
-    minHeight: 54,
-    borderWidth: 1,
-    borderColor: "#d7d7d7",
-    borderRadius: radius.md,
-    paddingHorizontal: spacing[16],
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: colors.surface.primary,
-  },
-  agePlaceholder: {
-    ...textStyles.bodySmall,
-    color: colors.text.secondary,
-  },
-  ageValue: {
-    ...textStyles.bodySmall,
-    color: colors.text.primary,
-  },
-  sexSection: {
-    gap: spacing[12],
-  },
-  sectionTitle: {
-    ...textStyles.titleSmall,
-    color: colors.text.primary,
-    fontWeight: "700",
-  },
-  footer: {
-    flexDirection: "row",
-    gap: spacing[16],
-  },
-  buttonWrap: {
-    flex: 1,
-  },
-});

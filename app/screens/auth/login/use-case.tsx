@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
 
-import { AuthChoiceCard } from "../../../components/auth/AuthChoiceCard";
-import { AuthLogoHeader } from "../../../components/auth/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../components/auth/AuthScaffold";
-import { AppButton } from "../../../components/ui/AppButton";
-import { colors, spacing, textStyles } from "../../../theme/theme";
+import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
+import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import { AppButton } from "../../../../components/ui/AppButton";
+import { colors, spacing, textStyles } from "../../../../theme/theme";
 
 type Choice = "myself" | "caregiver" | "organization" | null;
 
@@ -27,19 +27,24 @@ export default function AuthUseCaseScreen() {
         />
       }
       footer={
-        <View style={styles.footer}>
-          {choice === null ? <Text style={styles.error}>Please choose an option to continue</Text> : null}
+        <View style={{ gap: spacing[12] }}>
+          {choice === null ? (
+            <Text style={[textStyles.captionLarge, { color: "#e46a5a", textAlign: "center" }]}>
+              Please choose an option to continue
+            </Text>
+          ) : null}
           <AppButton
             label="Continue"
             disabled={choice === null}
             onPress={() => router.replace("/")}
           />
-          <Text style={styles.caption}>
-            Already have an account? <Text style={styles.link}>Sign in</Text>
+          <Text style={[textStyles.captionLarge, { color: colors.text.secondary, textAlign: "center" }]}>
+            Already have an account?{" "}
+            <Text style={{ color: colors.text.action, textDecorationLine: "underline" }}>Sign in</Text>
           </Text>
         </View>
       }>
-      <View style={styles.stack}>
+      <View style={{ gap: spacing[12], marginTop: spacing[24] }}>
         <AuthChoiceCard
           title="For Myself"
           description="Improve my daily physical and mental activity."
@@ -62,27 +67,3 @@ export default function AuthUseCaseScreen() {
     </AuthScaffold>
   );
 }
-
-const styles = StyleSheet.create({
-  stack: {
-    gap: spacing[12],
-    marginTop: spacing[24],
-  },
-  footer: {
-    gap: spacing[12],
-  },
-  error: {
-    ...textStyles.captionLarge,
-    color: "#e46a5a",
-    textAlign: "center",
-  },
-  caption: {
-    ...textStyles.captionLarge,
-    color: colors.text.secondary,
-    textAlign: "center",
-  },
-  link: {
-    color: colors.text.action,
-    textDecorationLine: "underline",
-  },
-});

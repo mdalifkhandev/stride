@@ -1,12 +1,12 @@
-import { BrandMark } from "@/components/auth/BrandMark";
+import { BrandMark } from "@/components/auth/login/BrandMark";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppScreen } from "@/components/ui/AppScreen";
 import { colors, spacing, textStyles } from "@/theme/theme";
 import { Href, router } from "expo-router";
 import { Text, View } from "react-native";
 
-const loginRoute = "/screens/login" as Href;
-const signupRoute = "/screens/signup" as Href;
+const loginRoute = "/screens/auth/login" as Href;
+const signupRoute = "/screens/auth/signup" as Href;
 
 export default function AuthIndex() {
   return (

@@ -34,8 +34,8 @@ export const semanticColors = {
 
   borderPrimary: appColors.gray500,
   borderPrimaryInverted: appColors.gray0,
-  borderSecondary: appColors.gray200,
-  borderTertiary: appColors.gray100,
+  borderSecondary: appColors.gray300,
+  borderTertiary: appColors.gray200,
   borderAction: appColors.blue500,
   borderActionLight: appColors.blue50,
   borderActionHover: appColors.blue400,
@@ -61,4 +61,3 @@ export const semanticColors = {
   iconError: appColors.red100,
   iconWarning: appColors.orange100,
 } as const;
-

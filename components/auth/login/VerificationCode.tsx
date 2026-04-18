@@ -1,8 +1,8 @@
 import { createRef } from "react";
 
-import { StyleSheet, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme/theme";
 
 type VerificationCodeProps = {
   code: string[];
@@ -24,7 +24,7 @@ export function VerificationCode({ code, onChange }: VerificationCodeProps) {
   };
 
   return (
-    <View style={styles.row}>
+    <View style={{ flexDirection: "row", gap: spacing[4] }}>
       {code.map((digit, index) => (
         <TextInput
           key={`otp-${index}`}
@@ -34,29 +34,21 @@ export function VerificationCode({ code, onChange }: VerificationCodeProps) {
           keyboardType="number-pad"
           maxLength={1}
           textAlign="center"
-          style={styles.box}
+          style={{
+            flex: 1,
+            height: 56,
+            borderRadius: radius.sm,
+            borderWidth: 1,
+            borderColor: "#d7d7d7",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: colors.surface.primary,
+            ...textStyles.titleT2,
+            color: colors.text.action,
+            fontWeight: "700",
+          }}
         />
       ))}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    gap: spacing[4],
-  },
-  box: {
-    flex: 1,
-    height: 56,
-    borderRadius: radius.sm,
-    borderWidth: 1,
-    borderColor: "#d7d7d7",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.surface.primary,
-    ...textStyles.titleT2,
-    color: colors.text.action,
-    fontWeight: "700",
-  },
-});

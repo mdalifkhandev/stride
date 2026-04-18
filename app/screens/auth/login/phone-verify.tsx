@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 
-import { AuthLogoHeader } from "../../../components/auth/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../components/auth/AuthScaffold";
-import { VerificationCode } from "../../../components/auth/VerificationCode";
-import { AppButton } from "../../../components/ui/AppButton";
-import { spacing } from "../../../theme/theme";
+import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import { VerificationCode } from "../../../../components/auth/login/VerificationCode";
+import { AppButton } from "../../../../components/ui/AppButton";
+import { spacing } from "../../../../theme/theme";
 
 export default function AuthPhoneVerifyScreen() {
   const router = useRouter();
@@ -29,19 +29,12 @@ export default function AuthPhoneVerifyScreen() {
         <AppButton
           label="Next"
           disabled={!isComplete}
-          onPress={() => router.push("/screens/login/use-case")}
+          onPress={() => router.push("/screens/auth/login/use-case")}
         />
       }>
-      <View style={styles.stack}>
+      <View style={{ gap: spacing[16], marginTop: spacing[32] }}>
         <VerificationCode code={code} onChange={setCode} />
       </View>
     </AuthScaffold>
   );
 }
-
-const styles = StyleSheet.create({
-  stack: {
-    gap: spacing[16],
-    marginTop: spacing[32],
-  },
-});

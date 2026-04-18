@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
 import { colors, radius, spacing, textStyles } from "../../theme/theme";
 
@@ -30,17 +30,35 @@ export function AppButton({
       disabled={disabled}
       onPress={onPress}
       style={[
-        styles.base,
-        isPrimary ? styles.primary : styles.secondary,
-        fullRadius && styles.fullRadius,
-        disabled && (isPrimary ? styles.primaryDisabled : styles.secondaryDisabled),
+        {
+          minHeight: 58,
+          borderRadius: radius.lg,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingVertical: spacing[16],
+          paddingHorizontal: spacing[24],
+          flexDirection: "row",
+          gap: spacing[8],
+        },
+        isPrimary
+          ? { backgroundColor: colors.surface.action }
+          : {
+              backgroundColor: colors.surface.primary,
+              borderWidth: 1,
+              borderColor: colors.border.action,
+            },
+        fullRadius && { borderRadius: 999 },
+        disabled &&
+          (isPrimary
+            ? { backgroundColor: "#d9d9d9" }
+            : { borderColor: "#d9d9d9", backgroundColor: "#f4f4f4" }),
       ]}>
       {leftSlot}
       <Text
         style={[
-          styles.label,
-          isPrimary ? styles.primaryLabel : styles.secondaryLabel,
-          disabled && styles.disabledLabel,
+          textStyles.titleT2,
+          isPrimary ? { color: colors.text.onAction } : { color: colors.text.action },
+          disabled && { color: "#9d9d9d" },
         ]}>
         {label}
       </Text>
@@ -48,46 +66,3 @@ export function AppButton({
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  base: {
-    minHeight: 58,
-    borderRadius: radius.lg,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: spacing[16],
-    paddingHorizontal: spacing[24],
-    flexDirection: "row",
-    gap: spacing[8],
-  },
-  primary: {
-    backgroundColor: colors.surface.action,
-  },
-  primaryDisabled: {
-    backgroundColor: "#d9d9d9",
-  },
-  fullRadius: {
-    borderRadius: 999,
-  },
-  secondary: {
-    backgroundColor: colors.surface.primary,
-    borderWidth: 1,
-    borderColor: colors.border.action,
-  },
-  secondaryDisabled: {
-    borderColor: "#d9d9d9",
-    backgroundColor: "#f4f4f4",
-  },
-  label: {
-    ...textStyles.titleT2,
-  },
-  primaryLabel: {
-    color: colors.text.onAction,
-  },
-  secondaryLabel: {
-    color: colors.text.action,
-  },
-  disabledLabel: {
-    color: "#9d9d9d",
-  },
-});
