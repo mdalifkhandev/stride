@@ -1,9 +1,7 @@
-import { Text, View } from "react-native";
+import { Href, Redirect } from "expo-router";
+
+const authRoute = "/auth" as Href;
 
 export default function Index() {
-  return (
-    <View className="bg-red-500">
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+  return <Redirect href={authRoute} />;
 }
