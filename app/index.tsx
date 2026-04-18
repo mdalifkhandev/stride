@@ -1,7 +1,8 @@
-import { Href, Redirect } from "expo-router";
-
-const authRoute = "/auth" as Href;
+import { Href, Redirect, useRouter } from "expo-router";
 
 export default function Index() {
-  return <Redirect href={authRoute} />;
+  const router = useRouter();
+  const loginRoute = "/auth" as Href;
+
+  return <Redirect href={loginRoute} />;
 }
