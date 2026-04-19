@@ -15,8 +15,9 @@ import { AppScreen } from "../../ui/AppScreen";
 import { caregiverQuestionStyles, spacing } from "../../../trast/theme";
 
 type CaregiverQuestionLayoutProps = PropsWithChildren<{
-  currentStep: number;
-  totalSteps: number;
+  currentStep?: number;
+  totalSteps?: number;
+  progress?: number;
   footerAction: () => void;
   children: ReactNode;
   keyboardAware?: boolean;
@@ -25,6 +26,7 @@ type CaregiverQuestionLayoutProps = PropsWithChildren<{
 export function CaregiverQuestionLayout({
   currentStep,
   totalSteps,
+  progress,
   footerAction,
   children,
   keyboardAware = false,
@@ -33,6 +35,7 @@ export function CaregiverQuestionLayout({
     <AppScreen>
       <View style={caregiverQuestionStyles.screenBody}>
         <SignupProgressHeader
+          progress={progress}
           currentStep={currentStep}
           totalSteps={totalSteps}
         />
