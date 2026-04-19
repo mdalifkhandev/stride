@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-import { colors, spacing, textStyles } from "../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../trast/theme";
 
 type AuthHeaderProps = {
   title: string;
@@ -14,10 +14,16 @@ export function AuthHeader({ title, subtitle }: AuthHeaderProps) {
         style={[
           textStyles.h2,
           { color: colors.text.action, fontWeight: "700", textAlign: "center" },
-        ]}>
+        ]}
+      >
         {title}
       </Text>
-      <Text style={[textStyles.bodyLarge, { color: colors.text.secondary, textAlign: "center" }]}>
+      <Text
+        style={[
+          textStyles.bodyLarge,
+          { color: colors.text.secondary, textAlign: "center" },
+        ]}
+      >
         {subtitle}
       </Text>
     </View>

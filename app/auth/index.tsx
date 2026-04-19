@@ -1,7 +1,7 @@
 import { BrandMark } from "@/components/auth/login/BrandMark";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppScreen } from "@/components/ui/AppScreen";
-import { colors, spacing, textStyles } from "@/theme/theme";
+import { colors, spacing, textStyles } from "@/trast/theme";
 import { Href, router } from "expo-router";
 import { Text, View } from "react-native";
 

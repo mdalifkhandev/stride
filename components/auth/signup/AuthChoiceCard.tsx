@@ -1,6 +1,8 @@
 import { Pressable, Text, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { textSize } from "@/theme/tokens/premetive/text";
+import { Typography } from "@/theme/tokens/semantic/thypography";
+import { colors, radius, spacing } from "../../../trast/theme";
 
 type AuthChoiceCardProps = {
   title: string;
@@ -19,7 +21,6 @@ export function AuthChoiceCard({
 
   return (
     <Pressable
-      onPress={onPress}
       style={[
         {
           flexDirection: "row",
@@ -37,7 +38,8 @@ export function AuthChoiceCard({
           borderColor: colors.border.action,
           backgroundColor: "#dcebff",
         },
-      ]}>
+      ]}
+    >
       <View
         style={[
           {
@@ -51,7 +53,8 @@ export function AuthChoiceCard({
             marginTop: 2,
           },
           selected && { borderColor: colors.border.action },
-        ]}>
+        ]}
+      >
         {selected ? (
           <View
             style={{
@@ -64,24 +67,16 @@ export function AuthChoiceCard({
         ) : null}
       </View>
       <View style={{ flex: 1, gap: spacing[4] }}>
-        <Text
-          style={[
-            textStyles.titleT2,
-            {
-              color: colors.text.primary,
-              fontWeight: "700",
-              fontSize: 18,
-              lineHeight: 28,
-            },
-          ]}>
-          {title}
-        </Text>
+        <Text style={[Typography.labelLarge]}>{title}</Text>
         {hasDescription ? (
           <Text
             style={[
-              textStyles.bodyLarge,
-              { color: colors.text.secondary, fontSize: 16, lineHeight: 26 },
-            ]}>
+              {
+                color: colors.text.secondary,
+                fontSize: textSize[18],
+              },
+            ]}
+          >
             {description}
           </Text>
         ) : null}

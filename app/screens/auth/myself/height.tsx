@@ -8,7 +8,7 @@ import { SignupProgressHeader } from "../../../../components/auth/signup/SignupP
 import { UnitToggle } from "../../../../components/auth/signup/UnitToggle";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../../trast/theme";
 
 const HEIGHT_OPTIONS = ["4'", "5'", "6'", "7'"] as const;
 

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { ScrollView, Text, View } from "react-native";
 
-import { colors, radius, textStyles } from "../../../theme/theme";
+import { colors, radius, textStyles } from "../../../trast/theme";
 
 type LegacyScrollMeasurePickerProps = {
   leftValues: readonly string[];
@@ -121,7 +121,8 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
         bounces={false}
         onMomentumScrollEnd={(event) =>
           handleMomentumEnd(columnIndex, event.nativeEvent.contentOffset.y)
-        }>
+        }
+      >
         {values.map((value, index) => {
           const selected = index === selectedIndex;
 
@@ -134,7 +135,8 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
                 alignItems: "center",
                 justifyContent: "center",
                 zIndex: 1,
-              }}>
+              }}
+            >
               <Text
                 style={[
                   textStyles.titleT2,
@@ -144,7 +146,8 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
                     fontSize: 20,
                     lineHeight: 28,
                   },
-                ]}>
+                ]}
+              >
                 {value}
               </Text>
             </View>
@@ -164,7 +167,8 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
         justifyContent: "center",
         flexDirection: "row",
         alignItems: "center",
-      }}>
+      }}
+    >
       <View
         style={{
           position: "absolute",
@@ -188,14 +192,17 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
             flex: 1,
             flexDirection: "row",
             alignItems: "center",
-          }}>
+          }}
+        >
           {renderColumn(values, columnIndex)}
-          {columnIndex === separatorAfterColumn && columnIndex < columns.length - 1 ? (
+          {columnIndex === separatorAfterColumn &&
+          columnIndex < columns.length - 1 ? (
             <Text
               style={[
                 textStyles.bodyLarge,
                 { color: "#bcbcbc", width: 12, textAlign: "center" },
-              ]}>
+              ]}
+            >
               |
             </Text>
           ) : null}

@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 
 import Logo from "../../../assets/images/logo.svg";
-import { colors, spacing, textStyles } from "../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../trast/theme";
 
 const LOGO_WIDTH = 84;
 const LOGO_HEIGHT = 38;
@@ -18,17 +18,32 @@ export function AuthLogoHeader({
   compact = false,
 }: AuthLogoHeaderProps) {
   return (
-    <View style={[{ alignItems: "center", gap: spacing[8] }, compact && { gap: spacing[4] }]}>
+    <View
+      style={[
+        { alignItems: "center", gap: spacing[8] },
+        compact && { gap: spacing[4] },
+      ]}
+    >
       <Logo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
-      <Text style={[textStyles.h2, { color: colors.text.action, fontWeight: "700" }]}>
+      <Text
+        style={[
+          textStyles.h2,
+          { color: colors.text.action, fontWeight: "700" },
+        ]}
+      >
         Stride
       </Text>
       {title ? (
         <Text
           style={[
             textStyles.titleT2,
-            { color: colors.text.primary, fontWeight: "700", marginTop: spacing[24] },
-          ]}>
+            {
+              color: colors.text.primary,
+              fontWeight: "700",
+              marginTop: spacing[24],
+            },
+          ]}
+        >
           {title}
         </Text>
       ) : null}
@@ -36,8 +51,13 @@ export function AuthLogoHeader({
         <Text
           style={[
             textStyles.bodySmall,
-            { color: colors.text.secondary, textAlign: "center", maxWidth: 245 },
-          ]}>
+            {
+              color: colors.text.secondary,
+              textAlign: "center",
+              maxWidth: 245,
+            },
+          ]}
+        >
           {subtitle}
         </Text>
       ) : null}

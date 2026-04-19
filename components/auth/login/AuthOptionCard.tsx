@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../trast/theme";
 
 type AuthOptionCardProps = {
   title: string;
@@ -40,15 +40,20 @@ export function AuthOptionCard({
           shadowOffset: { width: 0, height: 4 },
           elevation: 1,
         },
-        selected && { backgroundColor: colors.surface.actionLight, borderColor: colors.border.action },
-      ]}>
+        selected && {
+          backgroundColor: colors.surface.actionLight,
+          borderColor: colors.border.action,
+        },
+      ]}
+    >
       <View style={{ flex: 1, gap: spacing[8] }}>
         <Text
           style={[
             textStyles.titleSmall,
             { color: colors.text.primary, fontWeight: "700" },
             selected && { color: colors.text.action },
-          ]}>
+          ]}
+        >
           {title}
         </Text>
         <Text
@@ -56,7 +61,8 @@ export function AuthOptionCard({
             textStyles.bodySmall,
             { color: colors.text.secondary, lineHeight: 20 },
             selected && { color: colors.text.primary },
-          ]}>
+          ]}
+        >
           {description}
         </Text>
       </View>

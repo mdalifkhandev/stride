@@ -1,11 +1,14 @@
-import { View } from "react-native";
 import { useRouter } from "expo-router";
+import { View } from "react-native";
 
 import { AuthInputField } from "../../../../components/auth/login/AuthInputField";
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import {
+  AuthBackButton,
+  AuthScaffold,
+} from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { spacing } from "../../../../theme/theme";
+import { spacing } from "../../../../trast/theme";
 
 export default function AuthEmailScreen() {
   const router = useRouter();
@@ -21,7 +24,13 @@ export default function AuthEmailScreen() {
           subtitle="We'll send a verification code to your email address."
         />
       }
-      footer={<AppButton label="Next" onPress={() => router.push("/screens/auth/login/verify")} />}>
+      footer={
+        <AppButton
+          label="Next"
+          onPress={() => router.push("/screens/auth/login/verify")}
+        />
+      }
+    >
       <View style={{ gap: spacing[16], marginTop: spacing[8] }}>
         <AuthInputField
           label="Email"

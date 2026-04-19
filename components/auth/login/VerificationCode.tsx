@@ -2,7 +2,7 @@ import { createRef } from "react";
 
 import { TextInput, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../trast/theme";
 
 type VerificationCodeProps = {
   code: string[];

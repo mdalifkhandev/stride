@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { colors, spacing } from "../../theme/theme";
+import { colors, spacing } from "../../trast/theme";
 
 type AppScreenProps = PropsWithChildren<{
   padded?: boolean;

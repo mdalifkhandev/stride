@@ -5,7 +5,7 @@ import { SignupField } from "../../../../components/auth/signup/SignupField";
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../theme/theme";
+import { colors, spacing } from "../../../../trast/theme";
 
 export default function SignupProfileScreen() {
   const router = useRouter();
@@ -18,7 +18,8 @@ export default function SignupProfileScreen() {
       <ScrollView
         style={{ flex: 1, marginTop: 28 }}
         contentContainerStyle={{ gap: 18, paddingBottom: spacing[24] }}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         <Text
           style={[
             {
@@ -31,7 +32,8 @@ export default function SignupProfileScreen() {
               letterSpacing: 0.2,
               marginBottom: spacing[8],
             },
-          ]}>
+          ]}
+        >
           Let&apos;s Get To Know You
         </Text>
 
@@ -44,10 +46,7 @@ export default function SignupProfileScreen() {
         />
       </ScrollView>
 
-      <AppButton
-        label="Next"
-        onPress={() => router.push(sexRoute)}
-      />
+      <AppButton label="Next" onPress={() => router.push(sexRoute)} />
     </AppScreen>
   );
 }

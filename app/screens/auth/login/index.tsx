@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
-import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import { Text, View } from "react-native";
 
 import GoogleIcon from "../../../../assets/images/google.svg";
 import { AuthDivider } from "../../../../components/auth/login/AuthDivider";
@@ -10,22 +10,24 @@ import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader
 import { AuthOptionCard } from "../../../../components/auth/login/AuthOptionCard";
 import { AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { colors, spacing, textStyles } from "../../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../../trast/theme";
 
 export default function LoginIndex() {
   const router = useRouter();
   const [method, setMethod] = useState<"email" | "phone">("email");
 
   const handleNext = () => {
-    router.push(method === "email" ? "/screens/auth/login/email" : "/screens/auth/login/phone");
+    router.push(
+      method === "email"
+        ? "/screens/auth/login/email"
+        : "/screens/auth/login/phone",
+    );
   };
 
   return (
     <AuthScaffold contentAlignment="top" header={<AuthLogoHeader compact />}>
       <View style={{ gap: spacing[16] }}>
-        <Text style={textStyles.titleT2}>
-          Welcome Back!
-        </Text>
+        <Text style={textStyles.titleT2}>Welcome Back!</Text>
         <Text style={textStyles.bodySmall}>
           Keep doing what you love with 1-minute Strides built just for you!
         </Text>
@@ -40,7 +42,9 @@ export default function LoginIndex() {
               <Ionicons
                 name="chevron-forward"
                 size={18}
-                color={method === "email" ? colors.text.action : colors.text.primary}
+                color={
+                  method === "email" ? colors.text.action : colors.text.primary
+                }
               />
             }
           />
@@ -53,14 +57,22 @@ export default function LoginIndex() {
               <Ionicons
                 name="chevron-forward"
                 size={18}
-                color={method === "phone" ? colors.text.action : colors.text.primary}
+                color={
+                  method === "phone" ? colors.text.action : colors.text.primary
+                }
               />
             }
           />
         </View>
       </View>
 
-      <View style={{ gap: spacing[16], paddingBottom: spacing[8], marginTop: spacing[12] }}>
+      <View
+        style={{
+          gap: spacing[16],
+          paddingBottom: spacing[8],
+          marginTop: spacing[12],
+        }}
+      >
         <AppButton label="Next" onPress={handleNext} />
         <AuthDivider />
         <AppButton
@@ -70,7 +82,14 @@ export default function LoginIndex() {
         />
         <Text style={textStyles.captionLarge}>
           Already have an account?{" "}
-          <Text style={{ color: colors.text.action, textDecorationLine: "underline" }}>Sign UP</Text>
+          <Text
+            style={{
+              color: colors.text.action,
+              textDecorationLine: "underline",
+            }}
+          >
+            Sign UP
+          </Text>
         </Text>
       </View>
     </AuthScaffold>

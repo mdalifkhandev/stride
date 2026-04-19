@@ -7,7 +7,7 @@ import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../../trast/theme";
 
 type Choice = "myself" | "caregiver" | "organization" | null;
 
@@ -15,7 +15,12 @@ export default function SignupIndex() {
   const router = useRouter();
   const [choice, setChoice] = useState<Choice>("myself");
   const loginRoute = "/screens/auth/login" as Href;
-  const profileRoute = "/screens/auth/myself/profile" as Href;
+  const myself = "/screens/auth/myself/profile" as Href;
+
+  const handleMyselfPress = () => {
+    setChoice("myself");
+    router.push(myself);
+  };
 
   return (
     <AppScreen>
@@ -32,7 +37,7 @@ export default function SignupIndex() {
             title="For Myself"
             description="Improve my daily physical and mental activity."
             selected={choice === "myself"}
-            onPress={() => setChoice("myself")}
+            onPress={handleMyselfPress}
           />
           <AuthChoiceCard
             title="As a Caregiver"
@@ -56,7 +61,7 @@ export default function SignupIndex() {
           marginTop: spacing[20],
         }}
       >
-        <AppButton label="Continue" onPress={() => router.push(profileRoute)} />
+        <AppButton label="Continue" onPress={() => router.push(myself)} />
         <View
           style={{
             flexDirection: "row",

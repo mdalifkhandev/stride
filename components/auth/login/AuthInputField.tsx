@@ -1,6 +1,6 @@
 import { Text, TextInput, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../trast/theme";
 
 type AuthInputFieldProps = {
   label: string;
@@ -19,7 +19,12 @@ export function AuthInputField({
 }: AuthInputFieldProps) {
   return (
     <View style={{ gap: spacing[8] }}>
-      <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+      <Text
+        style={[
+          textStyles.titleSmall,
+          { color: colors.text.primary, fontWeight: "700" },
+        ]}
+      >
         {label}
       </Text>
       <TextInput

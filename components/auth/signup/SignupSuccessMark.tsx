@@ -1,7 +1,7 @@
 import { View } from "react-native";
 
 import SuccessMark from "../../../assets/images/success.svg";
-import { spacing } from "../../../theme/theme";
+import { spacing } from "../../../trast/theme";
 
 export function SignupSuccessMark() {
   return (
@@ -13,7 +13,8 @@ export function SignupSuccessMark() {
         justifyContent: "center",
         alignSelf: "center",
         marginBottom: spacing[16],
-      }}>
+      }}
+    >
       <SuccessMark width={200} height={200} />
     </View>
   );

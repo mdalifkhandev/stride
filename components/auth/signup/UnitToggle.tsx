@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../trast/theme";
 
 type UnitToggleProps<T extends string> = {
   options: readonly T[];
@@ -26,7 +26,8 @@ export function UnitToggle<T extends string>({
         shadowRadius: 12,
         shadowOffset: { width: 0, height: 3 },
         elevation: 2,
-      }}>
+      }}
+    >
       {options.map((option) => {
         const selected = option === value;
         return (
@@ -42,13 +43,15 @@ export function UnitToggle<T extends string>({
                 alignItems: "center",
               },
               selected && { backgroundColor: colors.surface.action },
-            ]}>
+            ]}
+          >
             <Text
               style={[
                 textStyles.titleSmall,
                 { color: colors.text.secondary },
                 selected && { color: colors.text.onAction },
-              ]}>
+              ]}
+            >
               {option}
             </Text>
           </Pressable>

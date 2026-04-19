@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { Pressable, Text } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../trast/theme";
 
 type AppButtonProps = {
   label: string;
@@ -52,14 +52,18 @@ export function AppButton({
           (isPrimary
             ? { backgroundColor: "#d9d9d9" }
             : { borderColor: "#d9d9d9", backgroundColor: "#f4f4f4" }),
-      ]}>
+      ]}
+    >
       {leftSlot}
       <Text
         style={[
           textStyles.titleT2,
-          isPrimary ? { color: colors.text.onAction } : { color: colors.text.action },
+          isPrimary
+            ? { color: colors.text.onAction }
+            : { color: colors.text.action },
           disabled && { color: "#9d9d9d" },
-        ]}>
+        ]}
+      >
         {label}
       </Text>
       {rightSlot}

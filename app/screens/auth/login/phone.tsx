@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-import { View } from "react-native";
 import { useRouter } from "expo-router";
+import { View } from "react-native";
 
 import { AuthInputField } from "../../../../components/auth/login/AuthInputField";
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import {
+  AuthBackButton,
+  AuthScaffold,
+} from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { spacing } from "../../../../theme/theme";
+import { spacing } from "../../../../trast/theme";
 
 export default function AuthPhoneScreen() {
   const router = useRouter();
@@ -30,7 +33,8 @@ export default function AuthPhoneScreen() {
           disabled={phone.trim().length < 7}
           onPress={() => router.push("/screens/auth/login/phone-verify")}
         />
-      }>
+      }
+    >
       <View style={{ gap: spacing[16], marginTop: spacing[8] }}>
         <AuthInputField
           label="Phone Number"

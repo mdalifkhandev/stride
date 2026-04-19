@@ -1,4 +1,4 @@
-import { appColors } from "./appColors";
+import { appColors } from "../premetive/colors";
 
 export const semanticColors = {
   surfacePrimary: appColors.gray0,

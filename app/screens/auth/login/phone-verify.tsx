@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-import { View } from "react-native";
 import { useRouter } from "expo-router";
+import { View } from "react-native";
 
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import {
+  AuthBackButton,
+  AuthScaffold,
+} from "../../../../components/auth/login/AuthScaffold";
 import { VerificationCode } from "../../../../components/auth/login/VerificationCode";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { spacing } from "../../../../theme/theme";
+import { spacing } from "../../../../trast/theme";
 
 export default function AuthPhoneVerifyScreen() {
   const router = useRouter();
@@ -31,7 +34,8 @@ export default function AuthPhoneVerifyScreen() {
           disabled={!isComplete}
           onPress={() => router.push("/screens/auth/login/use-case")}
         />
-      }>
+      }
+    >
       <View style={{ gap: spacing[16], marginTop: spacing[32] }}>
         <VerificationCode code={code} onChange={setCode} />
       </View>

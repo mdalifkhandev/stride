@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 
 import Logo from "../../../assets/images/logo.svg";
-import { colors, spacing } from "../../../theme/theme";
+import { colors, spacing } from "../../../trast/theme";
 
 const LOGO_WIDTH = 190;
 const LOGO_HEIGHT = 120;
@@ -12,7 +12,14 @@ type BrandMarkProps = {
 
 export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: spacing[16] }}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: spacing[16],
+      }}
+    >
       <Logo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
       <Text
         style={{
@@ -21,7 +28,8 @@ export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
           fontWeight: "800",
           color: colors.text.action,
           letterSpacing: -1,
-        }}>
+        }}
+      >
         {wordmark}
       </Text>
     </View>

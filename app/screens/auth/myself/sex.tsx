@@ -1,17 +1,17 @@
 import { useState } from "react";
 
+import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { Ionicons } from "@expo/vector-icons";
-import { Platform, ScrollView, Pressable, Text, View } from "react-native";
 import { Href, useRouter } from "expo-router";
+import { Platform, Pressable, ScrollView, Text, View } from "react-native";
 
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
+import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
-import { colors, radius, spacing, textStyles } from "../../../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../../trast/theme";
 
 export default function SignupSexScreen() {
   const router = useRouter();
@@ -22,7 +22,10 @@ export default function SignupSexScreen() {
 
   const ageValue = birthDate ? String(getAge(birthDate)) : "";
 
-  const handleDateChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+  const handleDateChange = (
+    event: DateTimePickerEvent,
+    selectedDate?: Date,
+  ) => {
     setShowPicker(false);
 
     if (event.type === "set" && selectedDate) {
@@ -37,9 +40,15 @@ export default function SignupSexScreen() {
       <ScrollView
         style={{ flex: 1, marginTop: 22 }}
         contentContainerStyle={{ gap: spacing[20], paddingBottom: spacing[24] }}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         <View style={{ gap: spacing[8] }}>
-          <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+          <Text
+            style={[
+              textStyles.titleSmall,
+              { color: colors.text.primary, fontWeight: "700" },
+            ]}
+          >
             Age
           </Text>
           <Pressable
@@ -54,20 +63,33 @@ export default function SignupSexScreen() {
               alignItems: "center",
               justifyContent: "space-between",
               backgroundColor: colors.surface.primary,
-            }}>
+            }}
+          >
             <Text
               style={[
                 textStyles.bodySmall,
-                { color: ageValue ? colors.text.primary : colors.text.secondary },
-              ]}>
+                {
+                  color: ageValue ? colors.text.primary : colors.text.secondary,
+                },
+              ]}
+            >
               {ageValue || "Select from calendar"}
             </Text>
-            <Ionicons name="calendar-clear-outline" size={20} color={colors.text.action} />
+            <Ionicons
+              name="calendar-clear-outline"
+              size={20}
+              color={colors.text.action}
+            />
           </Pressable>
         </View>
 
         <View style={{ gap: spacing[12] }}>
-          <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+          <Text
+            style={[
+              textStyles.titleSmall,
+              { color: colors.text.primary, fontWeight: "700" },
+            ]}
+          >
             Sex
           </Text>
           <AuthChoiceCard
@@ -85,10 +107,17 @@ export default function SignupSexScreen() {
 
       <View style={{ flexDirection: "row", gap: spacing[16] }}>
         <View style={{ flex: 1 }}>
-          <AppButton label="Previous" variant="secondary" onPress={() => router.back()} />
+          <AppButton
+            label="Previous"
+            variant="secondary"
+            onPress={() => router.back()}
+          />
         </View>
         <View style={{ flex: 1 }}>
-          <AppButton label="Continue" onPress={() => router.push(heightRoute)} />
+          <AppButton
+            label="Continue"
+            onPress={() => router.push(heightRoute)}
+          />
         </View>
       </View>
 

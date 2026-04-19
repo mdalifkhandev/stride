@@ -1,13 +1,16 @@
 import { useState } from "react";
 
-import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import { Text, View } from "react-native";
 
-import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
-import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
+import {
+  AuthBackButton,
+  AuthScaffold,
+} from "../../../../components/auth/login/AuthScaffold";
+import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { colors, spacing, textStyles } from "../../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../../trast/theme";
 
 type Choice = "myself" | "caregiver" | "organization" | null;
 
@@ -29,7 +32,12 @@ export default function AuthUseCaseScreen() {
       footer={
         <View style={{ gap: spacing[12] }}>
           {choice === null ? (
-            <Text style={[textStyles.captionLarge, { color: "#e46a5a", textAlign: "center" }]}>
+            <Text
+              style={[
+                textStyles.captionLarge,
+                { color: "#e46a5a", textAlign: "center" },
+              ]}
+            >
               Please choose an option to continue
             </Text>
           ) : null}
@@ -38,12 +46,25 @@ export default function AuthUseCaseScreen() {
             disabled={choice === null}
             onPress={() => router.replace("/")}
           />
-          <Text style={[textStyles.captionLarge, { color: colors.text.secondary, textAlign: "center" }]}>
+          <Text
+            style={[
+              textStyles.captionLarge,
+              { color: colors.text.secondary, textAlign: "center" },
+            ]}
+          >
             Already have an account?{" "}
-            <Text style={{ color: colors.text.action, textDecorationLine: "underline" }}>Sign in</Text>
+            <Text
+              style={{
+                color: colors.text.action,
+                textDecorationLine: "underline",
+              }}
+            >
+              Sign in
+            </Text>
           </Text>
         </View>
-      }>
+      }
+    >
       <View style={{ gap: spacing[12], marginTop: spacing[24] }}>
         <AuthChoiceCard
           title="For Myself"

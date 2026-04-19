@@ -8,7 +8,7 @@ import { SignupProgressHeader } from "../../../../components/auth/signup/SignupP
 import { UnitToggle } from "../../../../components/auth/signup/UnitToggle";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../theme/theme";
+import { colors, spacing, textStyles } from "../../../../trast/theme";
 
 const WEIGHT_VALUES = Array.from({ length: 301 }, (_, index) =>
   index.toString().padStart(3, "0"),
@@ -73,10 +73,7 @@ export default function SignupWeightScreen() {
           />
         </View>
         <View style={{ flex: 1 }}>
-          <AppButton
-            label="Done"
-            onPress={() => router.push(successRoute)}
-          />
+          <AppButton label="Done" onPress={() => router.push(successRoute)} />
         </View>
       </View>
     </AppScreen>

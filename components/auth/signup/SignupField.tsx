@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TextInput, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme/theme";
+import { colors, radius, spacing, textStyles } from "../../../trast/theme";
 
 type SignupFieldProps = {
   label: string;
@@ -22,7 +22,12 @@ export function SignupField({
 }: SignupFieldProps) {
   return (
     <View style={{ gap: spacing[8] }}>
-      <Text style={[textStyles.titleSmall, { color: colors.text.primary, fontWeight: "700" }]}>
+      <Text
+        style={[
+          textStyles.titleSmall,
+          { color: colors.text.primary, fontWeight: "700" },
+        ]}
+      >
         {label}
       </Text>
       <View
@@ -36,7 +41,8 @@ export function SignupField({
           alignItems: "center",
           gap: spacing[12],
           backgroundColor: colors.surface.primary,
-        }}>
+        }}
+      >
         <TextInput
           value={value}
           onChangeText={onChangeText}
