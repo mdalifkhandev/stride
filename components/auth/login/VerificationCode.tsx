@@ -24,7 +24,7 @@ export function VerificationCode({ code, onChange }: VerificationCodeProps) {
   };
 
   return (
-    <View style={{ flexDirection: "row", gap: spacing[4] }}>
+    <View style={{ flexDirection: "row", gap: spacing[8] }}>
       {code.map((digit, index) => (
         <TextInput
           key={`otp-${index}`}
@@ -36,10 +36,10 @@ export function VerificationCode({ code, onChange }: VerificationCodeProps) {
           textAlign="center"
           style={{
             flex: 1,
-            height: 56,
-            borderRadius: radius.sm,
+            height: 52,
+            borderRadius: radius.input,
             borderWidth: 1,
-            borderColor: "#d7d7d7",
+            borderColor: colors.border.tertiary,
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: colors.surface.primary,

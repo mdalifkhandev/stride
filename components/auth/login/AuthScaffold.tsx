@@ -1,8 +1,8 @@
-import type { PropsWithChildren, ReactNode } from "react";
+import { useEffect, useState, type PropsWithChildren, type ReactNode } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Pressable, View } from "react-native";
+import { Keyboard, Pressable, View } from "react-native";
 
 import { colors, spacing } from "../../../trast/theme";
 import { AppScreen } from "../../ui/AppScreen";
@@ -21,11 +21,27 @@ export function AuthScaffold({
   footer,
   contentAlignment = "center",
 }: AuthScaffoldProps) {
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setIsKeyboardOpen(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setIsKeyboardOpen(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
     <AppScreen>
-      <View style={{ minHeight: 28, justifyContent: "center" }}>{topSlot}</View>
+      <View style={{ minHeight: 20, justifyContent: "center" }}>{topSlot}</View>
       <View
-        style={{ alignItems: "center", gap: spacing[8], marginTop: spacing[8] }}
+        style={{ alignItems: "center", gap: spacing[8], marginTop: spacing[4] }}
       >
         {header}
       </View>
@@ -34,13 +50,19 @@ export function AuthScaffold({
           { flex: 1, justifyContent: "center" },
           contentAlignment === "top" && {
             justifyContent: "flex-start",
-            paddingTop: spacing[40],
+            paddingTop: spacing[32],
           },
         ]}
       >
         {children}
       </View>
-      <View style={{ gap: spacing[16], paddingBottom: spacing[8] }}>
+      <View
+        style={{
+          gap: spacing[16],
+          paddingBottom: isKeyboardOpen ? spacing[0] : spacing[8],
+          marginTop: spacing[20],
+        }}
+      >
         {footer}
       </View>
     </AppScreen>

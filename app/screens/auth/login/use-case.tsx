@@ -35,7 +35,7 @@ export default function AuthUseCaseScreen() {
             <Text
               style={[
                 textStyles.captionLarge,
-                { color: "#e46a5a", textAlign: "center" },
+                { color: colors.text.warning, textAlign: "center" },
               ]}
             >
               Please choose an option to continue

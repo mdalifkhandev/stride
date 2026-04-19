@@ -21,7 +21,7 @@ export function AuthLogoHeader({
     <View
       style={[
         { alignItems: "center", gap: spacing[8] },
-        compact && { gap: spacing[4] },
+        compact && { gap: spacing[2] },
       ]}
     >
       <Logo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
@@ -40,7 +40,8 @@ export function AuthLogoHeader({
             {
               color: colors.text.primary,
               fontWeight: "700",
-              marginTop: spacing[24],
+              marginTop: compact ? spacing[16] : spacing[24],
+              textAlign: "center",
             },
           ]}
         >
@@ -54,7 +55,7 @@ export function AuthLogoHeader({
             {
               color: colors.text.secondary,
               textAlign: "center",
-              maxWidth: 245,
+              maxWidth: 260,
             },
           ]}
         >

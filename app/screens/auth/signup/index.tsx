@@ -13,14 +13,10 @@ type Choice = "myself" | "caregiver" | "organization" | null;
 
 export default function SignupIndex() {
   const router = useRouter();
-  const [choice, setChoice] = useState<Choice>("myself");
+  const [choice, setChoice] = useState<Choice>(null);
   const loginRoute = "/screens/auth/login" as Href;
   const myself = "/screens/auth/myself/profile" as Href;
-
-  const handleMyselfPress = () => {
-    setChoice("myself");
-    router.push(myself);
-  };
+  const isChoiceMissing = choice === null;
 
   return (
     <AppScreen>
@@ -37,7 +33,7 @@ export default function SignupIndex() {
             title="For Myself"
             description="Improve my daily physical and mental activity."
             selected={choice === "myself"}
-            onPress={handleMyselfPress}
+            onPress={() => setChoice("myself")}
           />
           <AuthChoiceCard
             title="As a Caregiver"
@@ -56,12 +52,26 @@ export default function SignupIndex() {
 
       <View
         style={{
-          gap: spacing[16],
+          gap: spacing[12],
           paddingBottom: spacing[8],
           marginTop: spacing[20],
         }}
       >
-        <AppButton label="Continue" onPress={() => router.push(myself)} />
+        {isChoiceMissing ? (
+          <Text
+            style={[
+              textStyles.captionLarge,
+              { color: colors.text.warning, textAlign: "center" },
+            ]}
+          >
+            Please choose an option to continue
+          </Text>
+        ) : null}
+        <AppButton
+          label="Continue"
+          disabled={isChoiceMissing}
+          onPress={() => router.push(myself)}
+        />
         <View
           style={{
             flexDirection: "row",

@@ -35,13 +35,14 @@ export function AuthInputField({
         keyboardType={keyboardType}
         autoCapitalize="none"
         style={{
-          height: 48,
-          borderRadius: radius.sm,
+          height: 44,
+          borderRadius: radius.input,
           borderWidth: 1,
-          borderColor: "#d7d7d7",
+          borderColor: colors.border.tertiary,
           paddingHorizontal: spacing[12],
+          backgroundColor: colors.surface.primary,
           color: colors.text.primary,
-          fontSize: 12,
+          ...textStyles.bodyXsm,
         }}
       />
     </View>

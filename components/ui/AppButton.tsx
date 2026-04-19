@@ -31,11 +31,11 @@ export function AppButton({
       onPress={onPress}
       style={[
         {
-          minHeight: 58,
-          borderRadius: radius.lg,
+          minHeight: 52,
+          borderRadius: fullRadius ? radius.full : radius.button,
           alignItems: "center",
           justifyContent: "center",
-          paddingVertical: spacing[16],
+          paddingVertical: spacing[12],
           paddingHorizontal: spacing[24],
           flexDirection: "row",
           gap: spacing[8],
@@ -47,21 +47,23 @@ export function AppButton({
               borderWidth: 1,
               borderColor: colors.border.action,
             },
-        fullRadius && { borderRadius: 999 },
         disabled &&
           (isPrimary
-            ? { backgroundColor: "#d9d9d9" }
-            : { borderColor: "#d9d9d9", backgroundColor: "#f4f4f4" }),
+            ? { backgroundColor: colors.surface.disabled }
+            : {
+                borderColor: colors.border.onDisabled,
+                backgroundColor: colors.surface.disabledLight,
+              }),
       ]}
     >
       {leftSlot}
       <Text
         style={[
-          textStyles.titleT2,
+          textStyles.titleSmall,
           isPrimary
             ? { color: colors.text.onAction }
             : { color: colors.text.action },
-          disabled && { color: "#9d9d9d" },
+          disabled && { color: colors.text.onDisabled },
         ]}
       >
         {label}

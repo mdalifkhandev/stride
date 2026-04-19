@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 import GoogleIcon from "../../../../assets/images/google.svg";
 import { AuthDivider } from "../../../../components/auth/login/AuthDivider";
@@ -15,6 +15,7 @@ import { colors, spacing, textStyles } from "../../../../trast/theme";
 export default function LoginIndex() {
   const router = useRouter();
   const [method, setMethod] = useState<"email" | "phone">("email");
+  const signupRoute = "/screens/auth/signup" as const;
 
   const handleNext = () => {
     router.push(
@@ -82,14 +83,16 @@ export default function LoginIndex() {
         />
         <Text style={textStyles.captionLarge}>
           Already have an account?{" "}
-          <Text
-            style={{
-              color: colors.text.action,
-              textDecorationLine: "underline",
-            }}
-          >
-            Sign UP
-          </Text>
+          <Pressable onPress={() => router.push(signupRoute)}>
+            <Text
+              style={{
+                color: colors.text.action,
+                textDecorationLine: "underline",
+              }}
+            >
+              Sign UP
+            </Text>
+          </Pressable>
         </Text>
       </View>
     </AuthScaffold>

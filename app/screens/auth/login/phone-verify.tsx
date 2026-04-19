@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useRouter } from "expo-router";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
 import {
@@ -18,27 +18,33 @@ export default function AuthPhoneVerifyScreen() {
   const isComplete = code.every((item) => item.length === 1);
 
   return (
-    <AuthScaffold
-      topSlot={<AuthBackButton />}
-      contentAlignment="top"
-      header={
-        <AuthLogoHeader
-          compact
-          title="Check your phone"
-          subtitle="Enter the 4-digit verification code sent to +1 ******5924"
-        />
-      }
-      footer={
-        <AppButton
-          label="Next"
-          disabled={!isComplete}
-          onPress={() => router.push("/screens/auth/login/use-case")}
-        />
-      }
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={0}
     >
-      <View style={{ gap: spacing[16], marginTop: spacing[32] }}>
-        <VerificationCode code={code} onChange={setCode} />
-      </View>
-    </AuthScaffold>
+      <AuthScaffold
+        topSlot={<AuthBackButton />}
+        contentAlignment="top"
+        header={
+          <AuthLogoHeader
+            compact
+            title="Check your phone"
+            subtitle="Enter the 4-digit verification code sent to +1 ******5924"
+          />
+        }
+        footer={
+          <AppButton
+            label="Next"
+            disabled={!isComplete}
+            onPress={() => router.push("/screens/auth/login/use-case")}
+          />
+        }
+      >
+        <View style={{ gap: spacing[16], marginTop: spacing[32] }}>
+          <VerificationCode code={code} onChange={setCode} />
+        </View>
+      </AuthScaffold>
+    </KeyboardAvoidingView>
   );
 }

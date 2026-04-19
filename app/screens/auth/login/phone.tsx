@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useRouter } from "expo-router";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 
 import { AuthInputField } from "../../../../components/auth/login/AuthInputField";
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
@@ -17,33 +17,39 @@ export default function AuthPhoneScreen() {
   const [phone, setPhone] = useState("");
 
   return (
-    <AuthScaffold
-      topSlot={<AuthBackButton />}
-      contentAlignment="top"
-      header={
-        <AuthLogoHeader
-          compact
-          title="Sign In with Phone Number"
-          subtitle="We'll send a verification code to your phone number."
-        />
-      }
-      footer={
-        <AppButton
-          label="Next"
-          disabled={phone.trim().length < 7}
-          onPress={() => router.push("/screens/auth/login/phone-verify")}
-        />
-      }
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={0}
     >
-      <View style={{ gap: spacing[16], marginTop: spacing[8] }}>
-        <AuthInputField
-          label="Phone Number"
-          placeholder="Enter your phone number"
-          keyboardType="numeric"
-          value={phone}
-          onChangeText={setPhone}
-        />
-      </View>
-    </AuthScaffold>
+      <AuthScaffold
+        topSlot={<AuthBackButton />}
+        contentAlignment="top"
+        header={
+          <AuthLogoHeader
+            compact
+            title="Sign In with Phone Number"
+            subtitle="We'll send a verification code to your phone number."
+          />
+        }
+        footer={
+          <AppButton
+            label="Next"
+            disabled={phone.trim().length < 7}
+            onPress={() => router.push("/screens/auth/login/phone-verify")}
+          />
+        }
+      >
+        <View style={{ gap: spacing[16], marginTop: spacing[8] }}>
+          <AuthInputField
+            label="Phone Number"
+            placeholder="Enter your phone number"
+            keyboardType="numeric"
+            value={phone}
+            onChangeText={setPhone}
+          />
+        </View>
+      </AuthScaffold>
+    </KeyboardAvoidingView>
   );
 }
