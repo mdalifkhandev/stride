@@ -35,7 +35,7 @@ export default function SignupSexScreen() {
 
   return (
     <AppScreen>
-      <SignupProgressHeader progress={20} />
+      <SignupProgressHeader currentStep={2} totalSteps={4} />
 
       <ScrollView
         style={{ flex: 1, marginTop: 22 }}

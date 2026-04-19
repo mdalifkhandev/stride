@@ -18,6 +18,12 @@ export default function SignupIndex() {
   const myself = "/screens/auth/myself/profile" as Href;
   const isChoiceMissing = choice === null;
 
+  const handleContinue = () => {
+    if (choice === "myself") {
+      router.push(myself);
+    }
+  };
+
   return (
     <AppScreen>
       <View style={{ paddingTop: 28 }}>
@@ -70,7 +76,7 @@ export default function SignupIndex() {
         <AppButton
           label="Continue"
           disabled={isChoiceMissing}
-          onPress={() => router.push(myself)}
+          onPress={handleContinue}
         />
         <View
           style={{

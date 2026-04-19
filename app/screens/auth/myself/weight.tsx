@@ -26,7 +26,7 @@ export default function SignupWeightScreen() {
 
   return (
     <AppScreen>
-      <SignupProgressHeader progress={20} />
+      <SignupProgressHeader currentStep={4} totalSteps={4} />
 
       <View
         style={{

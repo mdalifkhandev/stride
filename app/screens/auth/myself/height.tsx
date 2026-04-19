@@ -145,7 +145,7 @@ export default function SignupHeightScreen() {
 
   return (
     <AppScreen>
-      <SignupProgressHeader progress={20} />
+      <SignupProgressHeader currentStep={3} totalSteps={4} />
 
       <View
         style={{

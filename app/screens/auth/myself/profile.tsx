@@ -13,7 +13,7 @@ export default function SignupProfileScreen() {
 
   return (
     <AppScreen>
-      <SignupProgressHeader progress={20} />
+      <SignupProgressHeader currentStep={1} totalSteps={4} />
 
       <ScrollView
         style={{ flex: 1, marginTop: 28 }}
