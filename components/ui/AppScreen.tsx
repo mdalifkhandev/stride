@@ -18,6 +18,7 @@ export function AppScreen({ children, padded = true }: AppScreenProps) {
           padded && {
             paddingHorizontal: spacing[16],
             paddingBottom: spacing[24],
+            paddingTop: spacing[28],
           },
         ]}
       >

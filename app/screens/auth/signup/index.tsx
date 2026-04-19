@@ -16,11 +16,17 @@ export default function SignupIndex() {
   const [choice, setChoice] = useState<Choice>(null);
   const loginRoute = "/screens/auth/login" as Href;
   const myself = "/screens/auth/myself/profile" as Href;
+  const caregiver = "/screens/auth/caregiver" as Href;
   const isChoiceMissing = choice === null;
 
   const handleContinue = () => {
     if (choice === "myself") {
       router.push(myself);
+      return;
+    }
+
+    if (choice === "caregiver") {
+      router.push(caregiver);
     }
   };
 

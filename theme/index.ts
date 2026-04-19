@@ -374,6 +374,174 @@ export const choiceCardStyles = StyleSheet.create({
   } as ViewStyle,
 } as const);
 
+export const progressHeaderStyles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing[12],
+    minHeight: 28,
+  } as ViewStyle,
+  backButton: {
+    paddingVertical: spacing[4],
+    paddingRight: spacing[4],
+  } as ViewStyle,
+  track: {
+    flex: 1,
+    height: 16,
+    borderRadius: radius.full,
+    backgroundColor: colors.surface.actionLight,
+    overflow: "hidden",
+  } as ViewStyle,
+  indicator: {
+    height: "100%",
+    borderRadius: radius.full,
+    backgroundColor: colors.surface.action,
+  } as ViewStyle,
+  percentage: {
+    ...typography.title.t2,
+    color: colors.text.action,
+    fontWeight: "700",
+  } as TextStyle,
+} as const);
+
+export const caregiverQuestionStyles = StyleSheet.create({
+  screenBody: {
+    flex: 1,
+  } as ViewStyle,
+  content: {
+    gap: spacing[20],
+    paddingBottom: spacing[24],
+  } as ViewStyle,
+  footer: {
+    gap: spacing[8],
+    paddingTop: spacing[8],
+  } as ViewStyle,
+  title: {
+    ...typography.headline.h2,
+    color: colors.text.primary,
+    fontWeight: "500",
+    marginTop: spacing[4],
+  } as TextStyle,
+  prompt: {
+    ...typography.title.t2,
+    color: colors.text.primary,
+    fontWeight: "700",
+    lineHeight: 32,
+  } as TextStyle,
+  section: {
+    gap: spacing[12],
+  } as ViewStyle,
+  optionList: {
+    gap: spacing[12],
+  } as ViewStyle,
+  optionCard: {
+    minHeight: 62,
+    borderWidth: border.thin,
+    borderColor: colors.border.tertiary,
+    borderRadius: radius.md,
+    backgroundColor: colors.surface.primary,
+    paddingHorizontal: spacing[12],
+    paddingVertical: spacing[12],
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: spacing[8],
+  } as ViewStyle,
+  optionCardSelected: {
+    borderColor: colors.border.action,
+    backgroundColor: colors.surface.actionLight,
+  } as ViewStyle,
+  checkbox: {
+    width: 24,
+    height: 24,
+    marginTop: 1,
+    borderWidth: border.thin,
+    borderColor: colors.border.secondary,
+    borderRadius: radius.xs,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.surface.primary,
+  } as ViewStyle,
+  checkboxSelected: {
+    borderColor: colors.border.action,
+    backgroundColor: colors.surface.action,
+  } as ViewStyle,
+  radio: {
+    width: 24,
+    height: 24,
+    marginTop: 1,
+    borderWidth: border.thin,
+    borderColor: colors.border.secondary,
+    borderRadius: radius.full,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.surface.primary,
+  } as ViewStyle,
+  radioSelected: {
+    borderColor: colors.border.action,
+  } as ViewStyle,
+  indicatorDot: {
+    width: 12,
+    height: 12,
+    borderRadius: radius.full,
+    backgroundColor: colors.surface.action,
+  } as ViewStyle,
+  indicatorCheck: {
+    ...typography.caption.smallBold,
+    color: colors.text.onAction,
+    lineHeight: 14,
+  } as TextStyle,
+  optionContent: {
+    flex: 1,
+    gap: spacing[2],
+  } as ViewStyle,
+  optionLabel: {
+    ...typography.button.small,
+    color: colors.text.primary,
+    fontWeight: "700",
+    lineHeight: 30,
+  } as TextStyle,
+  optionDescription: {
+    ...typography.body.small,
+    color: colors.text.secondary,
+    lineHeight: 30,
+  } as TextStyle,
+  textFieldGroup: {
+    gap: spacing[8],
+  } as ViewStyle,
+  textFieldLabel: {
+    ...typography.title.t2,
+    color: colors.text.primary,
+    fontWeight: "700",
+    lineHeight: 32,
+  } as TextStyle,
+  textField: {
+    minHeight: 84,
+    borderWidth: border.thin,
+    borderColor: colors.border.tertiary,
+    borderRadius: radius.md,
+    backgroundColor: colors.surface.primary,
+    paddingHorizontal: spacing[12],
+    paddingVertical: spacing[12],
+  } as ViewStyle,
+  textFieldSingle: {
+    minHeight: 40,
+    paddingVertical: spacing[8],
+  } as ViewStyle,
+  textFieldMultiline: {
+    minHeight: 116,
+  } as ViewStyle,
+  textFieldInput: {
+    ...typography.body.xsm,
+    color: colors.text.primary,
+  } as TextStyle,
+  skipText: {
+    ...typography.title.t2,
+    color: colors.text.action,
+    textAlign: "center",
+    fontWeight: "500",
+  } as TextStyle,
+} as const);
+
 export const badgeStyles = StyleSheet.create({
   success: {
     backgroundColor: colors.surface.success,
@@ -446,6 +614,8 @@ export const componentTheme = {
   inputStyles,
   cardStyles,
   choiceCardStyles,
+  progressHeaderStyles,
+  caregiverQuestionStyles,
   badgeStyles,
   textStyles,
   layoutStyles,
