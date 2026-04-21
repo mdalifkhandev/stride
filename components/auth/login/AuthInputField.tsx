@@ -22,7 +22,12 @@ export function AuthInputField({
       <Text
         style={[
           textStyles.titleSmall,
-          { color: colors.text.primary, fontWeight: "700" },
+          {
+            color: colors.text.primary,
+            fontWeight: "700",
+            fontSize: 16,
+            lineHeight: 24,
+          },
         ]}
       >
         {label}
@@ -35,14 +40,14 @@ export function AuthInputField({
         keyboardType={keyboardType}
         autoCapitalize="none"
         style={{
-          height: 44,
+          height: 48,
           borderRadius: radius.input,
           borderWidth: 1,
           borderColor: colors.border.tertiary,
           paddingHorizontal: spacing[12],
           backgroundColor: colors.surface.primary,
           color: colors.text.primary,
-          ...textStyles.bodyXsm,
+          ...textStyles.bodySmall,
         }}
       />
     </View>

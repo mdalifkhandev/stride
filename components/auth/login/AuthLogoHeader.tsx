@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import Logo from "../../../assets/images/logo.svg";
 import { colors, spacing, textStyles } from "../../../trast/theme";
 
-const LOGO_WIDTH = 130;
-const LOGO_HEIGHT = 60;
+const LOGO_WIDTH = 118;
+const LOGO_HEIGHT = 52;
 
 type AuthLogoHeaderProps = {
   title?: string;
@@ -31,8 +31,8 @@ export function AuthLogoHeader({
           {
             color: colors.text.action,
             fontWeight: "700",
-            fontSize: 40,
-            lineHeight: 40,
+            fontSize: compact ? 32 : 40,
+            lineHeight: compact ? 34 : 40,
           },
         ]}
       >
@@ -45,7 +45,9 @@ export function AuthLogoHeader({
             {
               color: colors.text.primary,
               fontWeight: "700",
-              marginTop: compact ? spacing[16] : spacing[24],
+              fontSize: compact ? 22 : 18,
+              lineHeight: compact ? 30 : 27,
+              marginTop: compact ? spacing[4] : spacing[24],
               textAlign: "center",
             },
           ]}
@@ -59,8 +61,11 @@ export function AuthLogoHeader({
             textStyles.bodySmall,
             {
               color: colors.text.secondary,
+              fontSize: compact ? 16 : 14,
+              lineHeight: compact ? 24 : 21,
               textAlign: "center",
-              maxWidth: 260,
+              marginTop: compact ? spacing[8] : spacing[0],
+              maxWidth: compact ? 320 : 260,
             },
           ]}
         >
