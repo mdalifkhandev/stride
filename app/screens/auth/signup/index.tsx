@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Href, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
+import { SignupChoiceHeader } from "../../../../components/auth/signup/SignupChoiceHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
 import { colors, spacing, textStyles } from "../../../../trast/theme";
@@ -14,6 +14,7 @@ type Choice = "myself" | "caregiver" | "organization" | null;
 export default function SignupIndex() {
   const router = useRouter();
   const [choice, setChoice] = useState<Choice>(null);
+  const [showWarning, setShowWarning] = useState(false);
   const loginRoute = "/screens/auth/login" as Href;
   const myself = "/screens/auth/myself/profile" as Href;
   const caregiver = "/screens/auth/caregiver" as Href;
@@ -21,6 +22,11 @@ export default function SignupIndex() {
   const isChoiceMissing = choice === null;
 
   const handleContinue = () => {
+    if (choice === null) {
+      setShowWarning(true);
+      return;
+    }
+
     if (choice === "myself") {
       router.push(myself);
       return;
@@ -38,80 +44,112 @@ export default function SignupIndex() {
 
   return (
     <AppScreen>
-      <View style={{ paddingTop: 28 }}>
-        <AuthLogoHeader
+      <View style={{ paddingTop: 16 }}>
+        <SignupChoiceHeader
           title="How will you use Stride?"
           subtitle="Choose the option that best describes you."
         />
       </View>
 
-      <View style={{ flex: 1, justifyContent: "flex-start", paddingTop: 36 }}>
+      <View style={{ flex: 1, justifyContent: "space-between", paddingTop: 24 }}>
         <View style={{ gap: spacing[12] }}>
           <AuthChoiceCard
             title="For Myself"
             description="Improve my daily physical and mental activity."
             selected={choice === "myself"}
-            onPress={() => setChoice("myself")}
+            onPress={() => {
+              setChoice("myself");
+              setShowWarning(false);
+            }}
           />
           <AuthChoiceCard
             title="As a Caregiver"
             description="Support a client or loved one on their wellness journey."
             selected={choice === "caregiver"}
-            onPress={() => setChoice("caregiver")}
+            onPress={() => {
+              setChoice("caregiver");
+              setShowWarning(false);
+            }}
           />
           <AuthChoiceCard
             title="For My Organization"
             description="Set up Stride for a business or care provider."
             selected={choice === "organization"}
-            onPress={() => setChoice("organization")}
+            onPress={() => {
+              setChoice("organization");
+              setShowWarning(false);
+            }}
           />
         </View>
-      </View>
 
-      <View
-        style={{
-          gap: spacing[12],
-          paddingBottom: spacing[8],
-          marginTop: spacing[20],
-        }}
-      >
-        {isChoiceMissing ? (
-          <Text
-            style={[
-              textStyles.captionLarge,
-              { color: colors.text.warning, textAlign: "center" },
-            ]}
-          >
-            Please choose an option to continue
-          </Text>
-        ) : null}
-        <AppButton
-          label="Continue"
-          disabled={isChoiceMissing}
-          onPress={handleContinue}
-        />
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
+            gap: spacing[24],
+            paddingBottom: spacing[8],
+            marginTop: spacing[24],
           }}
         >
-          <Text
-            style={[textStyles.captionLarge, { color: colors.text.secondary }]}
+          {showWarning ? (
+            <View
+              style={{
+                alignSelf: "center",
+                backgroundColor: "#FDECEA",
+                borderWidth: 0.5,
+                borderColor: colors.border.warning,
+                borderRadius: 4,
+                paddingHorizontal: spacing[8],
+                paddingVertical: spacing[2],
+              }}
+            >
+              <Text
+                style={[
+                  textStyles.captionLarge,
+                  {
+                    color: colors.text.warning,
+                    fontSize: 14,
+                    lineHeight: 21,
+                  },
+                ]}
+              >
+                Please choose an option to continue
+              </Text>
+            </View>
+          ) : null}
+          <AppButton
+            label="Continue"
+            onPress={handleContinue}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            Already have an account?{" "}
-          </Text>
-          <Pressable onPress={() => router.push(loginRoute)}>
             <Text
               style={[
                 textStyles.captionLarge,
-                { color: colors.text.action, textDecorationLine: "underline" },
+                { color: colors.text.secondary, fontSize: 14, lineHeight: 21 },
               ]}
             >
-              Sign In
+              Already have an account?{" "}
             </Text>
-          </Pressable>
+            <Pressable onPress={() => router.push(loginRoute)}>
+              <Text
+                style={[
+                  textStyles.captionLarge,
+                  {
+                    color: colors.text.action,
+                    textDecorationLine: "underline",
+                    fontSize: 14,
+                    lineHeight: 21,
+                  },
+                ]}
+              >
+                Sign In
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </AppScreen>
