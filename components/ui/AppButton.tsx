@@ -32,7 +32,7 @@ export function AppButton({
       style={[
         {
           minHeight: 52,
-          borderRadius: fullRadius ? radius.full : radius.button,
+          borderRadius: fullRadius ? radius.lg : radius.button,
           alignItems: "center",
           justifyContent: "center",
           paddingVertical: spacing[12],

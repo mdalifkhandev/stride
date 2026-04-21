@@ -11,44 +11,53 @@ const signupRoute = "/screens/auth/signup" as Href;
 export default function AuthIndex() {
   return (
     <AppScreen>
-      <View
-        style={{
-          alignItems: "center",
-          gap: spacing[4],
-          paddingTop: spacing[16],
-        }}
-      >
-        <Text
-          style={[
-            textStyles.h2,
-            {
-              color: colors.text.action,
-              textAlign: "center",
-              fontWeight: "700",
-            },
-          ]}
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            alignItems: "center",
+            gap: spacing[4],
+            paddingTop: spacing[12],
+          }}
         >
-          Welcome to Stride
-        </Text>
-        <Text
-          style={[
-            textStyles.bodySmall,
-            { color: colors.text.secondary, textAlign: "center" },
-          ]}
-        >
-          Stay ahead of decline with Stride!
-        </Text>
-      </View>
+          <Text
+            style={[
+              textStyles.h2,
+              {
+                color: colors.text.action,
+                textAlign: "center",
+                fontWeight: "700",
+              },
+            ]}
+          >
+            Welcome to Stride
+          </Text>
+          <Text
+            style={[
+              textStyles.bodySmall,
+              { color: colors.text.secondary, textAlign: "center" },
+            ]}
+          >
+            Stay ahead of decline with Stride!
+          </Text>
+        </View>
 
-      <BrandMark />
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <BrandMark />
+        </View>
 
-      <View style={{ gap: spacing[16], paddingBottom: spacing[8] }}>
-        <AppButton label="Sign in" onPress={() => router.push(loginRoute)} />
-        <AppButton
-          label="Create account"
-          variant="secondary"
-          onPress={() => router.push(signupRoute)}
-        />
+        <View style={{ gap: spacing[16], paddingBottom: spacing[8] }}>
+          <AppButton
+            label="Sign in"
+            fullRadius
+            onPress={() => router.push(loginRoute)}
+          />
+          <AppButton
+            label="Create account"
+            variant="secondary"
+            fullRadius
+            onPress={() => router.push(signupRoute)}
+          />
+        </View>
       </View>
     </AppScreen>
   );

@@ -14,7 +14,6 @@ export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
   return (
     <View
       style={{
-        flex: 1,
         alignItems: "center",
         justifyContent: "center",
         gap: spacing[16],
