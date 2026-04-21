@@ -1,45 +1,135 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import { useState } from "react";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ThirtyDaysBadge from "../../assets/images/Badge30days.svg";
+import SixtyDaysBadge from "../../assets/images/Badge60days.svg";
+import NinetyDaysBadge from "../../assets/images/Badge90days.svg";
+import { ProfileAwardCard } from "../../components/profile/ProfileAwardCard";
+import { ProfileHeroCard } from "../../components/profile/ProfileHeroCard";
+import { ProfileMilestoneSelector } from "../../components/profile/ProfileMilestoneSelector";
+import { ProfileSettingRow } from "../../components/profile/ProfileSettingRow";
 
-const avatarImage = require("../../assets/images/caregiver-first-screen.png");
+const avatarImage = {
+  uri: "https://i.pravatar.cc/300?img=12",
+};
+const dayOptions = [30, 60, 90] as const;
 
 const settingsItems = [
   { id: "personal", title: "Personal Information" },
   { id: "question", title: "Personalize Question" },
   { id: "caregiver", title: "Caregiver Settings" },
-  { id: "subscription", title: "Subscription Management", badge: "Silver" },
   { id: "privacy", title: "Security & Privacy" },
 ];
 
-function SettingRow({
-  title,
-  badge,
-}: {
-  title: string;
-  badge?: string;
-}) {
-  return (
-    <Pressable className="mb-4 flex-row items-center justify-between rounded-2xl bg-white px-4 py-5 shadow-sm">
-      <View className="flex-row items-center">
-        <Text className="font-['Inter-Medium'] text-[17px] text-[#252B36]">
-          {title}
-        </Text>
-        {badge ? (
-          <View className="ml-2 rounded-full bg-[#E5F0FF] px-2 py-0.5">
-            <Text className="font-['Inter-SemiBold'] text-[10px] text-[#2B6FD6]">
-              {badge}
-            </Text>
-          </View>
-        ) : null}
-      </View>
+function getMilestoneTheme(days: number) {
+  if (days >= 90) {
+    return {
+      badge: NinetyDaysBadge,
+      tier: "Peak",
+      headline: "You’re reaching your peak now!",
+      heroBackground: "#E8F3FF",
+      heroBorder: "#69B0FF",
+      heroAvatarBackground: "#F3F8FF",
+      heroChipBackground: "#4B96E8",
+      heroChipBorder: "#84BEFF",
+      heroChipText: "#FFFFFF",
+      heroSubtitle: "#5F6772",
+      awardTitle: "Discipline Keeper",
+      awardBackground: "#FFF6E8",
+      awardBorder: "#FFAF2A",
+      awardAccent: "#2B6FD6",
+      awardIcon: "#F4B228",
+      selectorBackground: "#EAF3FF",
+      selectorBorder: "#8EBBFF",
+      selectorActiveBackground: "#2B6FD6",
+      selectorActiveText: "#FFFFFF",
+      selectorText: "#2B6FD6",
+    } as const;
+  }
 
-      <Ionicons name="arrow-forward" size={18} color="#252B36" />
-    </Pressable>
-  );
+  if (days >= 60) {
+    return {
+      badge: SixtyDaysBadge,
+      tier: "Prime",
+      headline: "You’re in your prime,\nthriving like never before!",
+      heroBackground: "#FBF0E1",
+      heroBorder: "#F59E27",
+      heroAvatarBackground: "#FFF7ED",
+      heroChipBackground: "#FFC44D",
+      heroChipBorder: "#FFD98B",
+      heroChipText: "#FFFFFF",
+      heroSubtitle: "#6F6C68",
+      awardTitle: "Consistency Elite",
+      awardBackground: "#FFF8EC",
+      awardBorder: "#F8B54B",
+      awardAccent: "#2B6FD6",
+      awardIcon: "#F4B228",
+      selectorBackground: "#FFF5E5",
+      selectorBorder: "#F7C97A",
+      selectorActiveBackground: "#F4B228",
+      selectorActiveText: "#FFFFFF",
+      selectorText: "#A26600",
+    } as const;
+  }
+
+  return {
+    badge: ThirtyDaysBadge,
+    tier: "Strong",
+    headline: "You’re getting stronger every day!",
+    heroBackground: "#EEF4FA",
+    heroBorder: "#9CB6C4",
+    heroAvatarBackground: "#FFFFFF",
+    heroChipBackground: "#9CB8C7",
+    heroChipBorder: "#C8D8E2",
+    heroChipText: "#FFFFFF",
+    heroSubtitle: "#6C727A",
+    awardTitle: "Habit Builder",
+    awardBackground: "#FFF8EC",
+    awardBorder: "#FFAF2A",
+    awardAccent: "#2B6FD6",
+    awardIcon: "#8B8B8B",
+    subscriptionBadge: "Basic",
+    subscriptionBadgeBackground: "#EEF9F0",
+    subscriptionBadgeBorder: "#76BE7F",
+    subscriptionBadgeText: "#2F8C3E",
+    selectorBackground: "#F1F5F9",
+    selectorBorder: "#C8D8E2",
+    selectorActiveBackground: "#9CB8C7",
+    selectorActiveText: "#FFFFFF",
+    selectorText: "#587489",
+  } as const;
 }
 
 export default function ProfileScreen() {
+  const [activityDays, setActivityDays] =
+    useState<(typeof dayOptions)[number]>(90);
+  const milestone = getMilestoneTheme(activityDays);
+  const settingsWithSubscription = [
+    ...settingsItems.slice(0, 3).map((item) => ({
+      ...item,
+      badge: undefined,
+      badgeBackground: undefined,
+      badgeBorder: undefined,
+      badgeText: undefined,
+    })),
+    {
+      id: "subscription",
+      title: "Subscription Management",
+      badge: milestone.subscriptionBadge ?? "Silver",
+      badgeBackground: milestone.subscriptionBadgeBackground ?? "#E5F0FF",
+      badgeBorder: milestone.subscriptionBadgeBorder ?? "#B9D4FF",
+      badgeText: milestone.subscriptionBadgeText ?? "#2B6FD6",
+    },
+    {
+      ...settingsItems[3],
+      badge: undefined,
+      badgeBackground: undefined,
+      badgeBorder: undefined,
+      badgeText: undefined,
+    },
+  ];
+
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-[#F5F7FB]">
       <ScrollView
@@ -56,68 +146,28 @@ export default function ProfileScreen() {
             </Text>
           </View>
 
-          <View className="items-center rounded-[8px] bg-[#FBF0E1] px-5 pb-7 pt-6">
-            <View className="relative">
-              <View className="h-[92px] w-[92px] items-center justify-center rounded-full border-[3px] border-[#F59E27] bg-[#FFF7ED]">
-                <Image
-                  source={avatarImage}
-                  className="h-[82px] w-[82px] rounded-full"
-                  resizeMode="cover"
-                />
-              </View>
+          <ProfileHeroCard
+            avatarSource={avatarImage}
+            badge={milestone.badge}
+            tier={milestone.tier}
+            headline={milestone.headline}
+            heroBackground={milestone.heroBackground}
+            heroBorder={milestone.heroBorder}
+            heroAvatarBackground={milestone.heroAvatarBackground}
+            heroChipBackground={milestone.heroChipBackground}
+            heroChipBorder={milestone.heroChipBorder}
+            heroChipText={milestone.heroChipText}
+            heroSubtitle={milestone.heroSubtitle}
+          />
 
-              <View className="absolute bottom-0 left-1/2 h-8 w-8 -translate-x-4 items-center justify-center rounded-full border-2 border-[#FBF0E1] bg-[#FFC55A]">
-                <Ionicons name="diamond" size={16} color="#FFF" />
-              </View>
-            </View>
-
-            <View className="mt-4 rounded-full bg-[#FFC44D] px-4 py-1.5">
-              <Text className="font-['Inter-Bold'] text-[18px] text-white">
-                Prime
-              </Text>
-            </View>
-
-            <Text className="mt-4 font-['Inter-SemiBold'] text-[19px] text-[#2C2D30]">
-              Mahmudur Rahman
-            </Text>
-            <Text className="mt-2 text-center font-['Inter-Regular'] text-[16px] leading-7 text-[#6F6C68]">
-              You&apos;re in your prime,{`\n`}thriving like never before!
-            </Text>
-          </View>
-
-          <View className="mt-5 rounded-[10px] border border-[#F8B54B] bg-[#FFF8EC] px-4 py-5">
-            <View className="flex-row items-start justify-between">
-              <View>
-                <Text className="font-['Inter-Bold'] text-[16px] text-[#3B362F]">
-                  Consistency Elite
-                </Text>
-              </View>
-              <Text className="font-['Inter-Bold'] text-[14px] text-[#2B6FD6]">
-                Stride
-              </Text>
-            </View>
-
-            <View className="mt-6 flex-row items-center justify-between">
-              <View className="pr-4">
-                <Text className="font-['Inter-Medium'] text-[17px] text-[#2C2D30]">
-                  Congratulation!
-                </Text>
-                <Text className="mt-2 font-['Inter-Regular'] text-[15px] italic leading-6 text-[#6F6C68]">
-                  Awarded for{" "}
-                  <Text className="font-['Inter-Bold'] text-[#2B6FD6]">60 Days</Text> of{"\n"}
-                  Consistent Activity.
-                </Text>
-              </View>
-
-              <View className="items-center justify-center">
-                <MaterialCommunityIcons
-                  name="trophy-award"
-                  size={70}
-                  color="#F4B228"
-                />
-              </View>
-            </View>
-          </View>
+          <ProfileAwardCard
+            badge={milestone.badge}
+            awardTitle={milestone.awardTitle}
+            awardBackground={milestone.awardBackground}
+            awardBorder={milestone.awardBorder}
+            awardAccent={milestone.awardAccent}
+            activityDays={activityDays}
+          />
 
           <View className="mb-4 mt-5 flex-row items-center">
             <Text className="mr-3 font-['Inter-SemiBold'] text-[17px] text-[#666A72]">
@@ -126,8 +176,15 @@ export default function ProfileScreen() {
             <View className="h-px flex-1 bg-[#D4D8DE]" />
           </View>
 
-          {settingsItems.map((item) => (
-            <SettingRow key={item.id} title={item.title} badge={item.badge} />
+          {settingsWithSubscription.map((item) => (
+            <ProfileSettingRow
+              key={item.id}
+              title={item.title}
+              badge={item.badge}
+              badgeBackground={item.badgeBackground}
+              badgeBorder={item.badgeBorder}
+              badgeText={item.badgeText}
+            />
           ))}
 
           <Pressable className="mt-2 self-start rounded-xl bg-[#FDECEC] px-4 py-3">
@@ -142,6 +199,19 @@ export default function ProfileScreen() {
               </Text>
             </View>
           </Pressable>
+
+          <ProfileMilestoneSelector
+            dayOptions={dayOptions}
+            activityDays={activityDays}
+            selectorBackground={milestone.selectorBackground}
+            selectorBorder={milestone.selectorBorder}
+            selectorActiveBackground={milestone.selectorActiveBackground}
+            selectorActiveText={milestone.selectorActiveText}
+            selectorText={milestone.selectorText}
+            onSelect={(days) =>
+              setActivityDays(days as (typeof dayOptions)[number])
+            }
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
