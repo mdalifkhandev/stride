@@ -5,6 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ThirtyDaysBadge from "../../assets/images/Badge30days.svg";
 import SixtyDaysBadge from "../../assets/images/Badge60days.svg";
 import NinetyDaysBadge from "../../assets/images/Badge90days.svg";
+import AwardedThirtyDays from "../../assets/images/awaeded30days.svg";
+import AwardedSixtyDays from "../../assets/images/awaeded60days.svg";
+import AwardedNinetyDays from "../../assets/images/awaeded90days.svg";
 import { ProfileAwardCard } from "../../components/profile/ProfileAwardCard";
 import { ProfileHeroCard } from "../../components/profile/ProfileHeroCard";
 import { ProfileMilestoneSelector } from "../../components/profile/ProfileMilestoneSelector";
@@ -13,7 +16,7 @@ import { ProfileSettingRow } from "../../components/profile/ProfileSettingRow";
 const avatarImage = {
   uri: "https://i.pravatar.cc/300?img=12",
 };
-const dayOptions = [30, 60, 90] as const;
+const dayOptions = [20, 30, 60, 90] as const;
 
 const settingsItems = [
   { id: "personal", title: "Personal Information" },
@@ -26,6 +29,7 @@ function getMilestoneTheme(days: number) {
   if (days >= 90) {
     return {
       badge: NinetyDaysBadge,
+      awardBadge: AwardedNinetyDays,
       tier: "Peak",
       headline: "You’re reaching your peak now!",
       heroBackground: "#E8F3FF",
@@ -39,7 +43,6 @@ function getMilestoneTheme(days: number) {
       awardBackground: "#FFF6E8",
       awardBorder: "#FFAF2A",
       awardAccent: "#2B6FD6",
-      awardIcon: "#F4B228",
       selectorBackground: "#EAF3FF",
       selectorBorder: "#8EBBFF",
       selectorActiveBackground: "#2B6FD6",
@@ -51,6 +54,7 @@ function getMilestoneTheme(days: number) {
   if (days >= 60) {
     return {
       badge: SixtyDaysBadge,
+      awardBadge: AwardedSixtyDays,
       tier: "Prime",
       headline: "You’re in your prime,\nthriving like never before!",
       heroBackground: "#FBF0E1",
@@ -64,7 +68,6 @@ function getMilestoneTheme(days: number) {
       awardBackground: "#FFF8EC",
       awardBorder: "#F8B54B",
       awardAccent: "#2B6FD6",
-      awardIcon: "#F4B228",
       selectorBackground: "#FFF5E5",
       selectorBorder: "#F7C97A",
       selectorActiveBackground: "#F4B228",
@@ -75,6 +78,7 @@ function getMilestoneTheme(days: number) {
 
   return {
     badge: ThirtyDaysBadge,
+    awardBadge: AwardedThirtyDays,
     tier: "Strong",
     headline: "You’re getting stronger every day!",
     heroBackground: "#EEF4FA",
@@ -88,7 +92,6 @@ function getMilestoneTheme(days: number) {
     awardBackground: "#FFF8EC",
     awardBorder: "#FFAF2A",
     awardAccent: "#2B6FD6",
-    awardIcon: "#8B8B8B",
     subscriptionBadge: "Basic",
     subscriptionBadgeBackground: "#EEF9F0",
     subscriptionBadgeBorder: "#76BE7F",
@@ -149,6 +152,7 @@ export default function ProfileScreen() {
           <ProfileHeroCard
             avatarSource={avatarImage}
             badge={milestone.badge}
+            showMilestone={activityDays >= 30}
             tier={milestone.tier}
             headline={milestone.headline}
             heroBackground={milestone.heroBackground}
@@ -160,14 +164,18 @@ export default function ProfileScreen() {
             heroSubtitle={milestone.heroSubtitle}
           />
 
-          <ProfileAwardCard
-            badge={milestone.badge}
-            awardTitle={milestone.awardTitle}
-            awardBackground={milestone.awardBackground}
-            awardBorder={milestone.awardBorder}
-            awardAccent={milestone.awardAccent}
-            activityDays={activityDays}
-          />
+          {activityDays >= 30 ? (
+            <ProfileAwardCard
+              awardBadge={milestone.awardBadge}
+              awardBadgeWidth={44}
+              awardBadgeHeight={70}
+              awardTitle={milestone.awardTitle}
+              awardBackground={milestone.awardBackground}
+              awardBorder={milestone.awardBorder}
+              awardAccent={milestone.awardAccent}
+              activityDays={activityDays}
+            />
+          ) : null}
 
           <View className="mb-4 mt-5 flex-row items-center">
             <Text className="mr-3 font-['Inter-SemiBold'] text-[17px] text-[#666A72]">

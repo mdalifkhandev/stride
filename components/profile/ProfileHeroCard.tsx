@@ -5,6 +5,7 @@ type BadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 type ProfileHeroCardProps = {
   avatarSource: ImageSourcePropType;
   badge: BadgeComponent;
+  showMilestone?: boolean;
   tier: string;
   headline: string;
   heroBackground: string;
@@ -19,6 +20,7 @@ type ProfileHeroCardProps = {
 export function ProfileHeroCard({
   avatarSource,
   badge: BadgeAsset,
+  showMilestone = true,
   tier,
   headline,
   heroBackground,
@@ -50,30 +52,38 @@ export function ProfileHeroCard({
           />
         </View>
 
+        {showMilestone ? (
+          <View
+            className="absolute -bottom-5"
+            style={{ left: "50%", transform: [{ translateX: -118 }] }}
+          >
+            <BadgeAsset width={40} height={41} />
+          </View>
+        ) : null}
+      </View>
+
+      {showMilestone ? (
         <View
-          className="absolute -bottom-5"
-          style={{ left: "50%", transform: [{ translateX: -118 }] }}
+          className="mt-7 rounded-full border px-5 py-2"
+          style={{
+            backgroundColor: heroChipBackground,
+            borderColor: heroChipBorder,
+          }}
         >
-          <BadgeAsset width={40} height={41} />
+          <Text
+            className="font-['Inter-Bold'] text-[18px] leading-6"
+            style={{ color: heroChipText }}
+          >
+            {tier}
+          </Text>
         </View>
-      </View>
+      ) : null}
 
-      <View
-        className="mt-7 rounded-full border px-5 py-2"
-        style={{
-          backgroundColor: heroChipBackground,
-          borderColor: heroChipBorder,
-        }}
+      <Text
+        className={`font-['Inter-SemiBold'] text-[25px] leading-[34px] text-[#2C2D30] ${
+          showMilestone ? "mt-2.5" : "mt-7"
+        }`}
       >
-        <Text
-          className="font-['Inter-Bold'] text-[18px] leading-6"
-          style={{ color: heroChipText }}
-        >
-          {tier}
-        </Text>
-      </View>
-
-      <Text className="mt-2.5 font-['Inter-SemiBold'] text-[25px] leading-[34px] text-[#2C2D30]">
         Mahmudur Rahman
       </Text>
       <Text
