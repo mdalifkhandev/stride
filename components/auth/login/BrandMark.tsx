@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import Logo from "../../../assets/images/logo.svg";
 import { colors, spacing } from "../../../trast/theme";
 
-const LOGO_WIDTH = 190;
-const LOGO_HEIGHT = 120;
+const LOGO_WIDTH = 220;
+const LOGO_HEIGHT = 136;
 
 type BrandMarkProps = {
   wordmark?: string;

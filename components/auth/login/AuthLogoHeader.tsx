@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import Logo from "../../../assets/images/logo.svg";
 import { colors, spacing, textStyles } from "../../../trast/theme";
 
-const LOGO_WIDTH = 84;
-const LOGO_HEIGHT = 38;
+const LOGO_WIDTH = 130;
+const LOGO_HEIGHT = 60;
 
 type AuthLogoHeaderProps = {
   title?: string;
@@ -28,7 +28,12 @@ export function AuthLogoHeader({
       <Text
         style={[
           textStyles.h2,
-          { color: colors.text.action, fontWeight: "700" },
+          {
+            color: colors.text.action,
+            fontWeight: "700",
+            fontSize: 40,
+            lineHeight: 40,
+          },
         ]}
       >
         Stride

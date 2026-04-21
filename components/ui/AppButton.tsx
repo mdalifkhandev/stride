@@ -59,7 +59,7 @@ export function AppButton({
       {leftSlot}
       <Text
         style={[
-          textStyles.titleSmall,
+          textStyles.stateBar,
           isPrimary
             ? { color: colors.text.onAction }
             : { color: colors.text.action },

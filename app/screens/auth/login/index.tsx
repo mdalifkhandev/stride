@@ -28,8 +28,22 @@ export default function LoginIndex() {
   return (
     <AuthScaffold contentAlignment="top" header={<AuthLogoHeader compact />}>
       <View style={{ gap: spacing[16] }}>
-        <Text style={textStyles.titleT2}>Welcome Back!</Text>
-        <Text style={textStyles.bodySmall}>
+        <Text
+          style={[textStyles.h1, { textAlign: "center", fontWeight: "700" }]}
+        >
+          Welcome Back!
+        </Text>
+        <Text
+          style={[
+            textStyles.bodySmall,
+            {
+              textAlign: "center",
+              color: colors.text.secondary,
+              lineHeight: 20,
+              marginTop: -spacing[8],
+            },
+          ]}
+        >
           Keep doing what you love with 1-minute Strides built just for you!
         </Text>
 
@@ -74,26 +88,37 @@ export default function LoginIndex() {
           marginTop: spacing[12],
         }}
       >
-        <AppButton label="Next" onPress={handleNext} />
+        <AppButton label="Next" fullRadius onPress={handleNext} />
         <AuthDivider />
         <AppButton
           label="Continue with Google"
           variant="secondary"
+          fullRadius
           leftSlot={<GoogleIcon width={20} height={20} />}
         />
-        <Text style={textStyles.captionLarge}>
-          Already have an account?{" "}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 4,
+          }}
+        >
+          <Text style={textStyles.captionLarge}>Already have an account?</Text>
           <Pressable onPress={() => router.push(signupRoute)}>
             <Text
-              style={{
-                color: colors.text.action,
-                textDecorationLine: "underline",
-              }}
+              style={[
+                textStyles.captionLarge,
+                {
+                  color: colors.text.action,
+                  textDecorationLine: "underline",
+                },
+              ]}
             >
               Sign UP
             </Text>
           </Pressable>
-        </Text>
+        </View>
       </View>
     </AuthScaffold>
   );

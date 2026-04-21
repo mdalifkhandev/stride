@@ -30,14 +30,14 @@ export function AuthOptionCard({
           paddingHorizontal: spacing[16],
           paddingVertical: spacing[12],
           borderWidth: 1,
-          borderColor: "#efefef",
+          borderColor: "#D9D9D9",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
           shadowColor: "#000",
-          shadowOpacity: 0.04,
-          shadowRadius: 10,
-          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.05,
+          shadowRadius: 8,
+          shadowOffset: { width: 0, height: 2 },
           elevation: 1,
         },
         selected && {
@@ -49,7 +49,7 @@ export function AuthOptionCard({
       <View style={{ flex: 1, gap: spacing[8] }}>
         <Text
           style={[
-            textStyles.titleSmall,
+            textStyles.titleT3,
             { color: colors.text.primary, fontWeight: "700" },
             selected && { color: colors.text.action },
           ]}
@@ -58,7 +58,7 @@ export function AuthOptionCard({
         </Text>
         <Text
           style={[
-            textStyles.bodySmall,
+            textStyles.bodyLarge,
             { color: colors.text.secondary, lineHeight: 20 },
             selected && { color: colors.text.primary },
           ]}

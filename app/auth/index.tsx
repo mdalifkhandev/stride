@@ -23,6 +23,8 @@ export default function AuthIndex() {
             style={[
               textStyles.h2,
               {
+                fontSize: 18,
+                lineHeight: 28,
                 color: colors.text.action,
                 textAlign: "center",
                 fontWeight: "700",
@@ -34,7 +36,12 @@ export default function AuthIndex() {
           <Text
             style={[
               textStyles.bodySmall,
-              { color: colors.text.secondary, textAlign: "center" },
+              {
+                fontSize: 16,
+                lineHeight: 24,
+                color: colors.text.secondary,
+                textAlign: "center",
+              },
             ]}
           >
             Stay ahead of decline with Stride!
