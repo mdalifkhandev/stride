@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import { useRouter } from "expo-router";
-import { Animated, Easing, Text, View } from "react-native";
+import { Href, useRouter } from "expo-router";
+import { Animated, Easing, Text } from "react-native";
 
 import { SignupSuccessMark } from "../../../../components/auth/signup/SignupSuccessMark";
 import { AppButton } from "../../../../components/ui/AppButton";
@@ -10,6 +10,7 @@ import { colors, spacing, textStyles } from "../../../../trast/theme";
 
 export default function SignupSuccessScreen() {
   const router = useRouter();
+  const homeRoute = "/(tabs)/home" as Href;
   const heroOpacity = useRef(new Animated.Value(0)).current;
   const heroScale = useRef(new Animated.Value(0.92)).current;
   const buttonOpacity = useRef(new Animated.Value(0)).current;
@@ -81,7 +82,7 @@ export default function SignupSuccessScreen() {
           transform: [{ translateY: buttonTranslateY }],
         }}
       >
-        <AppButton label="Done" onPress={() => router.push("/")} />
+        <AppButton label="Done" onPress={() => router.replace(homeRoute)} />
       </Animated.View>
     </AppScreen>
   );

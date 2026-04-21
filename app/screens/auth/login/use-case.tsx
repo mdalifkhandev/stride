@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useRouter } from "expo-router";
+import { Href, useRouter } from "expo-router";
 import { Text, View } from "react-native";
 
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
@@ -16,6 +16,7 @@ type Choice = "myself" | "caregiver" | "organization" | null;
 
 export default function AuthUseCaseScreen() {
   const router = useRouter();
+  const homeRoute = "/(tabs)/home" as Href;
   const [choice, setChoice] = useState<Choice>(null);
 
   return (
@@ -44,7 +45,7 @@ export default function AuthUseCaseScreen() {
           <AppButton
             label="Continue"
             disabled={choice === null}
-            onPress={() => router.replace("/")}
+            onPress={() => router.replace(homeRoute)}
           />
           <Text
             style={[
