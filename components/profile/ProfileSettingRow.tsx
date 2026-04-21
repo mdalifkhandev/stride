@@ -7,6 +7,7 @@ type ProfileSettingRowProps = {
   badgeBackground?: string;
   badgeBorder?: string;
   badgeText?: string;
+  onPress?: () => void;
 };
 
 export function ProfileSettingRow({
@@ -15,9 +16,13 @@ export function ProfileSettingRow({
   badgeBackground,
   badgeBorder,
   badgeText,
+  onPress,
 }: ProfileSettingRowProps) {
   return (
-    <Pressable className="mb-4 flex-row items-center justify-between rounded-2xl bg-white px-4 py-5 shadow-sm">
+    <Pressable
+      onPress={onPress}
+      className="mb-4 flex-row items-center justify-between rounded-2xl bg-white px-4 py-5 shadow-sm"
+    >
       <View className="flex-row items-center">
         <Text className="font-['Inter-Medium'] text-[17px] text-[#252B36]">
           {title}

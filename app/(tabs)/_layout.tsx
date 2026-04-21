@@ -111,6 +111,12 @@ export default function TabLayout() {
           tabBarIcon: ProfileIcon,
         }}
       />
+      <Tabs.Screen
+        name="personal-info"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }

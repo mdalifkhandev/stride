@@ -1,4 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -105,6 +106,7 @@ function getMilestoneTheme(days: number) {
 }
 
 export default function ProfileScreen() {
+  const router = useRouter();
   const [activityDays, setActivityDays] =
     useState<(typeof dayOptions)[number]>(90);
   const milestone = getMilestoneTheme(activityDays);
@@ -192,6 +194,11 @@ export default function ProfileScreen() {
               badgeBackground={item.badgeBackground}
               badgeBorder={item.badgeBorder}
               badgeText={item.badgeText}
+              onPress={
+                item.id === "personal"
+                  ? () => router.push("/screens/profile/personal-info")
+                  : undefined
+              }
             />
           ))}
 
