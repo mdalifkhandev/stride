@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 
-import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
+import { AuthVerifyHeader } from "../../../../components/auth/login/AuthVerifyHeader";
 import {
   AuthBackButton,
   AuthScaffold,
@@ -24,16 +24,15 @@ export default function AuthVerifyScreen() {
         topSlot={<AuthBackButton />}
         contentAlignment="top"
         header={
-          <AuthLogoHeader
-            compact
+          <AuthVerifyHeader
             title="Verify code"
-            subtitle="We sent OTP code to your email example@gmail.com. Enter the code below to verify."
+            email="example@gmail.com."
           />
         }
-        footer={<AppButton label="Next" />}
       >
-        <View style={{ gap: spacing[16], marginTop: spacing[32] }}>
+        <View style={{ gap: spacing[16], marginTop: spacing[16] }}>
           <VerificationCode code={code} onChange={setCode} />
+          <AppButton label="Next" />
         </View>
       </AuthScaffold>
     </KeyboardAvoidingView>

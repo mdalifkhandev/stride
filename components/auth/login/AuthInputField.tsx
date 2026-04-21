@@ -25,8 +25,8 @@ export function AuthInputField({
           {
             color: colors.text.primary,
             fontWeight: "700",
-            fontSize: 16,
-            lineHeight: 24,
+            fontSize: 18,
+            lineHeight: 27,
           },
         ]}
       >
@@ -48,6 +48,8 @@ export function AuthInputField({
           backgroundColor: colors.surface.primary,
           color: colors.text.primary,
           ...textStyles.bodySmall,
+          fontSize: 14,
+          lineHeight: 21,
         }}
       />
     </View>

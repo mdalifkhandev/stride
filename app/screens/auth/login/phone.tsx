@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 
 import { AuthInputField } from "../../../../components/auth/login/AuthInputField";
-import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
+import { AuthPhoneHeader } from "../../../../components/auth/login/AuthPhoneHeader";
 import {
   AuthBackButton,
   AuthScaffold,
@@ -26,27 +26,24 @@ export default function AuthPhoneScreen() {
         topSlot={<AuthBackButton />}
         contentAlignment="top"
         header={
-          <AuthLogoHeader
-            compact
+          <AuthPhoneHeader
             title="Sign In with Phone Number"
-            subtitle="We'll send a verification code to your phone number."
+            subtitle="We'll send a verification code to your email address."
           />
         }
-        footer={
+      >
+        <View style={{ gap: spacing[20], marginTop: spacing[16] }}>
+          <AuthInputField
+            label="Phone Number"
+            placeholder="Type your phone number"
+            keyboardType="numeric"
+            value={phone}
+            onChangeText={setPhone}
+          />
           <AppButton
             label="Next"
             disabled={phone.trim().length < 7}
             onPress={() => router.push("/screens/auth/login/phone-verify")}
-          />
-        }
-      >
-        <View style={{ gap: spacing[16], marginTop: spacing[8] }}>
-          <AuthInputField
-            label="Phone Number"
-            placeholder="Enter your phone number"
-            keyboardType="numeric"
-            value={phone}
-            onChangeText={setPhone}
           />
         </View>
       </AuthScaffold>
