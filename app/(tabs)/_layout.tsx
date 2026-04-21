@@ -54,7 +54,8 @@ function ProfileIcon({ color, focused, size }: TabIconProps) {
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  const bottomInset = Platform.OS === "ios" ? insets.bottom : Math.max(insets.bottom, 10);
+  const bottomInset =
+    Platform.OS === "ios" ? insets.bottom : Math.max(insets.bottom, 10);
 
   return (
     <Tabs
@@ -109,12 +110,6 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ProfileIcon,
-        }}
-      />
-      <Tabs.Screen
-        name="personal-info"
-        options={{
-          href: null,
         }}
       />
     </Tabs>

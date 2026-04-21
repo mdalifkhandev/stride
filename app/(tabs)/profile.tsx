@@ -197,7 +197,9 @@ export default function ProfileScreen() {
               onPress={
                 item.id === "personal"
                   ? () => router.push("/screens/profile/personal-info")
-                  : undefined
+                  : item.id === "question"
+                    ? () => router.push("/screens/profile/personalize-question")
+                    : undefined
               }
             />
           ))}
