@@ -199,6 +199,8 @@ export default function ProfileScreen() {
                   ? () => router.push("/screens/profile/personal-info")
                   : item.id === "question"
                     ? () => router.push("/screens/profile/personalize-question")
+                    : item.id === "caregiver"
+                      ? () => router.push("/screens/profile/caregiver-settings")
                     : undefined
               }
             />
