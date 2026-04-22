@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { Pressable, Text } from "react-native";
 
+import { useTextScale } from "../accessibility/TextScaleContext";
 import { colors, radius, spacing, textStyles } from "../../trast/theme";
 
 type AppButtonProps = {
@@ -23,6 +24,7 @@ export function AppButton({
   fullRadius = false,
   disabled = false,
 }: AppButtonProps) {
+  useTextScale();
   const isPrimary = variant === "primary";
 
   return (

@@ -4,6 +4,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Animated, Easing, Pressable, Text, View } from "react-native";
 
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../accessibility/TextScaleContext";
 import { colors, progressHeaderStyles } from "../../../trast/theme";
 
 type SignupProgressHeaderProps = {
@@ -17,6 +22,7 @@ export function SignupProgressHeader({
   currentStep,
   totalSteps,
 }: SignupProgressHeaderProps) {
+  useTextScale();
   const router = useRouter();
   const [trackWidth, setTrackWidth] = useState(0);
   const animatedWidth = useRef(new Animated.Value(0)).current;
@@ -72,7 +78,17 @@ export function SignupProgressHeader({
         />
       </View>
 
-      <Text style={progressHeaderStyles.percentage}>{resolvedProgress}%</Text>
+      <Text
+        style={[
+          progressHeaderStyles.percentage,
+          {
+            fontSize: scaleTextSize(20),
+            lineHeight: scaleLineHeight(30),
+          },
+        ]}
+      >
+        {resolvedProgress}%
+      </Text>
     </View>
   );
 }

@@ -1,6 +1,11 @@
 import { Href, useRouter } from "expo-router";
 import { ScrollView, Text } from "react-native";
 
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../../../components/accessibility/TextScaleContext";
 import { SignupField } from "../../../../components/auth/signup/SignupField";
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
@@ -8,6 +13,7 @@ import { AppScreen } from "../../../../components/ui/AppScreen";
 import { colors, spacing } from "../../../../trast/theme";
 
 export default function SignupProfileScreen() {
+  useTextScale();
   const router = useRouter();
   const sexRoute = "/screens/auth/myself/sex" as Href;
 
@@ -25,11 +31,11 @@ export default function SignupProfileScreen() {
             {
               color: colors.text.primary,
               fontFamily: "Inter",
-              fontSize: 32,
+              fontSize: scaleTextSize(32),
               fontStyle: "normal",
               fontWeight: "700",
-              lineHeight: 41,
-              letterSpacing: 0.2,
+              lineHeight: scaleLineHeight(41),
+              letterSpacing: scaleTextSize(0.2),
               marginBottom: spacing[8],
             },
           ]}

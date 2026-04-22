@@ -1,4 +1,9 @@
 import { BrandMark } from "@/components/auth/login/BrandMark";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "@/components/accessibility/TextScaleContext";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppScreen } from "@/components/ui/AppScreen";
 import { colors, spacing, textStyles } from "@/trast/theme";
@@ -9,6 +14,8 @@ const loginRoute = "/screens/auth/login" as Href;
 const signupRoute = "/screens/auth/signup" as Href;
 
 export default function AuthIndex() {
+  useTextScale();
+
   return (
     <AppScreen>
       <ScrollView
@@ -29,8 +36,8 @@ export default function AuthIndex() {
               style={[
                 textStyles.h2,
                 {
-                  fontSize: 18,
-                  lineHeight: 28,
+                  fontSize: scaleTextSize(18),
+                  lineHeight: scaleLineHeight(28),
                   color: colors.text.action,
                   textAlign: "center",
                   fontWeight: "700",
@@ -43,8 +50,8 @@ export default function AuthIndex() {
               style={[
                 textStyles.bodySmall,
                 {
-                  fontSize: 16,
-                  lineHeight: 24,
+                  fontSize: scaleTextSize(16),
+                  lineHeight: scaleLineHeight(24),
                   color: colors.text.secondary,
                   textAlign: "center",
                 },

@@ -2,6 +2,11 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { ScrollView, Text, View } from "react-native";
 
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../accessibility/TextScaleContext";
 import { colors, radius, textStyles } from "../../../trast/theme";
 
 type LegacyScrollMeasurePickerProps = {
@@ -39,6 +44,7 @@ const VISIBLE_ROWS = 3;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ROWS;
 
 export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
+  useTextScale();
   const spacerHeight = useMemo(() => (CONTAINER_HEIGHT - ITEM_HEIGHT) / 2, []);
 
   const isMultiColumn = "columns" in props;
@@ -102,6 +108,11 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
 
   const renderColumn = (values: readonly string[], columnIndex: number) => {
     const selectedIndex = selectedIndices[columnIndex];
+    const visibleStart = Math.max(0, selectedIndex - 12);
+    const visibleEnd = Math.min(values.length, selectedIndex + 13);
+    const visibleValues = values.slice(visibleStart, visibleEnd);
+    const topSpacer = visibleStart * ITEM_HEIGHT;
+    const bottomSpacer = (values.length - visibleEnd) * ITEM_HEIGHT;
 
     return (
       <ScrollView
@@ -112,8 +123,8 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
         style={{ flex: 1 }}
         contentContainerStyle={{
           alignItems: "center",
-          paddingTop: spacerHeight,
-          paddingBottom: spacerHeight,
+          paddingTop: spacerHeight + topSpacer,
+          paddingBottom: spacerHeight + bottomSpacer,
         }}
         showsVerticalScrollIndicator={false}
         snapToInterval={ITEM_HEIGHT}
@@ -123,12 +134,13 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
           handleMomentumEnd(columnIndex, event.nativeEvent.contentOffset.y)
         }
       >
-        {values.map((value, index) => {
-          const selected = index === selectedIndex;
+        {visibleValues.map((value, visibleIndex) => {
+          const actualIndex = visibleStart + visibleIndex;
+          const selected = actualIndex === selectedIndex;
 
           return (
             <View
-              key={`${columnIndex}-${value}-${index}`}
+              key={`${columnIndex}-${value}-${actualIndex}`}
               style={{
                 height: ITEM_HEIGHT,
                 width: "100%",
@@ -143,8 +155,8 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
                   { color: colors.text.secondary, fontWeight: "700" },
                   selected && {
                     color: colors.text.action,
-                    fontSize: 20,
-                    lineHeight: 28,
+                    fontSize: scaleTextSize(20),
+                    lineHeight: scaleLineHeight(28),
                   },
                 ]}
               >

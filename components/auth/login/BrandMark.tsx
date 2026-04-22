@@ -1,5 +1,10 @@
 import { Text, View } from "react-native";
 
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../accessibility/TextScaleContext";
 import Logo from "../../../assets/images/logo.svg";
 import { colors, spacing } from "../../../trast/theme";
 
@@ -11,6 +16,8 @@ type BrandMarkProps = {
 };
 
 export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
+  useTextScale();
+
   return (
     <View
       style={{
@@ -22,11 +29,11 @@ export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
       <Logo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
       <Text
         style={{
-          fontSize: 64,
-          lineHeight: 70,
+          fontSize: scaleTextSize(64),
+          lineHeight: scaleLineHeight(70),
           fontWeight: "800",
           color: colors.text.action,
-          letterSpacing: -1,
+          letterSpacing: scaleTextSize(-1),
         }}
       >
         {wordmark}

@@ -3,6 +3,11 @@ import { useState } from "react";
 import { Href, useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../../../components/accessibility/TextScaleContext";
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { SignupChoiceHeader } from "../../../../components/auth/signup/SignupChoiceHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
@@ -12,6 +17,7 @@ import { colors, spacing, textStyles } from "../../../../trast/theme";
 type Choice = "myself" | "caregiver" | "organization" | null;
 
 export default function SignupIndex() {
+  useTextScale();
   const router = useRouter();
   const [choice, setChoice] = useState<Choice>(null);
   const [showWarning, setShowWarning] = useState(false);
@@ -114,8 +120,8 @@ export default function SignupIndex() {
                     textStyles.captionLarge,
                     {
                       color: colors.text.warning,
-                      fontSize: 14,
-                      lineHeight: 21,
+                      fontSize: scaleTextSize(14),
+                      lineHeight: scaleLineHeight(21),
                     },
                   ]}
                 >
@@ -136,8 +142,8 @@ export default function SignupIndex() {
                   textStyles.captionLarge,
                   {
                     color: colors.text.secondary,
-                    fontSize: 14,
-                    lineHeight: 21,
+                    fontSize: scaleTextSize(14),
+                    lineHeight: scaleLineHeight(21),
                   },
                 ]}
               >
@@ -150,8 +156,8 @@ export default function SignupIndex() {
                     {
                       color: colors.text.action,
                       textDecorationLine: "underline",
-                      fontSize: 14,
-                      lineHeight: 21,
+                      fontSize: scaleTextSize(14),
+                      lineHeight: scaleLineHeight(21),
                     },
                   ]}
                 >
