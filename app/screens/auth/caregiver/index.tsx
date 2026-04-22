@@ -1,9 +1,9 @@
-import { Image } from "expo-image";
 import { useState } from "react";
 
 import { Href, useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
+import Logo from "../../../../assets/images/logo.svg";
 import {
   scaleLineHeight,
   scaleTextSize,
@@ -11,7 +11,6 @@ import {
 } from "../../../../components/accessibility/TextScaleContext";
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import Logo from "../../../../assets/images/logo.svg";
 import { colors, radius, spacing, textStyles } from "../../../../trast/theme";
 
 type CaregiverChoice = "yes" | "no" | null;
@@ -51,80 +50,42 @@ export default function CaregiverIntroScreen() {
             style={{
               width: "100%",
               alignItems: "center",
-              paddingTop: spacing[4],
+              paddingTop: spacing[20],
             }}
           >
             <View
               style={{
-                width: "100%",
-                alignItems: "center",
-                marginBottom: spacing[12],
-              }}
-            >
-              <View
-                style={{
-                  width: 160,
-                  height: 160,
-                  borderTopLeftRadius: 80,
-                  borderTopRightRadius: 80,
-                  borderBottomLeftRadius: 80,
-                  borderBottomRightRadius: 0,
-                  backgroundColor: "#DCEBFF",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  paddingHorizontal: spacing[12],
-                }}
-              >
-                <Text
-                  style={[
-                    textStyles.titleT2,
-                    {
-                      color: colors.text.action,
-                      fontWeight: "700",
-                      fontSize: scaleTextSize(20),
-                      lineHeight: scaleLineHeight(30),
-                      textAlign: "center",
-                    },
-                  ]}
-                >
-                  A few more{"\n"}questions until{"\n"}we can start{"\n"}your
-                  journey
-                </Text>
-              </View>
-            </View>
-
-            <Image
-              source={require("@/assets/images/caregiver-first-screen.png")}
-              style={{ width: "100%", height: 180 }}
-              contentFit="contain"
-            />
-
-            <View
-              style={{
-                position: "absolute",
-                top: spacing[24],
-                right: spacing[36],
-                width: 150,
-                height: 112,
-              }}
-            >
-              <Image
-                source={require("@/assets/images/caregiver-message-shedwo.png")}
-                style={{ width: "100%", height: "100%" }}
-                contentFit="contain"
-              />
-            </View>
-
-            <View
-              style={{
-                position: "absolute",
-                top: spacing[48],
+                width: 182,
+                height: 182,
+                borderTopLeftRadius: 91,
+                borderTopRightRadius: 91,
+                borderBottomLeftRadius: 91,
+                borderBottomRightRadius: 0,
+                backgroundColor: "#DCEBFF",
                 alignItems: "center",
                 justifyContent: "center",
+                paddingHorizontal: spacing[16],
+                marginBottom: -spacing[12],
               }}
             >
-              <Logo width={112} height={52} />
+              <Text
+                style={[
+                  textStyles.titleT2,
+                  {
+                    color: colors.text.action,
+                    fontWeight: "700",
+                    fontSize: 18,
+                    lineHeight: scaleLineHeight(30),
+                    textAlign: "center",
+                  },
+                ]}
+              >
+                A few more{"\n"}questions until{"\n"}we can start{"\n"}your
+                journey
+              </Text>
             </View>
+
+            <Logo width={280} height={116} />
           </View>
 
           <View style={{ gap: spacing[16] }}>
@@ -158,7 +119,7 @@ export default function CaregiverIntroScreen() {
         <View
           style={{
             alignItems: "center",
-            paddingBottom: spacing[6],
+            paddingBottom: spacing[4],
             marginTop: spacing[20],
           }}
         >
