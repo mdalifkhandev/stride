@@ -1,213 +1,132 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const featuredImage = require("../../assets/images/caregiver-first-screen.png");
+import AccuracyCheckIcon from "../../assets/images/home-accuracy-check-tab.svg";
+import TrophyIcon from "../../assets/images/home-awaeded.svg";
+import FlameIcon from "../../assets/images/home-flameIcon.svg";
+import GrowthIcon from "../../assets/images/home-grow-tree.svg";
+import OrderMemoryIcon from "../../assets/images/home-order-mony-tab.svg";
+import SymbolTapIcon from "../../assets/images/home-symble-tab.svg";
+import TrendUpIcon from "../../assets/images/home-trade-up.svg";
+import { useTextScale } from "../../components/accessibility/TextScaleContext";
+import { HomeBrainGameCard } from "../../components/home/HomeBrainGameCard";
+import { HomeFeatureCard } from "../../components/home/HomeFeatureCard";
+import { HomeGreeting } from "../../components/home/HomeGreeting";
+import { HomeMetricCard } from "../../components/home/HomeMetricCard";
+import { HomeSectionHeader } from "../../components/home/HomeSectionHeader";
+import { HomeStridePopup } from "../../components/home/HomeStridePopup";
 
-const games = [
-  {
-    id: "symbol-tap",
-    title: "Symbol Tap",
-    icon: "apps",
-    bg: "#F3FBEF",
-    iconColor: "#7AB248",
-  },
-  {
-    id: "order",
-    title: "Order",
-    icon: "swap-horizontal",
-    bg: "#E8F6FF",
-    iconColor: "#2B6FD6",
-  },
-  {
-    id: "accuracy",
-    title: "Accuracy",
-    icon: "radio-button-on",
-    bg: "#EEF0FF",
-    iconColor: "#6F60E8",
-  },
-];
-
-function MetricCard({
-  title,
-  value,
-  suffix,
-  accent,
-  background,
-  icon,
-}: {
-  title: string;
-  value: string;
-  suffix?: string;
-  accent: string;
-  background: string;
-  icon: keyof typeof Ionicons.glyphMap;
-}) {
-  return (
-    <View
-      style={{ backgroundColor: background }}
-      className="flex-1 rounded-3xl px-4 py-3"
-    >
-      <View className="mb-3 flex-row items-center justify-between">
-        <View className="flex-row items-center gap-2">
-          <View
-            style={{ borderColor: accent }}
-            className="h-5 w-5 items-center justify-center rounded-full border"
-          >
-            <Ionicons name={icon} size={11} color={accent} />
-          </View>
-          <Text
-            style={{ color: accent }}
-            className="font-['Inter-Bold'] text-[13px] uppercase tracking-[0.8px]"
-          >
-            {title}
-          </Text>
-        </View>
-      </View>
-
-      <View className="flex-row items-end">
-        <Text
-          style={{ color: accent }}
-          className="font-['Inter-Bold'] text-[28px] leading-8"
-        >
-          {value}
-        </Text>
-        {suffix ? (
-          <Text
-            style={{ color: accent }}
-            className="ml-1 pb-1 font-['Inter-SemiBold'] text-base"
-          >
-            {suffix}
-          </Text>
-        ) : null}
-      </View>
-    </View>
-  );
-}
-
-function GameCard({
-  title,
-  icon,
-  bg,
-  iconColor,
-}: {
-  title: string;
-  icon: keyof typeof Ionicons.glyphMap;
-  bg: string;
-  iconColor: string;
-}) {
-  return (
-    <Pressable className="w-[31%]">
-      <View
-        style={{ backgroundColor: bg, shadowColor: iconColor }}
-        className="aspect-square items-center justify-center rounded-[24px] border border-white shadow-sm"
-      >
-        <View
-          style={{ backgroundColor: `${iconColor}20` }}
-          className="h-14 w-14 items-center justify-center rounded-full"
-        >
-          <Ionicons name={icon} size={30} color={iconColor} />
-        </View>
-      </View>
-      <Text className="mt-3 text-center font-['Inter-SemiBold'] text-[16px] text-[#2E67B1]">
-        {title}
-      </Text>
-    </Pressable>
-  );
-}
+const welcomeMessages = [
+  "It’s a great day to get active, Sam!",
+  "You’ve got this, Sam!",
+  "Let’s get moving, Sam!",
+] as const;
 
 export default function HomeScreen() {
+  const { textScale } = useTextScale();
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [typedMessage, setTypedMessage] = useState("");
+  const [showStridePopup, setShowStridePopup] = useState(false);
+
+  useEffect(() => {
+    const currentMessage = welcomeMessages[messageIndex];
+    let charIndex = 0;
+    let typingTimeout: ReturnType<typeof setTimeout> | null = null;
+    let nextMessageTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    setTypedMessage("");
+
+    const typeNextCharacter = () => {
+      charIndex += 1;
+      setTypedMessage(currentMessage.slice(0, charIndex));
+
+      if (charIndex < currentMessage.length) {
+        typingTimeout = setTimeout(typeNextCharacter, 45);
+        return;
+      }
+
+      nextMessageTimeout = setTimeout(() => {
+        setMessageIndex((current) => (current + 1) % welcomeMessages.length);
+      }, 1400);
+    };
+
+    typingTimeout = setTimeout(typeNextCharacter, 150);
+
+    return () => {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+      if (nextMessageTimeout) {
+        clearTimeout(nextMessageTimeout);
+      }
+    };
+  }, [messageIndex]);
+
   return (
-    <SafeAreaView edges={["top"]} className="flex-1 bg-[#FCFDFF]">
+    <SafeAreaView
+      key={textScale}
+      edges={["top"]}
+      style={{ flex: 1, backgroundColor: "#FCFDFF" }}
+    >
       <ScrollView
         contentContainerStyle={{ paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="px-5 pt-4">
-          <Text className="font-['Inter-Bold'] text-[20px] text-[#23314A]">
-            Hi, Sam !
-          </Text>
-          <Text className="mt-1 font-['Inter-Regular'] text-[16px] text-[#576172]">
-            It&apos;s a great day to get active, Sam!
-          </Text>
+        <View style={{ paddingHorizontal: 16, paddingTop: 16, marginTop: 12 }}>
+          <HomeGreeting message={typedMessage} />
 
-          <View className="mt-6 flex-row gap-3">
-            <MetricCard
+          <View style={{ marginTop: 16, flexDirection: "row", gap: 14 }}>
+            <HomeMetricCard
               title="Growth"
               value="48%"
-              accent="#4D9A52"
-              background="#EAF5E9"
-              icon="trending-up"
+              backgroundColor="#EAF5E9"
+              accentColor="#3E9748"
+              icon={<GrowthIcon width={20} height={20} />}
+              valueAdornment={<TrendUpIcon width={60} height={30} />}
+              onPress={() => setShowStridePopup(true)}
             />
-            <MetricCard
+            <HomeMetricCard
               title="Streak"
               value="90"
-              suffix="Days."
-              accent="#FF8A1E"
-              background="#FFF3E8"
-              icon="flame"
+              suffix="Days"
+              backgroundColor="#FFF4E8"
+              accentColor="#FF7A00"
+              icon={<FlameIcon width={20} height={20} />}
+              award={<TrophyIcon width={68} height={68} />}
+              onPress={() => setShowStridePopup(true)}
             />
           </View>
 
-          <Text className="mt-5 font-['Inter-Bold'] text-[16px] text-[#2F67B7]">
-            Prevent Decline, Take Your Strides!
-          </Text>
+          <HomeFeatureCard onPress={() => setShowStridePopup(true)} />
 
-          <View className="mt-4 overflow-hidden rounded-[28px] bg-white p-3 shadow-sm">
-            <View className="overflow-hidden rounded-[24px]">
-              <Image source={featuredImage} className="h-[305px] w-full" resizeMode="cover" />
+          <HomeSectionHeader
+            title="Brain Game"
+            subtitle="Boost your focus and memory, Sam."
+          />
 
-              <View className="absolute left-4 right-4 top-4 flex-row items-center justify-between">
-                <View className="h-9 w-9 items-center justify-center rounded-full bg-[#567AA0AA]">
-                  <Ionicons name="moon" size={18} color="#FFFFFF" />
-                </View>
-                <View className="flex-row items-center rounded-full bg-[#567AA0AA] px-3 py-2">
-                  <MaterialCommunityIcons
-                    name="layers-triple-outline"
-                    size={15}
-                    color="#FFFFFF"
-                  />
-                  <Text className="ml-1 font-['Inter-SemiBold'] text-[13px] text-white">
-                    2 Level
-                  </Text>
-                </View>
-              </View>
-
-              <View className="absolute bottom-0 left-0 right-0 px-4 pb-4 pt-10">
-                <View className="absolute inset-0 bg-[#10213755]" />
-                <Text className="font-['Inter-Bold'] text-[18px] text-white">
-                  Push Up
-                </Text>
-                <Text className="mt-1 font-['Inter-Regular'] text-[15px] text-[#EEF4FF]">
-                  Let&apos;s Begin Stride - 2
-                </Text>
-              </View>
-            </View>
-
-            <Pressable className="mt-3 items-center rounded-2xl border border-[#9DB8DE] bg-white py-4">
-              <Text className="font-['Inter-Bold'] text-[16px] tracking-[0.4px] text-[#2B6FD6]">
-                TAKE YOUR STRIDE!
-              </Text>
-            </Pressable>
-          </View>
-
-          <Text className="mt-6 font-['Inter-Bold'] text-[16px] text-[#2F67B7]">
-            Play Game
-          </Text>
-
-          <View className="mt-4 flex-row justify-between">
-            {games.map((game) => (
-              <GameCard
-                key={game.id}
-                title={game.title}
-                icon={game.icon as keyof typeof Ionicons.glyphMap}
-                bg={game.bg}
-                iconColor={game.iconColor}
-              />
-            ))}
+          <View style={{ marginTop: 18, gap: 18 }}>
+            <HomeBrainGameCard
+              title="Symbol Tap"
+              icon={<SymbolTapIcon width={68} height={68} />}
+            />
+            <HomeBrainGameCard
+              title="Order Memory"
+              icon={<OrderMemoryIcon width={68} height={68} />}
+            />
+            <HomeBrainGameCard
+              title="Accuracy Check"
+              icon={<AccuracyCheckIcon width={68} height={68} />}
+            />
           </View>
         </View>
       </ScrollView>
+
+      <HomeStridePopup
+        visible={showStridePopup}
+        onClose={() => setShowStridePopup(false)}
+      />
     </SafeAreaView>
   );
 }
