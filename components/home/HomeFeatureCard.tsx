@@ -11,7 +11,7 @@ import {
 const featuredImage = require("../../assets/images/home-feture-image.jpg");
 
 type HomeFeatureCardProps = {
-  onPress: () => void;
+  onPress?: () => void;
 };
 
 export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {

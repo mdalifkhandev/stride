@@ -6,7 +6,6 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../components/accessibility/TextScaleContext";
-import { ProfileMilestoneProvider } from "../../components/profile/ProfileMilestoneContext";
 
 const ACTIVE_TINT = "#2B6FD6";
 const INACTIVE_TINT = "#9CA3AF";
@@ -64,62 +63,60 @@ export default function TabLayout() {
     Platform.OS === "ios" ? insets.bottom : Math.max(insets.bottom, 10);
 
   return (
-    <ProfileMilestoneProvider>
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarActiveTintColor: ACTIVE_TINT,
-          tabBarInactiveTintColor: INACTIVE_TINT,
-          tabBarIconStyle: {
-            marginTop: 2,
-          },
-          tabBarItemStyle: {
-            paddingTop: 4,
-          },
-          tabBarLabelStyle: {
-            fontFamily: "Inter-SemiBold",
-            fontSize: scaleTextSize(12),
-            marginBottom: 2,
-          },
-          tabBarStyle: {
-            backgroundColor: "#FFFFFF",
-            borderTopColor: "#E5E7EB",
-            borderTopWidth: 1,
-            height: 62 + bottomInset,
-            paddingTop: 8,
-            paddingBottom: bottomInset,
-          },
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: ACTIVE_TINT,
+        tabBarInactiveTintColor: INACTIVE_TINT,
+        tabBarIconStyle: {
+          marginTop: 2,
+        },
+        tabBarItemStyle: {
+          paddingTop: 4,
+        },
+        tabBarLabelStyle: {
+          fontFamily: "Inter-SemiBold",
+          fontSize: scaleTextSize(12),
+          marginBottom: 2,
+        },
+        tabBarStyle: {
+          backgroundColor: "#FFFFFF",
+          borderTopColor: "#E5E7EB",
+          borderTopWidth: 1,
+          height: 62 + bottomInset,
+          paddingTop: 8,
+          paddingBottom: bottomInset,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="home"
+        options={{
+          title: "Home",
+          tabBarIcon: HomeIcon,
         }}
-      >
-        <Tabs.Screen
-          name="home"
-          options={{
-            title: "Home",
-            tabBarIcon: HomeIcon,
-          }}
-        />
-        <Tabs.Screen
-          name="journey"
-          options={{
-            title: "Journey",
-            tabBarIcon: JourneyIcon,
-          }}
-        />
-        <Tabs.Screen
-          name="progress"
-          options={{
-            title: "Progress",
-            tabBarIcon: ProgressIcon,
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            tabBarIcon: ProfileIcon,
-          }}
-        />
-      </Tabs>
-    </ProfileMilestoneProvider>
+      />
+      <Tabs.Screen
+        name="journey"
+        options={{
+          title: "Journey",
+          tabBarIcon: JourneyIcon,
+        }}
+      />
+      <Tabs.Screen
+        name="progress"
+        options={{
+          title: "Progress",
+          tabBarIcon: ProgressIcon,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ProfileIcon,
+        }}
+      />
+    </Tabs>
   );
 }

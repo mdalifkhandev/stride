@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { router } from "expo-router";
 import AccuracyCheckIcon from "../../assets/images/home-accuracy-check-tab.svg";
 import TrophyIcon from "../../assets/images/home-awaeded.svg";
 import FlameIcon from "../../assets/images/home-flameIcon.svg";
@@ -95,11 +96,11 @@ export default function HomeScreen() {
               accentColor="#FF7A00"
               icon={<FlameIcon width={20} height={20} />}
               award={<TrophyIcon width={68} height={68} />}
-              onPress={() => setShowStridePopup(true)}
+              onPress={() => router.push("/screens/home/journey")}
             />
           </View>
 
-          <HomeFeatureCard onPress={() => setShowStridePopup(true)} />
+          <HomeFeatureCard />
 
           <HomeSectionHeader
             title="Brain Game"
