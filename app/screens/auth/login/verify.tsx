@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Href, useRouter } from "expo-router";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 
 import { AuthVerifyHeader } from "../../../../components/auth/login/AuthVerifyHeader";
@@ -12,7 +13,10 @@ import { AppButton } from "../../../../components/ui/AppButton";
 import { spacing } from "../../../../trast/theme";
 
 export default function AuthVerifyScreen() {
+  const router = useRouter();
   const [code, setCode] = useState(["", "", "", ""]);
+  const isComplete = code.every((item) => item.length === 1);
+  const homeRoute = "/(tabs)/home" as Href;
 
   return (
     <KeyboardAvoidingView
@@ -32,7 +36,11 @@ export default function AuthVerifyScreen() {
       >
         <View style={{ gap: spacing[16], marginTop: spacing[16] }}>
           <VerificationCode code={code} onChange={setCode} />
-          <AppButton label="Next" />
+          <AppButton
+            label="Next"
+            disabled={!isComplete}
+            onPress={() => router.replace(homeRoute)}
+          />
         </View>
       </AuthScaffold>
     </KeyboardAvoidingView>

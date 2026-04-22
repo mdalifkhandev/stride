@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import { useTextScale } from "../accessibility/TextScaleContext";
 
 type AwardBadgeComponent = React.ComponentType<{
   width?: number;
@@ -26,6 +27,7 @@ export function ProfileAwardCard({
   awardAccent,
   activityDays,
 }: ProfileAwardCardProps) {
+  const { textScale } = useTextScale();
   const AwardBadge = awardBadge;
 
   return (
@@ -38,13 +40,23 @@ export function ProfileAwardCard({
     >
       <View className="flex-row items-start justify-between">
         <View>
-          <Text className="font-['Inter-Bold'] text-[18px] leading-[34px] text-[#24262B]">
+          <Text
+            style={{
+              fontSize: 18 * textScale,
+              lineHeight: 34 * textScale,
+            }}
+            className="font-['Inter-Bold'] text-[#24262B]"
+          >
             {awardTitle}
           </Text>
         </View>
         <Text
-          className="font-['Inter-Bold'] text-[18px] leading-[30px]"
-          style={{ color: awardAccent }}
+          style={{
+            color: awardAccent,
+            fontSize: 18 * textScale,
+            lineHeight: 30 * textScale,
+          }}
+          className="font-['Inter-Bold']"
         >
           Stride
         </Text>
@@ -54,14 +66,29 @@ export function ProfileAwardCard({
 
       <View className="mt-4 flex-row items-center">
         <View className="w-[75%] pr-2">
-          <Text className="font-['Inter-Medium'] text-[20px] leading-[34px] text-[#24262B]">
+          <Text
+            style={{
+              fontSize: 20 * textScale,
+              lineHeight: 34 * textScale,
+            }}
+            className="font-['Inter-Medium'] text-[#24262B]"
+          >
             Congratulation!
           </Text>
-          <Text className="mt-2 font-['Inter-Regular'] text-[16px] italic leading-[40px] text-[#6F6C68]">
+          <Text
+            style={{
+              fontSize: 16 * textScale,
+              lineHeight: 40 * textScale,
+            }}
+            className="mt-2 font-['Inter-Regular'] italic text-[#6F6C68]"
+          >
             Awarded for{" "}
             <Text
-              className="font-['Inter-Bold'] text-[18px] not-italic"
-              style={{ color: awardAccent }}
+              style={{
+                color: awardAccent,
+                fontSize: 18 * textScale,
+              }}
+              className="font-['Inter-Bold'] not-italic"
             >
               {activityDays} Days
             </Text>{" "}

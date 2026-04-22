@@ -2,6 +2,10 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  TextScaleSlider,
+  useTextScale,
+} from "../../components/accessibility/TextScaleContext";
 import { ProfileAwardCard } from "../../components/profile/ProfileAwardCard";
 import { ProfileHeroCard } from "../../components/profile/ProfileHeroCard";
 import {
@@ -23,6 +27,7 @@ const settingsItems = [
 ];
 
 export default function ProfileScreen() {
+  const { textScale } = useTextScale();
   const router = useRouter();
   const { activityDays, setActivityDays, milestone } = useProfileMilestone();
   const settingsWithSubscription = [
@@ -61,7 +66,10 @@ export default function ProfileScreen() {
             <Pressable className="absolute left-0 h-10 w-10 items-center justify-center">
               <Ionicons name="chevron-back" size={22} color="#292D32" />
             </Pressable>
-            <Text className="font-['Inter-SemiBold'] text-[22px] text-[#252B36]">
+            <Text
+              style={{ fontSize: 22 * textScale }}
+              className="font-['Inter-SemiBold'] text-[#252B36]"
+            >
               Profile
             </Text>
           </View>
@@ -95,7 +103,10 @@ export default function ProfileScreen() {
           ) : null}
 
           <View className="mb-4 mt-5 flex-row items-center">
-            <Text className="mr-3 font-['Inter-SemiBold'] text-[17px] text-[#666A72]">
+            <Text
+              style={{ fontSize: 17 * textScale }}
+              className="mr-3 font-['Inter-SemiBold'] text-[#666A72]"
+            >
               Settings
             </Text>
             <View className="h-px flex-1 bg-[#D4D8DE]" />
@@ -128,7 +139,10 @@ export default function ProfileScreen() {
                 size={20}
                 color="#2B2B2B"
               />
-              <Text className="ml-2 font-['Inter-Medium'] text-[17px] text-[#2B2B2B]">
+              <Text
+                style={{ fontSize: 17 * textScale }}
+                className="ml-2 font-['Inter-Medium'] text-[#2B2B2B]"
+              >
                 Log Out
               </Text>
             </View>
@@ -144,6 +158,8 @@ export default function ProfileScreen() {
             selectorText={milestone.selectorText}
             onSelect={(days) => setActivityDays(days as (typeof dayOptions)[number])}
           />
+
+          <TextScaleSlider />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -16,6 +16,7 @@ export default function AuthPhoneVerifyScreen() {
   const router = useRouter();
   const [code, setCode] = useState(["", "", "", ""]);
   const isComplete = code.every((item) => item.length === 1);
+  const homeRoute = "/(tabs)/home" as const;
 
   return (
     <KeyboardAvoidingView
@@ -38,7 +39,7 @@ export default function AuthPhoneVerifyScreen() {
           <AppButton
             label="Next"
             disabled={!isComplete}
-            onPress={() => router.push("/screens/auth/login/use-case")}
+            onPress={() => router.replace(homeRoute)}
           />
         </View>
       </AuthScaffold>

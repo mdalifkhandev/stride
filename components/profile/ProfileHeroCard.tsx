@@ -1,4 +1,5 @@
 import { Image, type ImageSourcePropType, Text, View } from "react-native";
+import { useTextScale } from "../accessibility/TextScaleContext";
 
 type BadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 
@@ -31,6 +32,8 @@ export function ProfileHeroCard({
   heroChipText,
   heroSubtitle,
 }: ProfileHeroCardProps) {
+  const { textScale } = useTextScale();
+
   return (
     <View
       className="items-center rounded-[8px] px-5 pb-8 pt-9"
@@ -71,8 +74,12 @@ export function ProfileHeroCard({
           }}
         >
           <Text
-            className="font-['Inter-Bold'] text-[18px] leading-6"
-            style={{ color: heroChipText }}
+            style={{
+              color: heroChipText,
+              fontSize: 18 * textScale,
+              lineHeight: 24 * textScale,
+            }}
+            className="font-['Inter-Bold']"
           >
             {tier}
           </Text>
@@ -80,15 +87,23 @@ export function ProfileHeroCard({
       ) : null}
 
       <Text
-        className={`font-['Inter-SemiBold'] text-[25px] leading-[34px] text-[#2C2D30] ${
+        style={{
+          fontSize: 32 * textScale,
+          lineHeight: 40 * textScale,
+        }}
+        className={`font-['Inter-SemiBold'] text-[#2C2D30] ${
           showMilestone ? "mt-2.5" : "mt-7"
         }`}
       >
         Mahmudur Rahman
       </Text>
       <Text
-        className="mt-2 text-center font-['Inter-Regular'] text-[17px] leading-[28px]"
-        style={{ color: heroSubtitle }}
+        style={{
+          color: heroSubtitle,
+          fontSize: 17 * textScale,
+          lineHeight: 28 * textScale,
+        }}
+        className="mt-2 text-center font-['Inter-Regular']"
       >
         {headline}
       </Text>

@@ -2,6 +2,10 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  scaleTextSize,
+  useTextScale,
+} from "../../components/accessibility/TextScaleContext";
 import { ProfileMilestoneProvider } from "../../components/profile/ProfileMilestoneContext";
 
 const ACTIVE_TINT = "#2B6FD6";
@@ -54,6 +58,7 @@ function ProfileIcon({ color, focused, size }: TabIconProps) {
 }
 
 export default function TabLayout() {
+  useTextScale();
   const insets = useSafeAreaInsets();
   const bottomInset =
     Platform.OS === "ios" ? insets.bottom : Math.max(insets.bottom, 10);
@@ -73,7 +78,7 @@ export default function TabLayout() {
           },
           tabBarLabelStyle: {
             fontFamily: "Inter-SemiBold",
-            fontSize: 12,
+            fontSize: scaleTextSize(12),
             marginBottom: 2,
           },
           tabBarStyle: {
