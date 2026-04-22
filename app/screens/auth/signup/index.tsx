@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Href, useRouter } from "expo-router";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { SignupChoiceHeader } from "../../../../components/auth/signup/SignupChoiceHeader";
@@ -44,114 +44,124 @@ export default function SignupIndex() {
 
   return (
     <AppScreen>
-      <View style={{ paddingTop: 16 }}>
-        <SignupChoiceHeader
-          title="How will you use Stride?"
-          subtitle="Choose the option that best describes you."
-        />
-      </View>
-
-      <View style={{ flex: 1, justifyContent: "space-between", paddingTop: 24 }}>
-        <View style={{ gap: spacing[12] }}>
-          <AuthChoiceCard
-            title="For Myself"
-            description="Improve my daily physical and mental activity."
-            selected={choice === "myself"}
-            onPress={() => {
-              setChoice("myself");
-              setShowWarning(false);
-            }}
-          />
-          <AuthChoiceCard
-            title="As a Caregiver"
-            description="Support a client or loved one on their wellness journey."
-            selected={choice === "caregiver"}
-            onPress={() => {
-              setChoice("caregiver");
-              setShowWarning(false);
-            }}
-          />
-          <AuthChoiceCard
-            title="For My Organization"
-            description="Set up Stride for a business or care provider."
-            selected={choice === "organization"}
-            onPress={() => {
-              setChoice("organization");
-              setShowWarning(false);
-            }}
+      <ScrollView
+        bounces={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={{ paddingTop: 16 }}>
+          <SignupChoiceHeader
+            title="How will you use Stride?"
+            subtitle="Choose the option that best describes you."
           />
         </View>
 
         <View
-          style={{
-            gap: spacing[24],
-            paddingBottom: spacing[8],
-            marginTop: spacing[24],
-          }}
+          style={{ flex: 1, justifyContent: "space-between", paddingTop: 24 }}
         >
-          {showWarning ? (
+          <View style={{ gap: spacing[12] }}>
+            <AuthChoiceCard
+              title="For Myself"
+              description="Improve my daily physical and mental activity."
+              selected={choice === "myself"}
+              onPress={() => {
+                setChoice("myself");
+                setShowWarning(false);
+              }}
+            />
+            <AuthChoiceCard
+              title="As a Caregiver"
+              description="Support a client or loved one on their wellness journey."
+              selected={choice === "caregiver"}
+              onPress={() => {
+                setChoice("caregiver");
+                setShowWarning(false);
+              }}
+            />
+            <AuthChoiceCard
+              title="For My Organization"
+              description="Set up Stride for a business or care provider."
+              selected={choice === "organization"}
+              onPress={() => {
+                setChoice("organization");
+                setShowWarning(false);
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              gap: spacing[24],
+              paddingBottom: spacing[8],
+              marginTop: spacing[24],
+            }}
+          >
+            {showWarning ? (
+              <View
+                style={{
+                  alignSelf: "center",
+                  backgroundColor: "#FDECEA",
+                  borderWidth: 0.5,
+                  borderColor: colors.border.warning,
+                  borderRadius: 4,
+                  paddingHorizontal: spacing[8],
+                  paddingVertical: spacing[2],
+                }}
+              >
+                <Text
+                  style={[
+                    textStyles.captionLarge,
+                    {
+                      color: colors.text.warning,
+                      fontSize: 14,
+                      lineHeight: 21,
+                    },
+                  ]}
+                >
+                  Please choose an option to continue
+                </Text>
+              </View>
+            ) : null}
+            <AppButton label="Continue" onPress={handleContinue} />
             <View
               style={{
-                alignSelf: "center",
-                backgroundColor: "#FDECEA",
-                borderWidth: 0.5,
-                borderColor: colors.border.warning,
-                borderRadius: 4,
-                paddingHorizontal: spacing[8],
-                paddingVertical: spacing[2],
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <Text
                 style={[
                   textStyles.captionLarge,
                   {
-                    color: colors.text.warning,
+                    color: colors.text.secondary,
                     fontSize: 14,
                     lineHeight: 21,
                   },
                 ]}
               >
-                Please choose an option to continue
+                Already have an account?{" "}
               </Text>
+              <Pressable onPress={() => router.push(loginRoute)}>
+                <Text
+                  style={[
+                    textStyles.captionLarge,
+                    {
+                      color: colors.text.action,
+                      textDecorationLine: "underline",
+                      fontSize: 14,
+                      lineHeight: 21,
+                    },
+                  ]}
+                >
+                  Sign In
+                </Text>
+              </Pressable>
             </View>
-          ) : null}
-          <AppButton
-            label="Continue"
-            onPress={handleContinue}
-          />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={[
-                textStyles.captionLarge,
-                { color: colors.text.secondary, fontSize: 14, lineHeight: 21 },
-              ]}
-            >
-              Already have an account?{" "}
-            </Text>
-            <Pressable onPress={() => router.push(loginRoute)}>
-              <Text
-                style={[
-                  textStyles.captionLarge,
-                  {
-                    color: colors.text.action,
-                    textDecorationLine: "underline",
-                    fontSize: 14,
-                    lineHeight: 21,
-                  },
-                ]}
-              >
-                Sign In
-              </Text>
-            </Pressable>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </AppScreen>
   );
 }

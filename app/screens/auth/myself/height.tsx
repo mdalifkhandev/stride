@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Href, useRouter } from "expo-router";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 import { ScrollMeasurePicker } from "../../../../components/auth/signup/ScrollMeasurePicker";
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
@@ -145,59 +145,72 @@ export default function SignupHeightScreen() {
 
   return (
     <AppScreen>
-      <SignupProgressHeader currentStep={3} totalSteps={4} />
-
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          gap: spacing[24],
-        }}
+      <ScrollView
+        bounces={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
-        <Text
-          style={[
-            textStyles.titleT2,
-            {
-              color: colors.text.primary,
-              fontWeight: "700",
-              textAlign: "center",
-            },
-          ]}
+        <SignupProgressHeader currentStep={3} totalSteps={4} />
+
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: spacing[24],
+          }}
         >
-          What&apos;s your height?
-        </Text>
-        <UnitToggle
-          options={["Ft", "Meter"] as const}
-          value={unit}
-          onChange={setUnit}
-        />
+          <Text
+            style={[
+              textStyles.titleT2,
+              {
+                color: colors.text.primary,
+                fontWeight: "700",
+                textAlign: "center",
+              },
+            ]}
+          >
+            What&apos;s your height?
+          </Text>
+          <UnitToggle
+            options={["Ft", "Meter"] as const}
+            value={unit}
+            onChange={setUnit}
+          />
 
-        <ScrollMeasurePicker
-          leftValues={leftValues}
-          rightValues={rightValues}
-          selectedLeftIndex={selectedLeftIndex}
-          selectedRightIndex={selectedRightIndex}
-          onChangeLeft={setSelectedLeftIndex}
-          onChangeRight={setSelectedRightIndex}
-        />
-      </View>
-
-      <View style={{ flexDirection: "row", gap: spacing[16] }}>
-        <View style={{ flex: 1 }}>
-          <AppButton
-            label="Previous"
-            variant="secondary"
-            onPress={() => router.back()}
+          <ScrollMeasurePicker
+            leftValues={leftValues}
+            rightValues={rightValues}
+            selectedLeftIndex={selectedLeftIndex}
+            selectedRightIndex={selectedRightIndex}
+            onChangeLeft={setSelectedLeftIndex}
+            onChangeRight={setSelectedRightIndex}
           />
         </View>
-        <View style={{ flex: 1 }}>
-          <AppButton
-            label="Continue"
-            onPress={() => router.push(weightRoute)}
-          />
+
+        <View
+          style={{
+            flexDirection: "row",
+            gap: spacing[16],
+            marginTop: spacing[20],
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <AppButton
+              label="Previous"
+              variant="secondary"
+              onPress={() => router.back()}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <AppButton
+              label="Continue"
+              onPress={() => router.push(weightRoute)}
+            />
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </AppScreen>
   );
 }

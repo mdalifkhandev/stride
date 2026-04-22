@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 import { Href, useRouter } from "expo-router";
-import { Animated, Easing, Text } from "react-native";
+import { Animated, Easing, ScrollView, Text } from "react-native";
 
 import { SignupSuccessMark } from "../../../../components/auth/signup/SignupSuccessMark";
 import { AppButton } from "../../../../components/ui/AppButton";
@@ -50,40 +50,44 @@ export default function SignupSuccessScreen() {
 
   return (
     <AppScreen>
-      <Animated.View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          paddingBottom: spacing[56],
-          opacity: heroOpacity,
-          transform: [{ scale: heroScale }],
-        }}
-      >
-        <SignupSuccessMark />
-        <Text
+      <ScrollView bounces={false} contentContainerStyle={{ flexGrow: 1 }}>
+        <Animated.View
           style={[
-            textStyles.titleT2,
             {
-              color: colors.text.primary,
-              textAlign: "center",
-              fontWeight: "500",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              paddingBottom: spacing[56],
+              opacity: heroOpacity,
+              transform: [{ scale: heroScale }],
             },
           ]}
         >
-          Account Created Successfully!
-        </Text>
-      </Animated.View>
+          <SignupSuccessMark />
+          <Text
+            style={[
+              textStyles.titleT2,
+              {
+                color: colors.text.primary,
+                textAlign: "center",
+                fontWeight: "500",
+              },
+            ]}
+          >
+            Account Created Successfully!
+          </Text>
+        </Animated.View>
 
-      <Animated.View
-        style={{
-          paddingBottom: spacing[8],
-          opacity: buttonOpacity,
-          transform: [{ translateY: buttonTranslateY }],
-        }}
-      >
-        <AppButton label="Done" onPress={() => router.replace(homeRoute)} />
-      </Animated.View>
+        <Animated.View
+          style={{
+            paddingBottom: spacing[8],
+            opacity: buttonOpacity,
+            transform: [{ translateY: buttonTranslateY }],
+          }}
+        >
+          <AppButton label="Done" onPress={() => router.replace(homeRoute)} />
+        </Animated.View>
+      </ScrollView>
     </AppScreen>
   );
 }
