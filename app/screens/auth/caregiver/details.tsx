@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 
+import { router } from "expo-router";
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
 import {
   AuthBackButton,
@@ -32,7 +33,9 @@ export default function CaregiverDetailsScreen() {
             subtitle="Ask a family member or friend to help answer the questions and keep track of your progress."
           />
         }
-        footer={<AppButton label="Next" />}
+        footer={
+          <AppButton label="Next" onPress={() => router.push("/(tabs)/home")} />
+        }
       >
         <ScrollView
           style={{ flex: 1, width: "100%" }}

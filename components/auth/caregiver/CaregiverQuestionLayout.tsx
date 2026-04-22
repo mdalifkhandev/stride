@@ -9,10 +9,15 @@ import {
   View,
 } from "react-native";
 
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../accessibility/TextScaleContext";
 import { SignupProgressHeader } from "../signup/SignupProgressHeader";
 import { AppButton } from "../../ui/AppButton";
 import { AppScreen } from "../../ui/AppScreen";
-import { caregiverQuestionStyles, spacing } from "../../../trast/theme";
+import { caregiverQuestionStyles, colors, spacing } from "../../../trast/theme";
 
 type CaregiverQuestionLayoutProps = PropsWithChildren<{
   currentStep?: number;
@@ -31,6 +36,8 @@ export function CaregiverQuestionLayout({
   children,
   keyboardAware = false,
 }: CaregiverQuestionLayoutProps) {
+  useTextScale();
+
   const content = (
     <AppScreen>
       <View style={caregiverQuestionStyles.screenBody}>
@@ -55,7 +62,18 @@ export function CaregiverQuestionLayout({
             onPress={footerAction}
             style={{ alignItems: "center", paddingVertical: spacing[4] }}
           >
-            <Text style={caregiverQuestionStyles.skipText}>Skip</Text>
+            <Text
+              style={[
+                caregiverQuestionStyles.skipText,
+                {
+                  color: colors.text.action,
+                  fontSize: scaleTextSize(20),
+                  lineHeight: scaleLineHeight(30),
+                },
+              ]}
+            >
+              Skip
+            </Text>
           </Pressable>
         </View>
       </View>

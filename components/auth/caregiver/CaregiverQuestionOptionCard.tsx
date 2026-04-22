@@ -1,6 +1,11 @@
 import { Pressable, Text, View } from "react-native";
 
-import { caregiverQuestionStyles } from "../../../trast/theme";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+  useTextScale,
+} from "../../accessibility/TextScaleContext";
+import { caregiverQuestionStyles, colors } from "../../../trast/theme";
 import type { CaregiverQuestionOption } from "./types";
 
 type CaregiverQuestionOptionCardProps = {
@@ -16,6 +21,8 @@ export function CaregiverQuestionOptionCard({
   selectionType,
   onPress,
 }: CaregiverQuestionOptionCardProps) {
+  useTextScale();
+
   return (
     <Pressable
       onPress={onPress}
@@ -45,9 +52,29 @@ export function CaregiverQuestionOptionCard({
       </View>
 
       <View style={caregiverQuestionStyles.optionContent}>
-        <Text style={caregiverQuestionStyles.optionLabel}>{option.label}</Text>
+        <Text
+          style={[
+            caregiverQuestionStyles.optionLabel,
+            {
+              color: colors.text.primary,
+              fontSize: scaleTextSize(16),
+              lineHeight: scaleLineHeight(30),
+            },
+          ]}
+        >
+          {option.label}
+        </Text>
         {option.description ? (
-          <Text style={caregiverQuestionStyles.optionDescription}>
+          <Text
+            style={[
+              caregiverQuestionStyles.optionDescription,
+              {
+                color: colors.text.secondary,
+                fontSize: scaleTextSize(14),
+                lineHeight: scaleLineHeight(30),
+              },
+            ]}
+          >
             {option.description}
           </Text>
         ) : null}
