@@ -12,7 +12,7 @@ import {
   organizationServiceOptions,
   organizationServiceTypes,
 } from "../../../../components/auth/organization";
-import { caregiverQuestionStyles } from "../../../../trast/theme";
+import { caregiverQuestionStyles } from "../../../../theme";
 
 export default function OrganizationIndexScreen() {
   const router = useRouter();

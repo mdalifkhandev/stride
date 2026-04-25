@@ -5,7 +5,7 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../accessibility/TextScaleContext";
-import { caregiverQuestionStyles, colors } from "../../../trast/theme";
+import { caregiverQuestionStyles, colors } from "../../../theme";
 import type { CaregiverQuestionOption } from "./types";
 
 type CaregiverQuestionOptionCardProps = {

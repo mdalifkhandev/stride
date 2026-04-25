@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type AuthOptionCardProps = {
   title: string;

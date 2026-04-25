@@ -6,7 +6,7 @@ import {
   useTextScale,
 } from "../../accessibility/TextScaleContext";
 import { SignupField } from "../signup/SignupField";
-import { caregiverQuestionStyles, colors } from "../../../trast/theme";
+import { caregiverQuestionStyles, colors } from "../../../theme";
 
 type CaregiverQuestionTextFieldProps = {
   label: string;

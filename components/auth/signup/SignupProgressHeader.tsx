@@ -9,7 +9,7 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../accessibility/TextScaleContext";
-import { colors, progressHeaderStyles } from "../../../trast/theme";
+import { colors, progressHeaderStyles } from "../../../theme";
 
 type SignupProgressHeaderProps = {
   progress?: number;

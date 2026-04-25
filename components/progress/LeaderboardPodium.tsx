@@ -75,7 +75,7 @@ export function LeaderboardPodium({ items }: LeaderboardPodiumProps) {
         🏆 Weekly Leaderboard
       </Text>
       <Text className="mt-5 font-['Inter-Bold'] text-[17px] leading-[28px] text-[#6E6E6E]">
-        You're building healthy habits! See{"\n"}how you rank this week
+        {"You're"} building healthy habits! See{"\n"}how you rank this week
       </Text>
 
       <View className="mt-8 flex-row items-end justify-between">

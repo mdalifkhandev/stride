@@ -10,7 +10,7 @@ import {
 } from "../../../../components/auth/login/AuthScaffold";
 import { VerificationCode } from "../../../../components/auth/login/VerificationCode";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { spacing } from "../../../../trast/theme";
+import { spacing } from "../../../../theme";
 
 export default function AuthPhoneVerifyScreen() {
   const router = useRouter();

@@ -7,7 +7,7 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../accessibility/TextScaleContext";
-import { colors, radius, textStyles } from "../../../trast/theme";
+import { colors, radius, textStyles } from "../../../theme";
 
 type LegacyScrollMeasurePickerProps = {
   leftValues: readonly string[];

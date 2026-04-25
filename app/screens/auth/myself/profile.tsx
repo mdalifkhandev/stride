@@ -10,7 +10,7 @@ import { SignupField } from "../../../../components/auth/signup/SignupField";
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing } from "../../../../trast/theme";
+import { colors, spacing } from "../../../../theme";
 
 export default function SignupProfileScreen() {
   useTextScale();

@@ -6,7 +6,7 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type SignupFieldProps = {
   label: string;

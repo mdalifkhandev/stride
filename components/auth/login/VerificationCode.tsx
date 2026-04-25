@@ -3,7 +3,7 @@ import { createRef } from "react";
 import { TextInput, View } from "react-native";
 
 import { useTextScale } from "../../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type VerificationCodeProps = {
   code: string[];

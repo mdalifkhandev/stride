@@ -10,7 +10,7 @@ import {
   CaregiverQuestionTextField,
   caregiverQuestionScreens,
 } from "../../../../../components/auth/caregiver";
-import { caregiverQuestionStyles } from "../../../../../trast/theme";
+import { caregiverQuestionStyles } from "../../../../../theme";
 
 export default function CaregiverQuestionStepScreen() {
   const router = useRouter();

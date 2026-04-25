@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type MeasureDisplayProps = {
   left: string;

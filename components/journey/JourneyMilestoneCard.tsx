@@ -128,7 +128,9 @@ export function JourneyMilestoneCard({
                 fontStyle: "italic",
               }}
             >
-              "{quote}"
+              {'"'}
+              {quote}
+              {'"'}
             </Text>
           )}
         </View>

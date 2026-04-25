@@ -10,14 +10,18 @@ import {
 type HomeBrainGameCardProps = {
   title: string;
   icon: ReactNode;
+  onPress?: () => void;
 };
 
 export function HomeBrainGameCard({
   title,
   icon,
+  onPress,
 }: HomeBrainGameCardProps) {
   return (
     <Pressable
+      accessibilityRole="button"
+      onPress={onPress}
       style={{
         borderRadius: 18,
         backgroundColor: "#FFFFFF",

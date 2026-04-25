@@ -1,7 +1,7 @@
 import { View } from "react-native";
 
 import SuccessMark from "../../../assets/images/success.svg";
-import { spacing } from "../../../trast/theme";
+import { spacing } from "../../../theme";
 
 export function SignupSuccessMark() {
   return (
