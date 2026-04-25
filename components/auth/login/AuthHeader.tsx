@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-import { colors, spacing, textStyles } from "../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../theme";
 
 type AuthHeaderProps = {
   title: string;

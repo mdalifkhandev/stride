@@ -7,7 +7,7 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../accessibility/TextScaleContext";
-import { caregiverQuestionStyles, colors } from "../../../trast/theme";
+import { caregiverQuestionStyles, colors } from "../../../theme";
 
 type CaregiverQuestionSectionProps = PropsWithChildren<{
   title?: string;

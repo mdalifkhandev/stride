@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Keyboard, Pressable, ScrollView, View } from "react-native";
 
-import { colors, spacing } from "../../../trast/theme";
+import { colors, spacing } from "../../../theme";
 import { AppScreen } from "../../ui/AppScreen";
 
 type AuthScaffoldProps = PropsWithChildren<{

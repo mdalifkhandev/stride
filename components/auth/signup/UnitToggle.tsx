@@ -1,7 +1,7 @@
 import { Pressable, Text, View } from "react-native";
 
 import { useTextScale } from "../../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type UnitToggleProps<T extends string> = {
   options: readonly T[];

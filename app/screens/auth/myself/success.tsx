@@ -6,7 +6,7 @@ import { Animated, Easing, ScrollView, Text } from "react-native";
 import { SignupSuccessMark } from "../../../../components/auth/signup/SignupSuccessMark";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../../theme";
 
 export default function SignupSuccessScreen() {
   const router = useRouter();

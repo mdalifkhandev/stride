@@ -17,7 +17,7 @@ import {
 import { SignupProgressHeader } from "../signup/SignupProgressHeader";
 import { AppButton } from "../../ui/AppButton";
 import { AppScreen } from "../../ui/AppScreen";
-import { caregiverQuestionStyles, colors, spacing } from "../../../trast/theme";
+import { caregiverQuestionStyles, colors, spacing } from "../../../theme";
 
 type CaregiverQuestionLayoutProps = PropsWithChildren<{
   currentStep?: number;

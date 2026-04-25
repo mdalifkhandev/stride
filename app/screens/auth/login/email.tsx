@@ -8,7 +8,7 @@ import {
   AuthScaffold,
 } from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { spacing } from "../../../../trast/theme";
+import { spacing } from "../../../../theme";
 
 export default function AuthEmailScreen() {
   const router = useRouter();

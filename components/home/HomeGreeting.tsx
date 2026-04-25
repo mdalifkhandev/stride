@@ -6,11 +6,7 @@ import {
   useTextScale,
 } from "../accessibility/TextScaleContext";
 
-type HomeGreetingProps = {
-  message: string;
-};
-
-export function HomeGreeting({ message }: HomeGreetingProps) {
+export function HomeGreeting() {
   const { textScale } = useTextScale();
 
   return (
@@ -27,18 +23,7 @@ export function HomeGreeting({ message }: HomeGreetingProps) {
       </Text>
       <Text
         style={{
-          marginTop: 4,
-          color: "#4C5663",
-          fontFamily: "Inter-Regular",
-          fontSize: scaleTextSize(16),
-          lineHeight: scaleLineHeight(24),
-        }}
-      >
-        {message}
-      </Text>
-      <Text
-        style={{
-          marginTop: 22,
+          marginTop: 18,
           color: "#0052AD",
           fontFamily: "Inter-Bold",
           fontSize: 16 * textScale,

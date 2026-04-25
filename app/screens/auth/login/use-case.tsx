@@ -10,7 +10,7 @@ import {
 } from "../../../../components/auth/login/AuthScaffold";
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { colors, spacing, textStyles } from "../../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../../theme";
 
 type Choice = "myself" | "caregiver" | "organization" | null;
 

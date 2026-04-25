@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Pressable, Text } from "react-native";
 
 import { useTextScale } from "../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../theme";
 
 type AppButtonProps = {
   label: string;

@@ -12,7 +12,7 @@ import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCar
 import { SignupChoiceHeader } from "../../../../components/auth/signup/SignupChoiceHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../../theme";
 
 type Choice = "myself" | "caregiver" | "organization" | null;
 

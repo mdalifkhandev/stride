@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
 
-import { colors, inputStyles, spacing, textStyles } from "../../../trast/theme";
+import { colors, inputStyles, spacing, textStyles } from "../../../theme";
 
 type OrganizationSelectFieldProps = {
   label: string;

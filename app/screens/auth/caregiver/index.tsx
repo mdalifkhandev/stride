@@ -11,7 +11,7 @@ import {
 } from "../../../../components/accessibility/TextScaleContext";
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, radius, spacing, textStyles } from "../../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../../theme";
 
 type CaregiverChoice = "yes" | "no" | null;
 

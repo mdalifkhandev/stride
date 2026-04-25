@@ -9,7 +9,7 @@ import { SignupProgressHeader } from "../../../../components/auth/signup/SignupP
 import { UnitToggle } from "../../../../components/auth/signup/UnitToggle";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../../theme";
 
 const WEIGHT_VALUES = Array.from({ length: 301 }, (_, index) =>
   index.toString().padStart(3, "0"),

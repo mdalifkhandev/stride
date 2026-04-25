@@ -5,7 +5,7 @@ import {
   scaleTextSize,
   useTextScale,
 } from "../../accessibility/TextScaleContext";
-import { colors, spacing, textStyles } from "../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../theme";
 
 type AuthChoiceCardProps = {
   title: string;

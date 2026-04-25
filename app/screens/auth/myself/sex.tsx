@@ -11,7 +11,7 @@ import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCar
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, radius, spacing, textStyles } from "../../../../trast/theme";
+import { colors, radius, spacing, textStyles } from "../../../../theme";
 
 export default function SignupSexScreen() {
   const router = useRouter();

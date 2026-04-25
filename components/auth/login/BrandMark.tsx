@@ -6,7 +6,7 @@ import {
   useTextScale,
 } from "../../accessibility/TextScaleContext";
 import Logo from "../../../assets/images/logo.svg";
-import { colors, spacing } from "../../../trast/theme";
+import { colors, spacing } from "../../../theme";
 
 const LOGO_WIDTH = 220;
 const LOGO_HEIGHT = 136;

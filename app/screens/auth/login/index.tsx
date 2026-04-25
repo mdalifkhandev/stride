@@ -10,7 +10,7 @@ import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader
 import { AuthOptionCard } from "../../../../components/auth/login/AuthOptionCard";
 import { AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { colors, spacing, textStyles } from "../../../../trast/theme";
+import { colors, spacing, textStyles } from "../../../../theme";
 
 export default function LoginIndex() {
   const router = useRouter();

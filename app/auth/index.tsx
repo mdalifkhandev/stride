@@ -6,7 +6,7 @@ import {
 } from "@/components/accessibility/TextScaleContext";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppScreen } from "@/components/ui/AppScreen";
-import { colors, spacing, textStyles } from "@/trast/theme";
+import { colors, spacing, textStyles } from "@/theme";
 import { Href, router } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
