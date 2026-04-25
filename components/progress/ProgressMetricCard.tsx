@@ -1,5 +1,9 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+} from "../accessibility/TextScaleContext";
 
 type ProgressMetricCardProps = {
   title: string;
@@ -36,12 +40,27 @@ export function ProgressMetricCard({
     >
       <View className="flex-row items-center gap-2">
         <Icon name={iconName as never} size={18} color="#2B6FD6" />
-        <Text className="font-['Inter-Bold'] text-[18px] text-[#252B36]">
+        <Text
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: scaleTextSize(18),
+            lineHeight: scaleLineHeight(27),
+            color: "#252B36",
+          }}
+        >
           {title}
         </Text>
       </View>
 
-      <Text className="mt-3 font-['Inter-Bold'] text-[16px] text-[#252B36]">
+      <Text
+        style={{
+          marginTop: 12,
+          fontFamily: "Inter-Bold",
+          fontSize: scaleTextSize(16),
+          lineHeight: scaleLineHeight(24),
+          color: "#252B36",
+        }}
+      >
         {value}
       </Text>
     </View>

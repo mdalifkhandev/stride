@@ -1,5 +1,9 @@
 import { Text, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+} from "../accessibility/TextScaleContext";
 
 type ProgressGaugeCardProps = {
   score: number;
@@ -58,17 +62,37 @@ export function ProgressGaugeCard({
           </Svg>
 
           <View className="absolute bottom-[10px] items-center">
-            <Text className="font-['Inter-Bold'] text-[18px] text-[#145CB4]">
-              <Text className="text-[20px]">{score}</Text>
-              <Text className="text-[#6E6E6E]"> pt</Text>
+            <Text
+              style={{
+                fontFamily: "Inter-Bold",
+                fontSize: scaleTextSize(18),
+                lineHeight: scaleLineHeight(24),
+                color: "#145CB4",
+              }}
+            >
+              <Text style={{ fontSize: scaleTextSize(20) }}>{score}</Text>
+              <Text style={{ color: "#6E6E6E", fontSize: scaleTextSize(18) }}>
+                {" "}
+                pt
+              </Text>
             </Text>
           </View>
         </View>
 
         <View className="mt-2 rounded-full bg-[#E7F0FB] px-5 py-3">
-          <Text className="font-['Inter-Bold'] text-[16px] text-[#4A4F57]">
-            Only <Text className="text-[#24262B]">{maxScore - score}pt</Text> to
-            your next stage!
+          <Text
+            style={{
+              fontFamily: "Inter-Bold",
+              fontSize: scaleTextSize(16),
+              lineHeight: scaleLineHeight(24),
+              color: "#4A4F57",
+            }}
+          >
+            Only{" "}
+            <Text style={{ color: "#24262B", fontSize: scaleTextSize(16) }}>
+              {maxScore - score}pt
+            </Text>{" "}
+            to your next stage!
           </Text>
         </View>
       </View>

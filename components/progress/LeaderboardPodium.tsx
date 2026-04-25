@@ -1,5 +1,9 @@
-import { Image, Text, View } from "react-native";
 import type { ImageSourcePropType } from "react-native";
+import { Image, Text, View } from "react-native";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+} from "../accessibility/TextScaleContext";
 
 type BadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 
@@ -20,46 +24,91 @@ type LeaderboardPodiumProps = {
 
 function PodiumColumn({ item }: { item: PodiumItem }) {
   const Badge = item.badge;
-  const blockHeight = item.rank === 1 ? 144 : 104;
+  const blockHeight = item.rank === 1 ? 146 : item.rank === 2 ? 108 : 84;
+  const blockWidth = item.rank === 1 ? 118 : 106;
+  const columnWidth = item.rank === 1 ? 124 : 110;
+  const avatarFrameSize = item.rank === 1 ? 90 : 84;
+  const avatarSize = item.rank === 1 ? 82 : 76;
+  const topOffset = item.rank === 1 ? 0 : item.rank === 2 ? 30 : 42;
 
   return (
-    <View className={`items-center ${item.rank === 1 ? "mt-0" : "mt-10"}`}>
+    <View
+      style={{ width: columnWidth, alignItems: "center", marginTop: topOffset }}
+    >
       <View className="relative">
         <View
-          className="h-[92px] w-[92px] items-center justify-center overflow-hidden rounded-full border-[4px] bg-white shadow-sm"
-          style={{ borderColor: item.accentColor }}
+          className="items-center justify-center overflow-hidden rounded-full border-[4px] bg-white"
+          style={{
+            width: avatarFrameSize,
+            height: avatarFrameSize,
+            borderColor: item.accentColor,
+            shadowColor: item.accentColor,
+            shadowOpacity: item.rank === 1 ? 0.24 : 0.16,
+            shadowRadius: item.rank === 1 ? 10 : 8,
+            shadowOffset: { width: 0, height: 4 },
+            elevation: 5,
+          }}
         >
           <Image
             source={item.avatarSource}
-            className="h-[84px] w-[84px] rounded-full"
+            style={{
+              width: avatarSize,
+              height: avatarSize,
+              borderRadius: 999,
+            }}
             resizeMode="cover"
           />
         </View>
         <View
-          className="absolute -bottom-4"
-          style={{ left: "50%", transform: [{ translateX: -18 }] }}
+          className="absolute"
+          style={{
+            bottom: -15,
+            left: "50%",
+            transform: [{ translateX: item.rank === 1 ? -19 : -18 }],
+          }}
         >
-          <Badge width={36} height={37} />
+          <Badge
+            width={item.rank === 1 ? 38 : 36}
+            height={item.rank === 1 ? 39 : 37}
+          />
         </View>
       </View>
 
       <View
-        className="mt-5 rounded-full px-5 py-2"
-        style={{ backgroundColor: item.chipBackground }}
+        className="mt-5 rounded-full py-2"
+        style={{
+          backgroundColor: item.chipBackground,
+          paddingHorizontal: item.rank === 1 ? 18 : 16,
+        }}
       >
         <Text
-          className="font-['Inter-Bold'] text-[18px]"
-          style={{ color: item.chipText }}
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: scaleTextSize(16),
+            lineHeight: scaleLineHeight(24),
+            color: item.chipText,
+          }}
         >
           {item.tier}
         </Text>
       </View>
 
       <View
-        className="mt-5 w-[112px] items-center justify-center rounded-[10px]"
-        style={{ height: blockHeight, backgroundColor: item.blockBackground }}
+        className="mt-4 items-center justify-center rounded-[8px]"
+        style={{
+          width: blockWidth,
+          height: blockHeight,
+          backgroundColor: item.blockBackground,
+        }}
       >
-        <Text className="font-['Inter-Bold'] text-[26px] text-[#0B4A98]">
+        <Text
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: scaleTextSize(24),
+            lineHeight: scaleLineHeight(30),
+            color: "#0B4A98",
+          }}
+        >
           {item.rank}
           {item.rank === 1 ? "st" : item.rank === 2 ? "nd" : "rd"}
         </Text>
@@ -71,14 +120,37 @@ function PodiumColumn({ item }: { item: PodiumItem }) {
 export function LeaderboardPodium({ items }: LeaderboardPodiumProps) {
   return (
     <View className="mt-7">
-      <Text className="font-['Inter-Bold'] text-[17px] text-[#252B36]">
+      <Text
+        style={{
+          fontFamily: "Inter-Bold",
+          fontSize: scaleTextSize(18),
+          lineHeight: scaleLineHeight(27),
+          color: "#252B36",
+        }}
+      >
         🏆 Weekly Leaderboard
       </Text>
-      <Text className="mt-5 font-['Inter-Bold'] text-[17px] leading-[28px] text-[#6E6E6E]">
+      <Text
+        style={{
+          marginTop: 20,
+          fontFamily: "Inter-Bold",
+          fontSize: scaleTextSize(17),
+          lineHeight: scaleLineHeight(28),
+          color: "#6E6E6E",
+        }}
+      >
         You're building healthy habits! See{"\n"}how you rank this week
       </Text>
 
-      <View className="mt-8 flex-row items-end justify-between">
+      <View
+        style={{
+          marginTop: 36,
+          flexDirection: "row",
+          alignItems: "flex-end",
+          justifyContent: "space-between",
+          paddingHorizontal: 2,
+        }}
+      >
         <PodiumColumn item={items[1]} />
         <PodiumColumn item={items[0]} />
         <PodiumColumn item={items[2]} />

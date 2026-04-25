@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
 import { Image, type ImageSourcePropType, Text, View } from "react-native";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+} from "../accessibility/TextScaleContext";
 
 type LeaderboardListItemProps = {
   name: string;
@@ -37,12 +41,38 @@ export function LeaderboardListItem({
         ) : null}
       </View>
 
-      <Text className="ml-6 flex-1 font-['Inter-Bold'] text-[18px] text-[#252B36]">
+      <Text
+        style={{
+          marginLeft: 24,
+          flex: 1,
+          fontFamily: "Inter-Bold",
+          fontSize: scaleTextSize(18),
+          lineHeight: scaleLineHeight(27),
+          color: "#252B36",
+        }}
+      >
         {name}
       </Text>
 
-      <Text className="font-['Inter-Bold'] text-[18px] text-[#252B36]">
-        {points} <Text className="font-['Inter-Medium']">Points</Text>
+      <Text
+        style={{
+          fontFamily: "Inter-Bold",
+          fontSize: scaleTextSize(18),
+          lineHeight: scaleLineHeight(27),
+          color: "#252B36",
+        }}
+      >
+        {points}{" "}
+        <Text
+          style={{
+            fontFamily: "Inter-Medium",
+            fontSize: scaleTextSize(18),
+            lineHeight: scaleLineHeight(27),
+            color: "#252B36",
+          }}
+        >
+          Points
+        </Text>
       </Text>
     </View>
   );

@@ -1,5 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+} from "../accessibility/TextScaleContext";
 
 const bars = [
   { day: "Sun", value: 0.42 },
@@ -15,11 +19,25 @@ export function ProgressStatusCard() {
   return (
     <View className="rounded-[20px] border border-[#B9BEC7] bg-white px-4 py-4 shadow-sm">
       <View className="flex-row items-center justify-between">
-        <Text className="font-['Inter-Bold'] text-[18px] text-[#252B36]">
+        <Text
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: scaleTextSize(18),
+            lineHeight: scaleLineHeight(27),
+            color: "#252B36",
+          }}
+        >
           Status
         </Text>
         <View className="flex-row items-center gap-1">
-          <Text className="font-['Inter-Bold'] text-[16px] text-[#2B6FD6]">
+          <Text
+            style={{
+              fontFamily: "Inter-Bold",
+              fontSize: scaleTextSize(16),
+              lineHeight: scaleLineHeight(24),
+              color: "#2B6FD6",
+            }}
+          >
             Day
           </Text>
           <Ionicons name="chevron-down" size={18} color="#2B6FD6" />
@@ -35,7 +53,15 @@ export function ProgressStatusCard() {
                 style={{ height: `${bar.value * 100}%` }}
               />
             </View>
-            <Text className="mt-2 font-['Inter-Medium'] text-[14px] text-[#6E6E6E]">
+            <Text
+              style={{
+                marginTop: 8,
+                fontFamily: "Inter-Medium",
+                fontSize: scaleTextSize(14),
+                lineHeight: scaleLineHeight(21),
+                color: "#6E6E6E",
+              }}
+            >
               {bar.day}
             </Text>
           </View>

@@ -1,16 +1,34 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import Svg, { Line, Path } from "react-native-svg";
+import {
+  scaleLineHeight,
+  scaleTextSize,
+} from "../accessibility/TextScaleContext";
 
 export function ProgressPerformanceCard() {
   return (
     <View className="rounded-[20px] border border-[#B9BEC7] bg-white px-4 py-4 shadow-sm">
       <View className="flex-row items-center justify-between">
-        <Text className="font-['Inter-Bold'] text-[18px] text-[#252B36]">
+        <Text
+          style={{
+            fontFamily: "Inter-Bold",
+            fontSize: scaleTextSize(18),
+            lineHeight: scaleLineHeight(27),
+            color: "#252B36",
+          }}
+        >
           Performance
         </Text>
         <View className="flex-row items-center gap-1">
-          <Text className="font-['Inter-Bold'] text-[16px] text-[#2B6FD6]">
+          <Text
+            style={{
+              fontFamily: "Inter-Bold",
+              fontSize: scaleTextSize(16),
+              lineHeight: scaleLineHeight(24),
+              color: "#2B6FD6",
+            }}
+          >
             Weekly
           </Text>
           <Ionicons name="chevron-down" size={18} color="#2B6FD6" />
@@ -52,7 +70,12 @@ export function ProgressPerformanceCard() {
           {["Sat", "Sun", "Mon", "Tus", "Wed", "Thr", "Fri"].map((day) => (
             <Text
               key={day}
-              className="font-['Inter-Medium'] text-[14px] text-[#6E6E6E]"
+              style={{
+                fontFamily: "Inter-Medium",
+                fontSize: scaleTextSize(14),
+                lineHeight: scaleLineHeight(21),
+                color: "#6E6E6E",
+              }}
             >
               {day}
             </Text>
@@ -62,13 +85,27 @@ export function ProgressPerformanceCard() {
         <View className="mt-4 flex-row items-center justify-center gap-5">
           <View className="flex-row items-center gap-2">
             <View className="h-3 w-3 rounded-full bg-[#145CB4]" />
-            <Text className="font-['Inter-Medium'] text-[14px] text-[#6E6E6E]">
+            <Text
+              style={{
+                fontFamily: "Inter-Medium",
+                fontSize: scaleTextSize(14),
+                lineHeight: scaleLineHeight(21),
+                color: "#6E6E6E",
+              }}
+            >
               Game
             </Text>
           </View>
           <View className="flex-row items-center gap-2">
             <View className="h-3 w-3 rounded-full bg-[#4A9B4D]" />
-            <Text className="font-['Inter-Medium'] text-[14px] text-[#6E6E6E]">
+            <Text
+              style={{
+                fontFamily: "Inter-Medium",
+                fontSize: scaleTextSize(14),
+                lineHeight: scaleLineHeight(21),
+                color: "#6E6E6E",
+              }}
+            >
               Game
             </Text>
           </View>
