@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { ScrollView, Text, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, {
   Circle,
@@ -11,6 +12,7 @@ import Svg, {
   Text as SvgText,
 } from "react-native-svg";
 
+import StarIcon from "../../assets/images/star.svg";
 import {
   scaleLineHeight,
   scaleTextSize,
@@ -26,7 +28,7 @@ type StageNode = {
   showStart: boolean;
 };
 
-type StageStatus = "active" | "locked";
+type StageStatus = "active" | "locked" | "completed";
 
 type StagePosition = {
   x: number;
@@ -38,8 +40,8 @@ type JourneyProgress = {
   stage: number;
 };
 
-const stageSize = 118;
-const activeStageSize = 132;
+const stageSize = 96;
+const activeStageSize = 108;
 const otterStageDots = Array.from({ length: 10 }, (_, index) => index);
 
 const currentJourney: JourneyProgress = {
@@ -72,6 +74,13 @@ function getStageStatus({
   stage: number;
   progress: JourneyProgress;
 }): StageStatus {
+  if (
+    level < progress.level ||
+    (level === progress.level && stage < progress.stage)
+  ) {
+    return "completed";
+  }
+
   if (level === progress.level && stage === progress.stage) {
     return "active";
   }
@@ -104,33 +113,33 @@ function createStageLevel({
 
 function LevelDivider({ label }: { label: string }) {
   return (
-    <View style={{ paddingHorizontal: 22 }}>
+    <View style={{ paddingHorizontal: 16 }}>
       <Svg width="100%" height={38} viewBox="0 0 390 38">
         <Line
           x1={0}
           y1={18}
-          x2={144}
+          x2={140}
           y2={18}
-          stroke="#8D8D8D"
-          strokeWidth={1.5}
+          stroke="#A5A5A5"
+          strokeWidth={1.3}
         />
         <SvgText
           x={195}
-          y={25}
+          y={24}
           fill="#0065C8"
           fontFamily="Inter-Bold"
-          fontSize={scaleTextSize(20)}
+          fontSize={scaleTextSize(18)}
           textAnchor="middle"
         >
           {label}
         </SvgText>
         <Line
-          x1={246}
+          x1={250}
           y1={18}
           x2={390}
           y2={18}
-          stroke="#8D8D8D"
-          strokeWidth={1.5}
+          stroke="#A5A5A5"
+          strokeWidth={1.3}
         />
       </Svg>
     </View>
@@ -172,59 +181,68 @@ function StageCircle({ stage }: { stage: StageNode }) {
   const isActive = stage.status === "active";
   const size = isActive ? activeStageSize : stageSize;
   const radius = size / 2;
-  const outerRadius = isActive ? radius - 5 : radius - 6;
-  const gapRadius = radius - 12;
-  const bandRadius = radius - 20;
-  const middleRadius = isActive ? radius - 31 : 42;
-  const fill = isActive ? "#E1EFFE" : "#E9E9E9";
-  const ring = isActive ? "#0052AD" : "#9D9D9D";
+  const outerRadius = radius - 4;
+  const gapRadius = radius - 9;
+  const bandRadius = radius - 15;
+  const middleRadius = isActive ? radius - 25 : radius - 22;
+  const fill = isActive || stage.status === "completed" ? "#E4EFFD" : "#E5E5E5";
+  const ring = isActive || stage.status === "completed" ? "#005DC8" : "#9F9F9F";
   const textColor = isActive ? "#0052AD" : "#969696";
-  const textSize = isActive ? 35 : 27;
+  const textSize = isActive ? 14 : 13;
+  const label = stage.status === "completed" ? "100%" : stage.label;
+  const labelColor = stage.status === "completed" ? "#0052AD" : textColor;
 
   return (
     <G>
       {stage.showStart ? (
         <G>
           <Rect
-            x={stage.x - 24}
-            y={stage.y - radius - 39}
-            width={48}
-            height={26}
+            x={stage.x - 17}
+            y={stage.y - radius - 28}
+            width={34}
+            height={22}
             rx={2}
             fill="#FFFFFF"
             stroke="#0058B9"
-            strokeWidth={2}
+            strokeWidth={1.6}
           />
           <Path
-            d={`M${stage.x - 8} ${stage.y - radius - 13}L${stage.x} ${stage.y - radius - 5}L${stage.x + 8} ${stage.y - radius - 13}`}
+            d={`M${stage.x - 6} ${stage.y - radius - 6}L${stage.x} ${stage.y - radius - 1}L${stage.x + 6} ${stage.y - radius - 6}`}
             fill="#FFFFFF"
             stroke="#0058B9"
-            strokeWidth={2}
+            strokeWidth={1.6}
             strokeLinejoin="round"
           />
           <SvgText
             x={stage.x}
-            y={stage.y - radius - 21}
+            y={stage.y - radius - 13}
             fill="#0058B9"
             fontFamily="Inter-Regular"
-            fontSize={scaleTextSize(15)}
+            fontSize={scaleTextSize(11)}
             textAnchor="middle"
           >
             Start
           </SvgText>
           <Line
             x1={stage.x}
-            y1={stage.y - radius - 4}
+            y1={stage.y - radius}
             x2={stage.x}
-            y2={stage.y - radius + 18}
+            y2={stage.y - radius + 10}
             stroke="#0058B9"
-            strokeWidth={2}
-            strokeDasharray="7 7"
+            strokeWidth={1.4}
+            strokeDasharray="4 5"
           />
         </G>
       ) : null}
 
-      <Circle cx={stage.x} cy={stage.y} r={radius} fill="#FFFFFF" />
+      <Circle
+        cx={stage.x + 3}
+        cy={stage.y + 4}
+        r={radius}
+        fill="#000000"
+        opacity={0.05}
+      />
+      <Circle cx={stage.x} cy={stage.y} r={radius} fill="#EBEBEB" />
       {isActive ? (
         <>
           <Circle cx={stage.x} cy={stage.y} r={outerRadius} fill={ring} />
@@ -238,7 +256,7 @@ function StageCircle({ stage }: { stage: StageNode }) {
           r={outerRadius}
           fill={fill}
           stroke={ring}
-          strokeWidth={10}
+          strokeWidth={8}
         />
       )}
       <Circle
@@ -249,31 +267,180 @@ function StageCircle({ stage }: { stage: StageNode }) {
         opacity={isActive ? 1 : 0.74}
       />
 
-      {!isActive ? <StageLock x={stage.x} y={stage.y - radius + 28} /> : null}
+      {!isActive && stage.status !== "completed" ? (
+        <StageLock x={stage.x} y={stage.y - radius + 28} />
+      ) : null}
 
       <SvgText
         x={stage.x}
-        y={stage.y + (isActive ? 13 : 10)}
-        fill={textColor}
+        y={stage.y + 6}
+        fill={labelColor}
         fontFamily="Inter-Bold"
         fontSize={scaleTextSize(textSize)}
         textAnchor="middle"
       >
-        {stage.label}
+        {label}
       </SvgText>
     </G>
+  );
+}
+
+function CompletedStageCard({
+  stage,
+  height,
+}: {
+  stage: StageNode;
+  height: number;
+}) {
+  return (
+    <>
+      <View
+        pointerEvents="none"
+        style={{
+          position: "absolute",
+          left: `${((stage.x + 50) / 390) * 100}%`,
+          top: `${((stage.y - 42) / height) * 100}%`,
+          width: `${(126 / 390) * 100}%`,
+          height: `${(82 / height) * 100}%`,
+          borderRadius: 14,
+          borderWidth: 1,
+          borderColor: "#E5EAF1",
+          backgroundColor: "#FFFFFF",
+          justifyContent: "center",
+          paddingLeft: 10,
+          shadowColor: "#91A4BE",
+          shadowOpacity: 0.18,
+          shadowRadius: 8,
+          shadowOffset: { width: 0, height: 4 },
+          elevation: 4,
+        }}
+      >
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ marginLeft: 8 }}>
+            <Text
+              style={{
+                color: "#1D63BC",
+                fontFamily: "Inter-Bold",
+                fontSize: scaleTextSize(18),
+                lineHeight: scaleLineHeight(18),
+              }}
+            >
+              Stride-1
+            </Text>
+            <View style={{ marginTop: 2, flexDirection: "row", gap: 3 }}>
+              <StarIcon width={20} height={20} />
+              <StarIcon width={20} height={20} />
+              <View style={{ opacity: 0.32 }}>
+                <StarIcon width={20} height={20} />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+
+      <View
+        pointerEvents="none"
+        style={{
+          position: "absolute",
+          left: `${((stage.x - 0.8) / 390) * 100}%`,
+          top: `${((stage.y - 40) / height) * 100}%`,
+          width: `${(1.6 / 390) * 100}%`,
+          height: `${(28 / height) * 100}%`,
+          backgroundColor: "#0B58B8",
+        }}
+      />
+    </>
   );
 }
 
 function StageMap({
   stages,
   height,
+  level,
+  onStagePress,
 }: {
   stages: StageNode[];
   height: number;
+  level: 1 | 2;
+  onStagePress?: (stage: StageNode) => void;
 }) {
   return (
     <View style={{ width: "100%", aspectRatio: 390 / height }}>
+      {level === 1 ? (
+        <>
+          <View
+            style={{
+              position: "absolute",
+              left: 8,
+              top: 230,
+              width: 320,
+              height: 250,
+              overflow: "hidden",
+              opacity: 0.78,
+            }}
+            pointerEvents="none"
+          >
+            <View
+              style={{
+                position: "absolute",
+                left: 16,
+                top: 43,
+                transform: [{ rotate: "292deg" }],
+              }}
+            >
+              <OtterStageIcon width={280} height={180} />
+            </View>
+          </View>
+          <View
+            style={{
+              position: "absolute",
+              left: -24,
+              top: 645,
+              width: 290,
+              height: 250,
+              overflow: "hidden",
+              opacity: 0.8,
+            }}
+            pointerEvents="none"
+          >
+            <View
+              style={{
+                position: "absolute",
+                left: 25,
+                top: 22,
+                transform: [{ rotate: "28deg" }],
+              }}
+            >
+              <OtterStageIcon width={280} height={180} />
+            </View>
+          </View>
+        </>
+      ) : (
+        <View
+          style={{
+            position: "absolute",
+            right: -96,
+            top: 350,
+            width: 360,
+            height: 220,
+            overflow: "hidden",
+            opacity: 0.78,
+          }}
+          pointerEvents="none"
+        >
+          <View
+            style={{
+              position: "absolute",
+              left: -20,
+              top: 18,
+              transform: [{ rotate: "14deg" }, { scaleX: -1 }],
+            }}
+          >
+            <OtterStageIcon width={280} height={180} />
+          </View>
+        </View>
+      )}
+
       <Svg width="100%" height="100%" viewBox={`0 0 390 ${height}`}>
         <Defs />
         {stages.slice(0, -1).map((stage, index) => {
@@ -284,12 +451,14 @@ function StageMap({
               x1={stage.x}
               y1={
                 stage.y +
-                (stage.status === "active" ? activeStageSize / 2 : stageSize / 2)
+                (stage.status === "active"
+                  ? activeStageSize / 2
+                  : stageSize / 2)
               }
               x2={next.x}
               y2={next.y - stageSize / 2}
-              stroke="#5B5B5B"
-              strokeWidth={3}
+              stroke="#747474"
+              strokeWidth={2.2}
             />
           );
         })}
@@ -298,6 +467,37 @@ function StageMap({
           <StageCircle key={stage.id} stage={stage} />
         ))}
       </Svg>
+
+      {stages
+        .filter((stage) => stage.status === "completed")
+        .map((stage) => (
+          <CompletedStageCard
+            key={`${stage.id}-completed`}
+            stage={stage}
+            height={height}
+          />
+        ))}
+
+      {stages.map((stage) => {
+        const size = stage.status === "active" ? activeStageSize : stageSize;
+
+        return (
+          <Pressable
+            key={`${stage.id}-touch`}
+            accessibilityRole="button"
+            accessibilityLabel={`${stage.label} stage`}
+            disabled={stage.status !== "active"}
+            onPress={() => onStagePress?.(stage)}
+            style={{
+              position: "absolute",
+              left: `${((stage.x - size / 2) / 390) * 100}%`,
+              top: `${((stage.y - size / 2) / height) * 100}%`,
+              width: `${(size / 390) * 100}%`,
+              height: `${(size / height) * 100}%`,
+            }}
+          />
+        );
+      })}
     </View>
   );
 }
@@ -321,24 +521,17 @@ function OtterStageIcon({
 
 function JourneyHeader() {
   return (
-    <View style={{ paddingHorizontal: 16, paddingTop: 8, paddingBottom: 18 }}>
+    <View style={{ paddingHorizontal: 16, paddingTop: 6, paddingBottom: 16 }}>
       <View
         style={{
-          borderRadius: 28,
-          backgroundColor: "#FFFFFF",
-          paddingHorizontal: 16,
-          paddingTop: 22,
-          paddingBottom: 24,
-          shadowColor: "#101828",
-          shadowOpacity: 0.13,
-          shadowRadius: 22,
-          shadowOffset: { width: 0, height: 12 },
-          elevation: 6,
+          paddingHorizontal: 0,
+          paddingTop: 10,
+          paddingBottom: 12,
         }}
       >
         <View
           style={{
-            minHeight: 58,
+            minHeight: 48,
             flexDirection: "row",
             alignItems: "center",
           }}
@@ -348,7 +541,7 @@ function JourneyHeader() {
               width: 32,
               height: 32,
               borderRadius: 999,
-              backgroundColor: "#E4F2FF",
+              backgroundColor: "#DCE9F6",
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -378,8 +571,8 @@ function JourneyHeader() {
               style={{
                 color: "#202124",
                 fontFamily: "Inter-Regular",
-                fontSize: scaleTextSize(20),
-                lineHeight: scaleLineHeight(38),
+                fontSize: scaleTextSize(17),
+                lineHeight: scaleLineHeight(24),
               }}
             >
               Otter Stages
@@ -389,13 +582,13 @@ function JourneyHeader() {
 
         <View
           style={{
-            marginTop: 30,
-            minHeight: 170,
-            borderRadius: 24,
-            backgroundColor: "#E4F2FF",
-            paddingHorizontal: 18,
-            paddingTop: 30,
-            paddingBottom: 22,
+            marginTop: 14,
+            minHeight: 88,
+            borderRadius: 14,
+            backgroundColor: "#D4E1EF",
+            paddingHorizontal: 16,
+            paddingTop: 10,
+            paddingBottom: 12,
           }}
         >
           <View
@@ -413,8 +606,8 @@ function JourneyHeader() {
                 flex: 1,
                 color: "#202124",
                 fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(39),
+                fontSize: scaleTextSize(16),
+                lineHeight: scaleLineHeight(24),
               }}
             >
               At Level 1
@@ -426,8 +619,8 @@ function JourneyHeader() {
                 flex: 0.8,
                 color: "#202124",
                 fontFamily: "Inter-Regular",
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(39),
+                fontSize: scaleTextSize(16),
+                lineHeight: scaleLineHeight(24),
                 textAlign: "right",
               }}
             >
@@ -437,7 +630,7 @@ function JourneyHeader() {
 
           <View
             style={{
-              marginTop: 34,
+              marginTop: 8,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
@@ -450,7 +643,7 @@ function JourneyHeader() {
                   width: "8.8%",
                   aspectRatio: 1,
                   borderRadius: 999,
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#EEF1F4",
                 }}
               />
             ))}
@@ -463,38 +656,58 @@ function JourneyHeader() {
 
 export default function JourneyTabScreen() {
   const { textScale } = useTextScale();
+  const router = useRouter();
+  const params = useLocalSearchParams<{ completedStage?: string }>();
+  const journeyProgress: JourneyProgress =
+    params.completedStage === "1" ? { level: 1, stage: 2 } : currentJourney;
   const levelOneStages = createStageLevel({
     level: 1,
     positions: levelOnePositions,
-    progress: currentJourney,
+    progress: journeyProgress,
   });
   const levelTwoStages = createStageLevel({
     level: 2,
     positions: levelTwoPositions,
-    progress: currentJourney,
+    progress: journeyProgress,
   });
+
+  const handleStagePress = (stage: StageNode) => {
+    if (stage.id === "level-1-s1" || stage.id === "level-1-s2") {
+      router.push("/screens/journey/stage-s1");
+    }
+  };
 
   return (
     <SafeAreaView
       key={textScale}
       edges={["top"]}
-      style={{ flex: 1, backgroundColor: "#FFFFFF" }}
+      style={{ flex: 1, backgroundColor: "#F2F2F2" }}
     >
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          paddingTop: 6,
-          paddingBottom: 26,
+          paddingTop: 4,
+          paddingBottom: 24,
         }}
       >
         <JourneyHeader />
         <LevelDivider label="Level 1" />
-        <StageMap stages={levelOneStages} height={830} />
+        <StageMap
+          stages={levelOneStages}
+          height={800}
+          level={1}
+          onStagePress={handleStagePress}
+        />
 
-        <View style={{ marginTop: 22 }}>
+        <View style={{ marginTop: 10 }}>
           <LevelDivider label="Level 2" />
         </View>
-        <StageMap stages={levelTwoStages} height={820} />
+        <StageMap
+          stages={levelTwoStages}
+          height={790}
+          level={2}
+          onStagePress={handleStagePress}
+        />
       </ScrollView>
     </SafeAreaView>
   );
