@@ -1,5 +1,5 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
@@ -107,6 +107,8 @@ function MetricRow({ title, icon }: MetricRowProps) {
 
 export default function StageS1CompleteScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{ stage?: string }>();
+  const stageNumber = Number.parseInt(params.stage ?? "1", 10) || 1;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F2F2F2" }} edges={["top"]}>
@@ -253,7 +255,9 @@ export default function StageS1CompleteScreen() {
             justifyContent: "center",
           }}
           accessibilityRole="button"
-          onPress={() => router.replace("/(tabs)/journey?completedStage=1")}
+          onPress={() =>
+            router.replace(`/(tabs)/journey?completedStage=${stageNumber}`)
+          }
         >
           <Text
             style={{

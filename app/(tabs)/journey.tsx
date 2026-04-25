@@ -50,19 +50,19 @@ const currentJourney: JourneyProgress = {
 };
 
 const levelOnePositions: StagePosition[] = [
-  { x: 195, y: 124 },
-  { x: 195, y: 282 },
-  { x: 150, y: 440 },
-  { x: 240, y: 598 },
-  { x: 150, y: 756 },
+  { x: 195, y: 54 },
+  { x: 195, y: 212 },
+  { x: 150, y: 370 },
+  { x: 240, y: 528 },
+  { x: 150, y: 686 },
 ];
 
 const levelTwoPositions: StagePosition[] = [
-  { x: 195, y: 112 },
-  { x: 195, y: 270 },
-  { x: 150, y: 428 },
-  { x: 240, y: 586 },
-  { x: 150, y: 744 },
+  { x: 195, y: 42 },
+  { x: 195, y: 200 },
+  { x: 150, y: 358 },
+  { x: 240, y: 516 },
+  { x: 150, y: 674 },
 ];
 
 function getStageStatus({
@@ -197,10 +197,10 @@ function StageCircle({ stage }: { stage: StageNode }) {
       {stage.showStart ? (
         <G>
           <Rect
-            x={stage.x - 17}
+            x={stage.x - 28}
             y={stage.y - radius - 28}
-            width={34}
-            height={22}
+            width={56}
+            height={24}
             rx={2}
             fill="#FFFFFF"
             stroke="#0058B9"
@@ -215,13 +215,13 @@ function StageCircle({ stage }: { stage: StageNode }) {
           />
           <SvgText
             x={stage.x}
-            y={stage.y - radius - 13}
+            y={stage.y - radius - 15}
             fill="#0058B9"
             fontFamily="Inter-Regular"
-            fontSize={scaleTextSize(11)}
+            fontSize={scaleTextSize(8.5)}
             textAnchor="middle"
           >
-            Start
+            Continue
           </SvgText>
           <Line
             x1={stage.x}
@@ -292,6 +292,8 @@ function CompletedStageCard({
   stage: StageNode;
   height: number;
 }) {
+  const stageNumber = Number.parseInt(stage.label.replace("S-", ""), 10) || 1;
+
   return (
     <>
       <View
@@ -325,7 +327,7 @@ function CompletedStageCard({
                 lineHeight: scaleLineHeight(18),
               }}
             >
-              Stride-1
+              {`Stride-${stageNumber}`}
             </Text>
             <View style={{ marginTop: 2, flexDirection: "row", gap: 3 }}>
               <StarIcon width={20} height={20} />
@@ -337,18 +339,6 @@ function CompletedStageCard({
           </View>
         </View>
       </View>
-
-      <View
-        pointerEvents="none"
-        style={{
-          position: "absolute",
-          left: `${((stage.x - 0.8) / 390) * 100}%`,
-          top: `${((stage.y - 40) / height) * 100}%`,
-          width: `${(1.6 / 390) * 100}%`,
-          height: `${(28 / height) * 100}%`,
-          backgroundColor: "#0B58B8",
-        }}
-      />
     </>
   );
 }
@@ -658,8 +648,14 @@ export default function JourneyTabScreen() {
   const { textScale } = useTextScale();
   const router = useRouter();
   const params = useLocalSearchParams<{ completedStage?: string }>();
+  const completedStage = Number.parseInt(params.completedStage ?? "0", 10);
+  const safeCompletedStage = Number.isFinite(completedStage)
+    ? Math.max(0, Math.min(completedStage, 4))
+    : 0;
   const journeyProgress: JourneyProgress =
-    params.completedStage === "1" ? { level: 1, stage: 2 } : currentJourney;
+    safeCompletedStage > 0
+      ? { level: 1, stage: safeCompletedStage + 1 }
+      : currentJourney;
   const levelOneStages = createStageLevel({
     level: 1,
     positions: levelOnePositions,
@@ -672,8 +668,10 @@ export default function JourneyTabScreen() {
   });
 
   const handleStagePress = (stage: StageNode) => {
-    if (stage.id === "level-1-s1" || stage.id === "level-1-s2") {
-      router.push("/screens/journey/stage-s1");
+    if (stage.status === "active" && stage.id.startsWith("level-1-s")) {
+      const stageNumber =
+        Number.parseInt(stage.label.replace("S-", ""), 10) || 1;
+      router.push(`/screens/journey/stage-s1?stage=${stageNumber}`);
     }
   };
 

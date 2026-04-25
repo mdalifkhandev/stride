@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -12,6 +12,8 @@ const exerciseImage = require("../../../assets/images/home-feture-image.jpg");
 
 export default function StageS1Screen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{ stage?: string }>();
+  const stageNumber = Number.parseInt(params.stage ?? "1", 10) || 1;
 
   return (
     <SafeAreaView
@@ -226,7 +228,9 @@ export default function StageS1Screen() {
               gap: 8,
             }}
             accessibilityRole="button"
-            onPress={() => router.push("/screens/journey/stage-s1-complete")}
+            onPress={() =>
+              router.push(`/screens/journey/stage-s1-complete?stage=${stageNumber}`)
+            }
           >
             <MaterialCommunityIcons name="pause" size={18} color="#0052AD" />
             <Text
