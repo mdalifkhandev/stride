@@ -57,7 +57,7 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
   const hasAutoStartedRef = useRef(false);
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
-  const isCompact = height < 820;
+  const isCompact = height < 900;
   const isFinalRound = game.round >= 8;
   const mistakesMade = game.failedAtStep ? 1 : 0;
   const mistakesLimit = ORDER_MEMORY_RULES.failOnMistake ? 1 : 3;
@@ -137,10 +137,10 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
       <ScrollView
         className="flex-1"
         contentContainerStyle={{
-          paddingTop: isCompact ? 14 : 18,
+          paddingTop: isCompact ? 10 : 14,
           paddingLeft: 24,
           paddingRight: 24,
-          paddingBottom: Math.max(insets.bottom, 12) + 24,
+          paddingBottom: Math.max(insets.bottom, 8) + 16,
         }}
         showsVerticalScrollIndicator={false}>
         <ProgressHeader
@@ -151,7 +151,7 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
           theme={orderMemoryTheme}
         />
 
-        <View style={{ paddingTop: isCompact ? 12 : 18 }}>
+        <View style={{ paddingTop: isCompact ? 8 : 12 }}>
           <MemorySequenceDisplay
             compact={isCompact}
             currentItem={game.phase === 'memorization' ? game.currentPrompt : null}
@@ -168,7 +168,7 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
           />
         </View>
 
-        <View style={{ paddingTop: isCompact ? 10 : 16 }}>
+        <View style={{ paddingTop: isCompact ? 8 : 12 }}>
           <AnswerGrid
             compact={isCompact}
             disabled={game.phase !== 'answering'}
@@ -180,7 +180,7 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
           />
         </View>
 
-        <View style={{ paddingTop: isCompact ? 10 : 14 }}>
+        <View style={{ paddingTop: isCompact ? 8 : 10 }}>
           <View className={`${isCompact ? 'px-4' : 'px-8'}`}>
             <Text
               className={`text-center font-medium ${isCompact ? 'text-[14px] leading-[22px]' : 'text-[16px] leading-[26px]'}`}
@@ -197,7 +197,7 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
           </View>
         </View>
 
-        <View className="items-center" style={{ paddingTop: isCompact ? 18 : 24 }}>
+        <View className="items-center" style={{ paddingTop: isCompact ? 10 : 16 }}>
           {game.isPaused ? (
             <Text className="mb-3 text-[14px] font-semibold" style={{ color: orderMemoryTheme.palette.primary }}>
               Paused

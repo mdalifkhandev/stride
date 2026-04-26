@@ -27,7 +27,7 @@ export function generateTargetSequence(items: OrderMemoryItem[], length: number)
     return [];
   }
 
-  return Array.from({ length }, () => items[Math.floor(Math.random() * items.length)]);
+  return shuffleItems(items).slice(0, Math.min(length, items.length));
 }
 
 export function generateAnswerPool(items: OrderMemoryItem[]) {

@@ -1,6 +1,5 @@
 import { Pressable, Text, View } from 'react-native';
 
-import { GardenIcon } from '@/game/components/GardenIcon';
 import { OrderMemoryItem, OrderMemoryTheme } from '@/order-memory/types';
 
 type AnswerOptionButtonProps = {
@@ -31,7 +30,6 @@ export function AnswerOptionButton({
       : 'rgba(195,198,214,0.2)';
   const shadowColor = isIncorrectSelection ? 'rgba(186,26,26,0.2)' : isSelected ? 'rgba(71,101,84,0.2)' : 'transparent';
   const labelColor = isIncorrectSelection ? '#93000A' : isSelected ? '#4B6958' : '#737785';
-  const iconColor = isIncorrectSelection ? '#BA1A1A' : isSelected ? theme.palette.secondary : '#475569';
 
   return (
     <Pressable
@@ -43,7 +41,7 @@ export function AnswerOptionButton({
         transform: [{ scale: pressed ? 0.98 : 1 }],
       })}>
       <View
-        className={`${compact ? 'min-h-[84px] rounded-[18px] px-2 py-2' : 'min-h-[104px] rounded-[20px] px-2 py-3'} items-center justify-center border-2`}
+        className={`${compact ? 'min-h-[58px] rounded-[16px] px-2 py-2' : 'min-h-[68px] rounded-[18px] px-2 py-2'} items-center justify-center border-2`}
         style={{
           backgroundColor,
           borderColor,
@@ -53,8 +51,7 @@ export function AnswerOptionButton({
           shadowOffset: { width: 0, height: 0 },
           elevation: 0,
         }}>
-        <GardenIcon color={iconColor} icon={item} size={compact ? 20 : 24} />
-        <Text className={`text-center font-semibold ${compact ? 'mt-1 text-[12px] leading-[14px]' : 'mt-2 text-[13px] leading-4'}`} style={{ color: labelColor }}>
+        <Text className={`text-center font-semibold ${compact ? 'text-[14px] leading-[18px]' : 'text-[15px] leading-5'}`} style={{ color: labelColor }}>
           {item.label}
         </Text>
         {selectedOrder ? (

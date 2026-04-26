@@ -1,13 +1,8 @@
-export type IconId =
-  | 'sunflower'
-  | 'rose'
-  | 'tulip'
-  | 'sprout'
-  | 'leaf'
-  | 'butterfly'
-  | 'bee'
-  | 'shovel'
-  | 'watering';
+import type { FC } from 'react';
+import type { SvgProps } from 'react-native-svg';
+
+export type IconId = string;
+export type IconStage = 'normal' | 'hard';
 
 export type GridCellStatus = 'idle' | 'hit' | 'miss';
 
@@ -15,7 +10,9 @@ export interface ThemeIcon {
   id: IconId;
   label: string;
   shortLabel: string;
-  iconName: string;
+  iconName?: string;
+  SvgIcon?: FC<SvgProps>;
+  stage?: IconStage;
   accent: string;
 }
 

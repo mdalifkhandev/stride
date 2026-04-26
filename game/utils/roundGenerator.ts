@@ -1,5 +1,7 @@
 import { GridCell, IconId, RoundDefinition, ThemeConfig } from '@/game/types';
 
+const HARD_ICON_START_ROUND = 10;
+
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -62,13 +64,21 @@ function createGridCells(iconIds: IconId[]) {
   }));
 }
 
+function getRoundIconIds(theme: ThemeConfig, roundId: number) {
+  const targetStage = roundId >= HARD_ICON_START_ROUND ? 'hard' : 'normal';
+  const stagedIcons = theme.icons.filter((icon) => icon.stage === targetStage);
+  const sourceIcons = stagedIcons.length > 0 ? stagedIcons : theme.icons;
+
+  return sourceIcons.map((icon) => icon.id);
+}
+
 export function countTargetCells(grid: GridCell[], targetIds: IconId[]) {
   return grid.filter((cell) => targetIds.includes(cell.iconId)).length;
 }
 
 export function generateRound(theme: ThemeConfig, roundId: number): RoundDefinition {
   const difficulty = getDifficultyProfile(theme, roundId);
-  const iconIds = theme.icons.map((icon) => icon.id);
+  const iconIds = getRoundIconIds(theme, roundId);
   const targetIds = shuffle(iconIds).slice(0, difficulty.targetCount);
   const guaranteedTargets = targetIds.flatMap((iconId) =>
     Array.from(

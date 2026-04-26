@@ -1,4 +1,5 @@
-import { Text, View } from 'react-native';
+import { Animated, Text, useWindowDimensions, View } from 'react-native';
+import { useEffect, useRef } from 'react';
 
 import { GardenIcon } from '@/game/components/GardenIcon';
 import { OrderMemoryItem, OrderMemoryTheme } from '@/order-memory/types';
@@ -20,13 +21,35 @@ export function MemorySequenceDisplay({
   sequenceLength,
   theme,
 }: MemorySequenceDisplayProps) {
-  const shellPadding = compact ? 'px-6 py-8' : 'px-10 py-[72px]';
-  const iconBox = compact ? 56 : 72;
-  const iconSize = compact ? 52 : 68;
-  const placeholderRadius = compact ? 18 : 24;
-  const messageClass = compact ? 'mt-5 text-[17px] leading-6' : 'mt-8 text-[20px] leading-7';
+  const { width } = useWindowDimensions();
+  const slideProgress = useRef(new Animated.Value(0)).current;
+  const shellPadding = compact ? 'px-5 py-5' : 'px-8 py-6';
+  const iconBox = compact ? 44 : 52;
+  const iconSize = compact ? 40 : 48;
+  const placeholderRadius = compact ? 16 : 18;
+  const messageClass = compact ? 'mt-3 text-[15px] leading-5' : 'mt-4 text-[17px] leading-6';
   const dotsGap = compact ? 'gap-2' : 'gap-3';
-  const dotsMargin = compact ? 'mt-5' : 'mt-8';
+  const dotsMargin = compact ? 'mt-3' : 'mt-4';
+  const slideDistance = Math.min(Math.max(width - 120, 160), compact ? 220 : 280);
+
+  useEffect(() => {
+    if (!currentItem) {
+      slideProgress.setValue(0);
+      return;
+    }
+
+    slideProgress.setValue(0);
+    Animated.timing(slideProgress, {
+      toValue: 1,
+      duration: 1200,
+      useNativeDriver: true,
+    }).start();
+  }, [currentItem, currentStep, slideProgress]);
+
+  const iconTranslateX = slideProgress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-slideDistance / 2, slideDistance / 2],
+  });
 
   return (
     <View
@@ -40,9 +63,11 @@ export function MemorySequenceDisplay({
         shadowOffset: { width: 0, height: 1 },
         elevation: 2,
       }}>
-      <View className="items-center justify-center" style={{ width: iconBox, height: iconBox }}>
+      <View className="items-center justify-center overflow-hidden" style={{ width: '100%', height: iconBox }}>
         {currentItem ? (
-          <GardenIcon color={theme.palette.secondary} icon={currentItem} size={iconSize} />
+          <Animated.View style={{ transform: [{ translateX: iconTranslateX }] }}>
+            <GardenIcon color={theme.palette.secondary} icon={currentItem} size={iconSize} />
+          </Animated.View>
         ) : (
           <View
             className="items-center justify-center"

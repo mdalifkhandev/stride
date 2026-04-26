@@ -23,20 +23,21 @@ export function AnswerGrid({
   theme,
 }: AnswerGridProps) {
   const filledItems = [...items];
+  const gridItemCount = 8;
 
-  if (filledItems.length < 9) {
+  if (filledItems.length < gridItemCount) {
     const existingIds = new Set(filledItems.map((item) => item.id));
     const missingItems = theme.items.filter((item) => !existingIds.has(item.id));
-    filledItems.push(...missingItems.slice(0, 9 - filledItems.length));
+    filledItems.push(...missingItems.slice(0, gridItemCount - filledItems.length));
   }
 
   return (
     <View className={`flex-row flex-wrap justify-between ${compact ? 'gap-y-3 pt-2' : 'gap-y-4 pt-4'}`}>
-      {filledItems.slice(0, 9).map((item) => {
+      {filledItems.slice(0, gridItemCount).map((item) => {
         const selectedIndex = selectedAnswers.findIndex((selectedItem) => selectedItem.id === item.id);
 
         return (
-          <View key={item.id} className="w-[31%]">
+          <View key={item.id} className="w-[48%]">
             <AnswerOptionButton
               compact={compact}
               disabled={disabled}
