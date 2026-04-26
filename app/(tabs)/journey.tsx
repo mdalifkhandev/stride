@@ -307,16 +307,16 @@ function CompletedStageCard({
         pointerEvents="none"
         style={{
           position: "absolute",
-          left: `${((stage.x + 50) / 390) * 100}%`,
-          top: `${((stage.y - 42) / height) * 100}%`,
-          width: `${(126 / 390) * 100}%`,
-          height: `${(82 / height) * 100}%`,
+          left: `${((stage.x - 52) / 390) * 100}%`,
+          top: `${((stage.y - 54) / height) * 100}%`,
+          width: `${(232 / 390) * 100}%`,
+          height: `${(108 / height) * 100}%`,
           borderRadius: 14,
           borderWidth: 1,
           borderColor: "#E5EAF1",
           backgroundColor: "#FFFFFF",
           justifyContent: "center",
-          paddingLeft: 10,
+          paddingLeft: 112,
           shadowColor: "#91A4BE",
           shadowOpacity: 0.18,
           shadowRadius: 8,
@@ -433,10 +433,20 @@ function StageMap({
               transform: [{ rotate: "14deg" }, { scaleX: -1 }],
             }}
           >
-            <OtterStageIcon width={280} height={180} />
+            <OtterStageIcon width={300} height={200} />
           </View>
         </View>
       )}
+
+      {stages
+        .filter((stage) => stage.status === "completed")
+        .map((stage) => (
+          <CompletedStageCard
+            key={`${stage.id}-completed`}
+            stage={stage}
+            height={height}
+          />
+        ))}
 
       <Svg width="100%" height="100%" viewBox={`0 0 390 ${height}`}>
         <Defs />
@@ -467,16 +477,6 @@ function StageMap({
           <StageCircle key={stage.id} stage={stage} />
         ))}
       </Svg>
-
-      {stages
-        .filter((stage) => stage.status === "completed")
-        .map((stage) => (
-          <CompletedStageCard
-            key={`${stage.id}-completed`}
-            stage={stage}
-            height={height}
-          />
-        ))}
 
       {stages.map((stage) => {
         const size = stage.status === "active" ? activeStageSize : stageSize;
