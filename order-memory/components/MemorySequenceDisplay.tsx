@@ -1,4 +1,4 @@
-import { Animated, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, Easing, Text, useWindowDimensions, View } from 'react-native';
 import { useEffect, useRef } from 'react';
 
 import { GardenIcon } from '@/game/components/GardenIcon';
@@ -30,7 +30,7 @@ export function MemorySequenceDisplay({
   const messageClass = compact ? 'mt-3 text-[15px] leading-5' : 'mt-4 text-[17px] leading-6';
   const dotsGap = compact ? 'gap-2' : 'gap-3';
   const dotsMargin = compact ? 'mt-3' : 'mt-4';
-  const slideDistance = Math.min(Math.max(width - 120, 160), compact ? 220 : 280);
+  const slideDistance = Math.min(Math.max(width - 72, 240), compact ? 340 : 380);
 
   useEffect(() => {
     if (!currentItem) {
@@ -41,7 +41,8 @@ export function MemorySequenceDisplay({
     slideProgress.setValue(0);
     Animated.timing(slideProgress, {
       toValue: 1,
-      duration: 1200,
+      duration: 2200,
+      easing: Easing.inOut(Easing.cubic),
       useNativeDriver: true,
     }).start();
   }, [currentItem, currentStep, slideProgress]);
@@ -49,6 +50,10 @@ export function MemorySequenceDisplay({
   const iconTranslateX = slideProgress.interpolate({
     inputRange: [0, 1],
     outputRange: [-slideDistance / 2, slideDistance / 2],
+  });
+  const iconOpacity = slideProgress.interpolate({
+    inputRange: [0, 0.12, 0.88, 1],
+    outputRange: [0, 1, 1, 0],
   });
 
   return (
@@ -65,7 +70,7 @@ export function MemorySequenceDisplay({
       }}>
       <View className="items-center justify-center overflow-hidden" style={{ width: '100%', height: iconBox }}>
         {currentItem ? (
-          <Animated.View style={{ transform: [{ translateX: iconTranslateX }] }}>
+          <Animated.View style={{ opacity: iconOpacity, transform: [{ translateX: iconTranslateX }] }}>
             <GardenIcon color={theme.palette.secondary} icon={currentItem} size={iconSize} />
           </Animated.View>
         ) : (
