@@ -4,10 +4,7 @@ import { Href, useRouter } from "expo-router";
 import { Text, View } from "react-native";
 
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
-import {
-  AuthBackButton,
-  AuthScaffold,
-} from "../../../../components/auth/login/AuthScaffold";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { colors, spacing, textStyles } from "../../../../theme";

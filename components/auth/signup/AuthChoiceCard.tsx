@@ -1,11 +1,7 @@
 import { Pressable, Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import { colors, spacing, textStyles } from "../../../theme";
+
+import { colors, spacing, textStyles, typography } from "../../../theme";
 
 type AuthChoiceCardProps = {
   title: string;
@@ -20,7 +16,6 @@ export function AuthChoiceCard({
   selected = false,
   onPress,
 }: AuthChoiceCardProps) {
-  useTextScale();
   const hasDescription = Boolean(description && description.trim().length > 0);
 
   return (
@@ -70,8 +65,7 @@ export function AuthChoiceCard({
           style={[
             textStyles.labelLarge,
             {
-              fontSize: scaleTextSize(20),
-              lineHeight: scaleLineHeight(30),
+              ...typography.headline.h3,
               fontWeight: "700",
             },
           ]}
@@ -83,8 +77,7 @@ export function AuthChoiceCard({
             style={[
               textStyles.captionXL,
               {
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(24),
+                ...typography.title.t2,
                 color: colors.text.secondary,
               },
             ]}
@@ -96,3 +89,4 @@ export function AuthChoiceCard({
     </Pressable>
   );
 }
+

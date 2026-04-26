@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Href, useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
-import { useTextScale } from "../../../../components/accessibility/TextScaleContext";
+
 import { ScrollMeasurePicker } from "../../../../components/auth/signup/ScrollMeasurePicker";
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { UnitToggle } from "../../../../components/auth/signup/UnitToggle";
@@ -134,7 +134,6 @@ const METER_DECIMALS = [
 ] as const;
 
 export default function SignupHeightScreen() {
-  useTextScale();
   const router = useRouter();
   const weightRoute = "/screens/auth/myself/weight" as Href;
   const [unit, setUnit] = useState<"Ft" | "Meter">("Ft");

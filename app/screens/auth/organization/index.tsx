@@ -3,15 +3,8 @@ import { useMemo, useState } from "react";
 import { Href, useRouter } from "expo-router";
 import { View } from "react-native";
 
-import {
-  CaregiverQuestionLayout,
-  CaregiverQuestionOptionCard,
-  CaregiverQuestionSection,
-} from "../../../../components/auth/caregiver";
-import {
-  organizationServiceOptions,
-  organizationServiceTypes,
-} from "../../../../components/auth/organization";
+import { CaregiverQuestionLayout, CaregiverQuestionOptionCard, CaregiverQuestionSection } from "../../../../components/auth/caregiver";
+import { organizationServiceOptions, organizationServiceTypes } from "../../../../components/auth/organization";
 import { caregiverQuestionStyles } from "../../../../theme";
 
 export default function OrganizationIndexScreen() {

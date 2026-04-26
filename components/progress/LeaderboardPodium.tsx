@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import type { ImageSourcePropType } from "react-native";
 import { Image, Text, View } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type BadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 
@@ -83,9 +81,7 @@ function PodiumColumn({ item }: { item: PodiumItem }) {
       >
         <Text
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(16),
-            lineHeight: scaleLineHeight(24),
+            ...typography.body.large,
             color: item.chipText,
           }}
         >
@@ -103,9 +99,7 @@ function PodiumColumn({ item }: { item: PodiumItem }) {
       >
         <Text
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(24),
-            lineHeight: scaleLineHeight(30),
+            ...typography.headline.h2,
             color: "#0B4A98",
           }}
         >
@@ -122,9 +116,7 @@ export function LeaderboardPodium({ items }: LeaderboardPodiumProps) {
     <View className="mt-7">
       <Text
         style={{
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(18),
-          lineHeight: scaleLineHeight(27),
+          ...typography.title.t2,
           color: "#252B36",
         }}
       >
@@ -133,13 +125,11 @@ export function LeaderboardPodium({ items }: LeaderboardPodiumProps) {
       <Text
         style={{
           marginTop: 20,
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(17),
-          lineHeight: scaleLineHeight(28),
+          ...typography.body.large, // nearest to 17
           color: "#6E6E6E",
         }}
       >
-        You're building healthy habits! See{"\n"}how you rank this week
+        You&apos;re building healthy habits! See{"\n"}how you rank this week
       </Text>
 
       <View
@@ -158,3 +148,4 @@ export function LeaderboardPodium({ items }: LeaderboardPodiumProps) {
     </View>
   );
 }
+

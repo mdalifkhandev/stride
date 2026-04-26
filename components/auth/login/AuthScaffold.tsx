@@ -1,9 +1,4 @@
-import {
-  useEffect,
-  useState,
-  type PropsWithChildren,
-  type ReactNode,
-} from "react";
+import { useEffect, useState, type PropsWithChildren, type ReactNode } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";

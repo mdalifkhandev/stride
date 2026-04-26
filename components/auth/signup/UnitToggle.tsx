@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 
-import { useTextScale } from "../../accessibility/TextScaleContext";
+
 import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type UnitToggleProps<T extends string> = {
@@ -14,8 +14,6 @@ export function UnitToggle<T extends string>({
   value,
   onChange,
 }: UnitToggleProps<T>) {
-  useTextScale();
-
   return (
     <View
       style={{

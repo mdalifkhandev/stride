@@ -12,7 +12,7 @@ import GrowthIcon from "../../../assets/images/home-grow-tree.svg";
 import OrderMemoryIcon from "../../../assets/images/home-order-mony-tab.svg";
 import SymbolTapIcon from "../../../assets/images/home-symble-tab.svg";
 import TrendUpIcon from "../../../assets/images/home-trade-up.svg";
-import { useTextScale } from "../../../components/accessibility/TextScaleContext";
+
 import { HomeBrainGameCard } from "../../../components/home/HomeBrainGameCard";
 import { HomeFeatureCard } from "../../../components/home/HomeFeatureCard";
 import { HomeGreeting } from "../../../components/home/HomeGreeting";
@@ -21,16 +21,13 @@ import { HomeSectionHeader } from "../../../components/home/HomeSectionHeader";
 import { HomeStridePopup } from "../../../components/home/HomeStridePopup";
 
 export default function HomeScreen() {
-  const { textScale } = useTextScale();
   const [showStridePopup, setShowStridePopup] = useState(false);
   const openGame = (tab: "symbol" | "order" | "time") => {
     router.push(`/home/games?tab=${tab}` as Href);
   };
 
   return (
-    <LinearGradient
-      key={textScale}
-      colors={[
+    <LinearGradient colors={[
         "rgba(0, 82, 173, 0.20)",
         "rgba(255, 255, 255, 0.20)",
         "#F8F9FC",

@@ -1,10 +1,8 @@
+import { typography } from "@/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type JourneyTimelineCardProps = {
   activityDays: number;
@@ -40,9 +38,7 @@ export function JourneyTimelineCard({
       <Text
         style={{
           color: "#666A72",
-          fontFamily: "Inter-SemiBold",
-          fontSize: scaleTextSize(18),
-          lineHeight: scaleLineHeight(27),
+          ...typography.title.t2,
         }}
       >
         Your Journey
@@ -97,9 +93,7 @@ export function JourneyTimelineCard({
                 style={{
                   marginTop: 8,
                   color: textColor,
-                  fontFamily: isReached || isCurrent ? "Inter-SemiBold" : "Inter-Regular",
-                  fontSize: scaleTextSize(14),
-                  lineHeight: scaleLineHeight(21),
+                  ...typography.body.small,
                 }}
               >
                 {step.day} days
@@ -128,3 +122,5 @@ export function JourneyTimelineCard({
     </View>
   );
 }
+
+

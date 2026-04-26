@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import { Text, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type ProgressGaugeCardProps = {
   score: number;
@@ -64,14 +62,12 @@ export function ProgressGaugeCard({
           <View className="absolute bottom-[10px] items-center">
             <Text
               style={{
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(24),
+                ...typography.title.t2,
                 color: "#145CB4",
               }}
             >
-              <Text style={{ fontSize: scaleTextSize(20) }}>{score}</Text>
-              <Text style={{ color: "#6E6E6E", fontSize: scaleTextSize(18) }}>
+              <Text style={{ ...typography.label.large }}>{score}</Text>
+              <Text style={{ ...typography.title.t2, color: "#6E6E6E" }}>
                 {" "}
                 pt
               </Text>
@@ -82,14 +78,12 @@ export function ProgressGaugeCard({
         <View className="mt-2 rounded-full bg-[#E7F0FB] px-5 py-3">
           <Text
             style={{
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(16),
-              lineHeight: scaleLineHeight(24),
+              ...typography.body.large,
               color: "#4A4F57",
             }}
           >
             Only{" "}
-            <Text style={{ color: "#24262B", fontSize: scaleTextSize(16) }}>
+            <Text style={{ ...typography.body.large, color: "#24262B" }}>
               {maxScore - score}pt
             </Text>{" "}
             to your next stage!
@@ -99,3 +93,5 @@ export function ProgressGaugeCard({
     </View>
   );
 }
+
+

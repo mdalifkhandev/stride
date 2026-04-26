@@ -1,16 +1,6 @@
 import { StyleSheet, type TextStyle, type ViewStyle } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../components/accessibility/TextScaleContext";
 
-import {
-  appBorderRadius,
-  appBorderWidth,
-  appIconSize,
-  appLayout,
-  appSpacing,
-} from "./tokens/premetive";
+import { appBorderRadius, appBorderWidth, appIconSize, appLayout, appSpacing } from "./tokens/premetive";
 import { semanticColors, Typography } from "./tokens/semantic";
 
 export * from "./tokens/premetive";
@@ -158,16 +148,6 @@ function makeScaledTextStyle(
   return {
     ...base,
     color,
-    fontSize:
-      typeof base.fontSize === "number" ? scaleTextSize(base.fontSize) : undefined,
-    lineHeight:
-      typeof base.lineHeight === "number"
-        ? scaleLineHeight(base.lineHeight)
-        : undefined,
-    letterSpacing:
-      typeof base.letterSpacing === "number"
-        ? scaleTextSize(base.letterSpacing)
-        : base.letterSpacing,
   };
 }
 

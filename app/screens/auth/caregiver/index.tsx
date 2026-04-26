@@ -4,19 +4,14 @@ import { Href, useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
 import Logo from "../../../../assets/images/logo.svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../../../components/accessibility/TextScaleContext";
+
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, radius, spacing, textStyles } from "../../../../theme";
+import { colors, radius, spacing, textStyles, typography } from "../../../../theme";
 
 type CaregiverChoice = "yes" | "no" | null;
 
 export default function CaregiverIntroScreen() {
-  useTextScale();
   const router = useRouter();
   const detailsRoute = "/screens/auth/caregiver/details" as Href;
   const questionsRoute = "/screens/auth/caregiver/questions/1" as Href;
@@ -74,8 +69,7 @@ export default function CaregiverIntroScreen() {
                   {
                     color: colors.text.action,
                     fontWeight: "700",
-                    fontSize: 18,
-                    lineHeight: scaleLineHeight(30),
+                    ...typography.title.t2,
                     textAlign: "center",
                   },
                 ]}
@@ -95,8 +89,7 @@ export default function CaregiverIntroScreen() {
                 {
                   color: colors.text.primary,
                   fontWeight: "700",
-                  fontSize: scaleTextSize(24),
-                  lineHeight: scaleLineHeight(36),
+                  ...typography.headline.h2,
                 },
               ]}
             >
@@ -137,3 +130,4 @@ export default function CaregiverIntroScreen() {
     </AppScreen>
   );
 }
+

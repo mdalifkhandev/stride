@@ -2,7 +2,7 @@ import { createRef } from "react";
 
 import { TextInput, View } from "react-native";
 
-import { useTextScale } from "../../accessibility/TextScaleContext";
+
 import { colors, radius, spacing, textStyles } from "../../../theme";
 
 type VerificationCodeProps = {
@@ -11,7 +11,6 @@ type VerificationCodeProps = {
 };
 
 export function VerificationCode({ code, onChange }: VerificationCodeProps) {
-  useTextScale();
   const refs = code.map(() => createRef<TextInput>());
 
   const handleChange = (value: string, index: number) => {

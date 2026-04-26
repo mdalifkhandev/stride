@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Href, useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
-import { useTextScale } from "../../../../components/accessibility/TextScaleContext";
+
 import { ScrollMeasurePicker } from "../../../../components/auth/signup/ScrollMeasurePicker";
 import { SignupProgressHeader } from "../../../../components/auth/signup/SignupProgressHeader";
 import { UnitToggle } from "../../../../components/auth/signup/UnitToggle";
@@ -19,7 +19,6 @@ const WEIGHT_DECIMALS = Array.from({ length: 100 }, (_, index) =>
 );
 
 export default function SignupWeightScreen() {
-  useTextScale();
   const router = useRouter();
   const successRoute = "/screens/auth/myself/success" as Href;
   const [unit, setUnit] = useState<"Pounds" | "Kg">("Kg");

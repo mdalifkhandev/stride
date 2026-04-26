@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 const bars = [
   { day: "Sun", value: 0.42 },
@@ -21,9 +19,7 @@ export function ProgressStatusCard() {
       <View className="flex-row items-center justify-between">
         <Text
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
             color: "#252B36",
           }}
         >
@@ -32,9 +28,7 @@ export function ProgressStatusCard() {
         <View className="flex-row items-center gap-1">
           <Text
             style={{
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(16),
-              lineHeight: scaleLineHeight(24),
+              ...typography.body.large,
               color: "#2B6FD6",
             }}
           >
@@ -56,9 +50,7 @@ export function ProgressStatusCard() {
             <Text
               style={{
                 marginTop: 8,
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(14),
-                lineHeight: scaleLineHeight(21),
+                ...typography.body.small,
                 color: "#6E6E6E",
               }}
             >
@@ -70,3 +62,5 @@ export function ProgressStatusCard() {
     </View>
   );
 }
+
+

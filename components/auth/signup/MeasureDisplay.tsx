@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-import { colors, radius, spacing, textStyles } from "../../../theme";
+import { colors, radius, spacing, textStyles, typography } from "../../../theme";
 
 type MeasureDisplayProps = {
   left: string;
@@ -41,8 +41,7 @@ export function MeasureDisplay({
           { color: colors.text.secondary, fontWeight: "700" },
           selected && {
             color: colors.text.action,
-            fontSize: 20,
-            lineHeight: 28,
+            ...typography.headline.h3,
           },
         ]}
       >
@@ -55,8 +54,7 @@ export function MeasureDisplay({
           { color: colors.text.secondary, fontWeight: "700" },
           selected && {
             color: colors.text.action,
-            fontSize: 20,
-            lineHeight: 28,
+            ...typography.headline.h3,
           },
         ]}
       >
@@ -65,3 +63,4 @@ export function MeasureDisplay({
     </View>
   );
 }
+

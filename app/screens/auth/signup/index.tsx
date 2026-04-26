@@ -3,21 +3,16 @@ import { useState } from "react";
 import { Href, useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../../../components/accessibility/TextScaleContext";
+
 import { AuthChoiceCard } from "../../../../components/auth/signup/AuthChoiceCard";
 import { SignupChoiceHeader } from "../../../../components/auth/signup/SignupChoiceHeader";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { AppScreen } from "../../../../components/ui/AppScreen";
-import { colors, spacing, textStyles } from "../../../../theme";
+import { colors, spacing, textStyles, typography } from "../../../../theme";
 
 type Choice = "myself" | "caregiver" | "organization" | null;
 
 export default function SignupIndex() {
-  useTextScale();
   const router = useRouter();
   const [choice, setChoice] = useState<Choice>(null);
   const [showWarning, setShowWarning] = useState(false);
@@ -120,8 +115,7 @@ export default function SignupIndex() {
                     textStyles.captionLarge,
                     {
                       color: colors.text.warning,
-                      fontSize: scaleTextSize(14),
-                      lineHeight: scaleLineHeight(21),
+                      ...typography.body.small,
                     },
                   ]}
                 >
@@ -142,8 +136,7 @@ export default function SignupIndex() {
                   textStyles.captionLarge,
                   {
                     color: colors.text.secondary,
-                    fontSize: scaleTextSize(14),
-                    lineHeight: scaleLineHeight(21),
+                    ...typography.body.small,
                   },
                 ]}
               >
@@ -156,8 +149,7 @@ export default function SignupIndex() {
                     {
                       color: colors.text.action,
                       textDecorationLine: "underline",
-                      fontSize: scaleTextSize(14),
-                      lineHeight: scaleLineHeight(21),
+                      ...typography.body.small,
                     },
                   ]}
                 >
@@ -171,3 +163,4 @@ export default function SignupIndex() {
     </AppScreen>
   );
 }
+

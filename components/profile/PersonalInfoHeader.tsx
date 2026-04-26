@@ -18,9 +18,10 @@ export function PersonalInfoHeader({
       >
         <Ionicons name="chevron-back" size={22} color="#292D32" />
       </Pressable>
-      <Text className="font-['Inter-SemiBold'] text-[22px] text-[#252B36]">
+      <Text className=" text-[22px] text-[#252B36]">
         {title}
       </Text>
     </View>
   );
 }
+

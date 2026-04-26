@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import type { ReactNode } from "react";
 import { Image, type ImageSourcePropType, Text, View } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type LeaderboardListItemProps = {
   name: string;
@@ -45,9 +43,7 @@ export function LeaderboardListItem({
         style={{
           marginLeft: 24,
           flex: 1,
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(18),
-          lineHeight: scaleLineHeight(27),
+          ...typography.title.t2,
           color: "#252B36",
         }}
       >
@@ -56,18 +52,14 @@ export function LeaderboardListItem({
 
       <Text
         style={{
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(18),
-          lineHeight: scaleLineHeight(27),
+          ...typography.title.t2,
           color: "#252B36",
         }}
       >
         {points}{" "}
         <Text
           style={{
-            fontFamily: "Inter-Medium",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
             color: "#252B36",
           }}
         >
@@ -77,3 +69,5 @@ export function LeaderboardListItem({
     </View>
   );
 }
+
+

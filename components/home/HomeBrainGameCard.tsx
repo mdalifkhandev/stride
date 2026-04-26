@@ -1,11 +1,9 @@
+import { typography } from "@/theme";
 import { ReactNode } from "react";
 
 import { Pressable, Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type HomeBrainGameCardProps = {
   title: string;
@@ -50,9 +48,7 @@ export function HomeBrainGameCard({
           style={{
             flex: 1,
             color: "#0052AD",
-            fontFamily: "Inter-SemiBold",
-            fontSize: scaleTextSize(20),
-            lineHeight: scaleLineHeight(30),
+            ...typography.headline.h3,
           }}
         >
           {title}
@@ -61,3 +57,5 @@ export function HomeBrainGameCard({
     </Pressable>
   );
 }
+
+

@@ -1,11 +1,9 @@
+import { typography } from "@/theme";
 import { useState } from "react";
 
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 const months = [
   "January",
@@ -36,9 +34,7 @@ export function ProgressActivityCard() {
       <View className="flex-row items-center justify-between">
         <Text
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
             color: "#252B36",
           }}
         >
@@ -51,9 +47,7 @@ export function ProgressActivityCard() {
           >
             <Text
               style={{
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(16),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large,
                 color: "#2B6FD6",
               }}
             >
@@ -105,9 +99,7 @@ export function ProgressActivityCard() {
                     >
                       <Text
                         style={{
-                          fontFamily: selected ? "Inter-SemiBold" : "Inter-Regular",
-                          fontSize: scaleTextSize(14),
-                          lineHeight: scaleLineHeight(21),
+                          ...typography.body.small,
                           color: selected ? "#145CB4" : "#4F555F",
                         }}
                       >
@@ -129,9 +121,7 @@ export function ProgressActivityCard() {
           <View className="flex-row items-start justify-between">
             <Text
               style={{
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(30),
+                ...typography.title.t2,
                 color: "#252B36",
               }}
             >
@@ -149,9 +139,7 @@ export function ProgressActivityCard() {
           <View className="flex-row items-start justify-between">
             <Text
               style={{
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(30),
+                ...typography.title.t2,
                 color: "#252B36",
               }}
             >
@@ -170,9 +158,7 @@ export function ProgressActivityCard() {
         <View className="flex-row items-center justify-between">
           <Text
             style={{
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(18),
-              lineHeight: scaleLineHeight(27),
+              ...typography.title.t2,
               color: "#252B36",
             }}
           >
@@ -180,9 +166,7 @@ export function ProgressActivityCard() {
           </Text>
           <Text
             style={{
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(18),
-              lineHeight: scaleLineHeight(27),
+              ...typography.title.t2,
               color: "#145CB4",
             }}
           >
@@ -198,9 +182,7 @@ export function ProgressActivityCard() {
           style={{
             marginTop: 12,
             textAlign: "center",
-            fontFamily: "Inter-Medium",
-            fontSize: scaleTextSize(16),
-            lineHeight: scaleLineHeight(24),
+            ...typography.body.large,
             color: "#4F555F",
           }}
         >
@@ -210,3 +192,5 @@ export function ProgressActivityCard() {
     </View>
   );
 }
+
+

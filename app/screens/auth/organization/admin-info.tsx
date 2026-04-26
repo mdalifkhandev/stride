@@ -3,10 +3,7 @@ import { useState } from "react";
 import { Href, useRouter } from "expo-router";
 
 import { CaregiverQuestionLayout, CaregiverQuestionSection } from "../../../../components/auth/caregiver";
-import {
-  OrganizationSelectField,
-  organizationGenderOptions,
-} from "../../../../components/auth/organization";
+import { OrganizationSelectField, organizationGenderOptions } from "../../../../components/auth/organization";
 import { SignupField } from "../../../../components/auth/signup/SignupField";
 
 export default function OrganizationAdminInfoScreen() {

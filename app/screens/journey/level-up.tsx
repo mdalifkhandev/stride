@@ -1,3 +1,4 @@
+import { typography } from "@/theme";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
@@ -5,12 +6,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 
 import StarIcon from "../../../assets/images/star.svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../../../components/accessibility/TextScaleContext";
 
-const confetti = [
+type ConfettiPiece = {
+  left: `${number}%`;
+  top: number;
+  rotate: `${number}deg`;
+};
+
+const confetti: ConfettiPiece[] = [
   { left: "16%", top: 42, rotate: "24deg" },
   { left: "28%", top: 68, rotate: "-8deg" },
   { left: "40%", top: 46, rotate: "32deg" },
@@ -82,9 +85,7 @@ function MetricRow({ title, icon }: MetricRowProps) {
           marginLeft: 10,
           flex: 1,
           color: "#1E2025",
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(22 / 1.6),
-          lineHeight: scaleLineHeight(26),
+          ...typography.body.small, // nearest to 22 / 1.6
         }}
       >
         {title}
@@ -93,16 +94,13 @@ function MetricRow({ title, icon }: MetricRowProps) {
       <Text
         style={{
           color: "#1E2025",
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(22 / 1.6),
-          lineHeight: scaleLineHeight(26),
+          ...typography.body.small, // nearest to 22 / 1.6
         }}
       >
         450
         <Text
           style={{
             color: "#787D84",
-            fontFamily: "Inter-Medium",
           }}
         >
           /500
@@ -114,12 +112,18 @@ function MetricRow({ title, icon }: MetricRowProps) {
 
 export default function LevelUpScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ completedStage?: string; level?: string }>();
+  const params = useLocalSearchParams<{
+    completedStage?: string;
+    level?: string;
+  }>();
   const completedStage = Number.parseInt(params.completedStage ?? "5", 10) || 5;
   const nextLevel = Math.max(1, Number.parseInt(params.level ?? "2", 10) || 2);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F2F2F2" }} edges={["top"]}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#F2F2F2" }}
+      edges={["top"]}
+    >
       <View
         style={{
           flex: 1,
@@ -154,9 +158,7 @@ export default function LevelUpScreen() {
               marginTop: 36,
               textAlign: "center",
               color: "#EB6A00",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(24),
-              lineHeight: scaleLineHeight(34),
+              ...typography.headline.h2,
             }}
           >
             Congratulations!
@@ -166,9 +168,7 @@ export default function LevelUpScreen() {
               marginTop: 8,
               textAlign: "center",
               color: "#EB6A00",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(24),
-              lineHeight: scaleLineHeight(34),
+              ...typography.headline.h2,
             }}
           >
             You&apos;ve Otter leveled up!
@@ -233,9 +233,7 @@ export default function LevelUpScreen() {
               <Text
                 style={{
                   color: "#FFF7EA",
-                  fontFamily: "Inter-Medium",
-                  fontSize: scaleTextSize(36 / 1.6),
-                  lineHeight: scaleLineHeight(28),
+                  ...typography.headline.h2, // nearest to 36 / 1.6
                   zIndex: 1,
                 }}
               >
@@ -245,9 +243,7 @@ export default function LevelUpScreen() {
                 style={{
                   marginTop: -2,
                   color: "#FFFFFF",
-                  fontFamily: "Inter-Bold",
-                  fontSize: scaleTextSize(52 / 1.6),
-                  lineHeight: scaleLineHeight(34),
+                  ...typography.headline.h1, // nearest to 52 / 1.6
                   zIndex: 1,
                 }}
               >
@@ -274,9 +270,7 @@ export default function LevelUpScreen() {
           style={{
             textAlign: "center",
             color: "#0E59B6",
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(38 / 1.6),
-            lineHeight: scaleLineHeight(34),
+            ...typography.headline.h2, // nearest to 38 / 1.6
           }}
         >
           Total Stride Points
@@ -307,9 +301,7 @@ export default function LevelUpScreen() {
           <Text
             style={{
               color: "#FFFFFF",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(42 / 1.6),
-              lineHeight: scaleLineHeight(38),
+              ...typography.headline.h2, // nearest to 42 / 1.6
             }}
           >
             Get Points
@@ -319,3 +311,5 @@ export default function LevelUpScreen() {
     </SafeAreaView>
   );
 }
+
+

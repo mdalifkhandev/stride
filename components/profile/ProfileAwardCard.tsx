@@ -1,5 +1,7 @@
+
 import { Text, View } from "react-native";
-import { useTextScale } from "../accessibility/TextScaleContext";
+import { typography } from "@/theme";
+
 
 type AwardBadgeComponent = React.ComponentType<{
   width?: number;
@@ -27,7 +29,6 @@ export function ProfileAwardCard({
   awardAccent,
   activityDays,
 }: ProfileAwardCardProps) {
-  const { textScale } = useTextScale();
   const AwardBadge = awardBadge;
 
   return (
@@ -42,21 +43,19 @@ export function ProfileAwardCard({
         <View>
           <Text
             style={{
-              fontSize: 18 * textScale,
-              lineHeight: 34 * textScale,
+              ...typography.title.t2,
             }}
-            className="font-['Inter-Bold'] text-[#24262B]"
+            className=" text-[#24262B]"
           >
             {awardTitle}
           </Text>
         </View>
         <Text
           style={{
+            ...typography.title.t2,
             color: awardAccent,
-            fontSize: 18 * textScale,
-            lineHeight: 30 * textScale,
           }}
-          className="font-['Inter-Bold']"
+          className=""
         >
           Stride
         </Text>
@@ -68,27 +67,25 @@ export function ProfileAwardCard({
         <View className="w-[75%] pr-2">
           <Text
             style={{
-              fontSize: 20 * textScale,
-              lineHeight: 34 * textScale,
+              ...typography.headline.h3,
             }}
-            className="font-['Inter-Medium'] text-[#24262B]"
+            className=" text-[#24262B]"
           >
             Congratulation!
           </Text>
           <Text
             style={{
-              fontSize: 16 * textScale,
-              lineHeight: 40 * textScale,
+              ...typography.body.large,
             }}
-            className="mt-2 font-['Inter-Regular'] italic text-[#6F6C68]"
+            className="mt-2 italic text-[#6F6C68]"
           >
             Awarded for{" "}
             <Text
               style={{
+                ...typography.title.t2,
                 color: awardAccent,
-                fontSize: 18 * textScale,
               }}
-              className="font-['Inter-Bold'] not-italic"
+              className=" not-italic"
             >
               {activityDays} Days
             </Text>{" "}
@@ -106,3 +103,4 @@ export function ProfileAwardCard({
     </View>
   );
 }
+

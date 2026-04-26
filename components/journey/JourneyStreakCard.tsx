@@ -1,10 +1,8 @@
+import { typography } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type AwardBadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 
@@ -53,9 +51,7 @@ export function JourneyStreakCard({
           style={{
             marginLeft: 10,
             color: "#24262B",
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
             letterSpacing: 0.8,
             textTransform: "uppercase",
           }}
@@ -76,9 +72,7 @@ export function JourneyStreakCard({
           <Text
             style={{
               color: "#0052AD",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(60),
-              lineHeight: scaleLineHeight(64),
+              ...typography.headline.h1, // nearest to 60
             }}
           >
             {activityDays}
@@ -87,9 +81,7 @@ export function JourneyStreakCard({
             <Text
               style={{
                 color: "#0052AD",
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(20),
-                lineHeight: scaleLineHeight(24),
+                ...typography.headline.h3,
               }}
             >
               days
@@ -97,9 +89,7 @@ export function JourneyStreakCard({
             <Text
               style={{
                 color: "#0052AD",
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(16),
-                lineHeight: scaleLineHeight(20),
+                ...typography.body.large,
               }}
             >
               in a row!
@@ -144,9 +134,7 @@ export function JourneyStreakCard({
                 style={{
                   marginTop: 6,
                   color: "#0052AD",
-                  fontFamily: "Inter-SemiBold",
-                  fontSize: scaleTextSize(12),
-                  lineHeight: scaleLineHeight(18),
+                  ...typography.caption.small,
                 }}
               >
                 {label}
@@ -158,3 +146,5 @@ export function JourneyStreakCard({
     </View>
   );
 }
+
+

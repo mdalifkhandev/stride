@@ -1,8 +1,6 @@
+import { typography } from "@/theme";
 import { Pressable, Text, View } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type ProgressTabsProps = {
   activeTab: "progress" | "leaderboard";
@@ -26,9 +24,7 @@ export function ProgressTabs({ activeTab, onChange }: ProgressTabsProps) {
             >
               <Text
                 style={{
-                  fontFamily: "Inter-Bold",
-                  fontSize: scaleTextSize(16),
-                  lineHeight: scaleLineHeight(24),
+                  ...typography.body.large,
                   color: selected ? "#FFFFFF" : "#6E6E6E",
                 }}
               >
@@ -41,3 +37,5 @@ export function ProgressTabs({ activeTab, onChange }: ProgressTabsProps) {
     </View>
   );
 }
+
+

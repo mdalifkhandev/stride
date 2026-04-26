@@ -3,13 +3,7 @@ import { useMemo, useState } from "react";
 import { Href, useLocalSearchParams, useRouter } from "expo-router";
 import { View } from "react-native";
 
-import {
-  CaregiverQuestionLayout,
-  CaregiverQuestionOptionCard,
-  CaregiverQuestionSection,
-  CaregiverQuestionTextField,
-  caregiverQuestionScreens,
-} from "../../../../../components/auth/caregiver";
+import { CaregiverQuestionLayout, CaregiverQuestionOptionCard, CaregiverQuestionSection, CaregiverQuestionTextField, caregiverQuestionScreens } from "../../../../../components/auth/caregiver";
 import { caregiverQuestionStyles } from "../../../../../theme";
 
 export default function CaregiverQuestionStepScreen() {

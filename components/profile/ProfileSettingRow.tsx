@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
-import { useTextScale } from "../accessibility/TextScaleContext";
+import { typography } from "@/theme";
+
 
 type ProfileSettingRowProps = {
   title: string;
@@ -19,8 +20,6 @@ export function ProfileSettingRow({
   badgeText,
   onPress,
 }: ProfileSettingRowProps) {
-  const { textScale } = useTextScale();
-
   return (
     <Pressable
       onPress={onPress}
@@ -28,8 +27,8 @@ export function ProfileSettingRow({
     >
       <View className="flex-row items-center">
         <Text
-          style={{ fontSize: 17 * textScale }}
-          className="font-['Inter-Medium'] text-[#252B36]"
+          style={{ ...typography.button.small }} // nearest to 17
+          className=" text-[#252B36]"
         >
           {title}
         </Text>
@@ -43,10 +42,10 @@ export function ProfileSettingRow({
           >
             <Text
               style={{
+                ...typography.caption.small, // nearest to 10
                 color: badgeText ?? "#2B6FD6",
-                fontSize: 10 * textScale,
               }}
-              className="font-['Inter-SemiBold']"
+              className=""
             >
               {badge}
             </Text>
@@ -58,3 +57,4 @@ export function ProfileSettingRow({
     </Pressable>
   );
 }
+

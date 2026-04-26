@@ -1,11 +1,9 @@
+import { typography } from "@/theme";
 import { ReactNode } from "react";
 
 import { Pressable, Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type HomeMetricCardProps = {
   title: string;
@@ -57,9 +55,7 @@ export function HomeMetricCard({
           <Text
             style={{
               color: accentColor,
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(13),
-              lineHeight: scaleLineHeight(18),
+              ...typography.caption.small, // nearest to 13
               letterSpacing: 0.8,
               textTransform: "uppercase",
             }}
@@ -73,9 +69,7 @@ export function HomeMetricCard({
         <Text
           style={{
             color: accentColor,
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(32),
-            lineHeight: scaleLineHeight(38),
+            ...typography.headline.h1,
           }}
         >
           {value}
@@ -87,9 +81,7 @@ export function HomeMetricCard({
           <Text
             style={{
               color: accentColor,
-              fontFamily: "Inter-SemiBold",
-              fontSize: scaleTextSize(15),
-              lineHeight: scaleLineHeight(24),
+              ...typography.body.small, // nearest to 15
               marginBottom: 6,
             }}
           >
@@ -113,3 +105,5 @@ export function HomeMetricCard({
     </Pressable>
   );
 }
+
+

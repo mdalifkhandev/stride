@@ -5,10 +5,7 @@ import { KeyboardAvoidingView, Platform, View } from "react-native";
 
 import { AuthInputField } from "../../../../components/auth/login/AuthInputField";
 import { AuthPhoneHeader } from "../../../../components/auth/login/AuthPhoneHeader";
-import {
-  AuthBackButton,
-  AuthScaffold,
-} from "../../../../components/auth/login/AuthScaffold";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { spacing } from "../../../../theme";
 

@@ -1,12 +1,10 @@
+import { typography } from "@/theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, Pressable, Text, View } from "react-native";
 
 import FeatureTopLeftIcon from "../../assets/images/home-image-top-left.svg";
 import LevelIcon from "../../assets/images/home-lavel-icon.svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 const featuredImage = require("../../assets/images/home-feture-image.jpg");
 
@@ -76,9 +74,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
           <Text
             style={{
               color: "#FFFFFF",
-              fontFamily: "Inter-SemiBold",
-              fontSize: scaleTextSize(13),
-              lineHeight: scaleLineHeight(18),
+              ...typography.caption.small, // nearest to 13
             }}
           >
             2 Level
@@ -103,9 +99,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
           <Text
             style={{
               color: "#FFFFFF",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(18),
-              lineHeight: scaleLineHeight(27),
+              ...typography.title.t2,
             }}
           >
             Push Up
@@ -114,9 +108,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
             style={{
               marginTop: 4,
               color: "#EEF4FF",
-              fontFamily: "Inter-Regular",
-              fontSize: scaleTextSize(15),
-              lineHeight: scaleLineHeight(21),
+              ...typography.body.small, // nearest to 15
             }}
           >
             Let&apos;s Begin Stride - 2
@@ -140,9 +132,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
         <Text
           style={{
             color: "#0052AD",
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(16),
-            lineHeight: scaleLineHeight(24),
+            ...typography.body.large,
             letterSpacing: 0.4,
           }}
         >
@@ -152,3 +142,5 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
     </Pressable>
   );
 }
+
+

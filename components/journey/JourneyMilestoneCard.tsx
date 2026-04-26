@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import { Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type AwardBadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 
@@ -57,9 +55,7 @@ export function JourneyMilestoneCard({
         <Text
           style={{
             color: titleColor,
-            fontFamily: "Inter-SemiBold",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
           }}
         >
           {title}
@@ -67,9 +63,7 @@ export function JourneyMilestoneCard({
         <Text
           style={{
             color: brandColor,
-            fontFamily: "Inter-SemiBold",
-            fontSize: scaleTextSize(17),
-            lineHeight: scaleLineHeight(24),
+            ...typography.body.large, // nearest to 17
           }}
         >
           Stride
@@ -89,9 +83,7 @@ export function JourneyMilestoneCard({
               <Text
                 style={{
                   color: "#24262B",
-                  fontFamily: "Inter-Medium",
-                  fontSize: scaleTextSize(18),
-                  lineHeight: scaleLineHeight(32),
+                  ...typography.title.t2,
                 }}
               >
                 Congratulation!
@@ -100,9 +92,7 @@ export function JourneyMilestoneCard({
                 style={{
                   marginTop: 6,
                   color: bodyColor,
-                  fontFamily: "Inter-Regular",
-                  fontSize: scaleTextSize(16),
-                  lineHeight: scaleLineHeight(24),
+                  ...typography.body.large,
                   fontStyle: "italic",
                 }}
               >
@@ -110,7 +100,6 @@ export function JourneyMilestoneCard({
                 <Text
                   style={{
                     color: accentColor,
-                    fontFamily: "Inter-Bold",
                   }}
                 >
                   {day} Days
@@ -122,9 +111,7 @@ export function JourneyMilestoneCard({
             <Text
               style={{
                 color: bodyColor,
-                fontFamily: "Inter-Regular",
-                fontSize: scaleTextSize(16),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large,
                 fontStyle: "italic",
               }}
             >
@@ -142,3 +129,5 @@ export function JourneyMilestoneCard({
     </View>
   );
 }
+
+

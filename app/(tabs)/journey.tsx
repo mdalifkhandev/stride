@@ -1,3 +1,4 @@
+import { typography } from "@/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
@@ -13,11 +14,7 @@ import Svg, {
 } from "react-native-svg";
 
 import StarIcon from "../../assets/images/star.svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../components/accessibility/TextScaleContext";
+
 
 type StageNode = {
   id: string;
@@ -135,7 +132,7 @@ function LevelDivider({ label }: { label: string }) {
           y={24}
           fill="#0065C8"
           fontFamily="Inter-Bold"
-          fontSize={scaleTextSize(18)}
+          fontSize={18}
           textAnchor="middle"
         >
           {label}
@@ -225,7 +222,7 @@ function StageCircle({ stage }: { stage: StageNode }) {
             y={stage.y - radius - 15}
             fill="#0058B9"
             fontFamily="Inter-Regular"
-            fontSize={scaleTextSize(8.5)}
+            fontSize={8.5}
             textAnchor="middle"
           >
             {stage.startText ?? "Continue"}
@@ -283,7 +280,7 @@ function StageCircle({ stage }: { stage: StageNode }) {
         y={stage.y + 6}
         fill={labelColor}
         fontFamily="Inter-Bold"
-        fontSize={scaleTextSize(textSize)}
+        fontSize={textSize}
         textAnchor="middle"
       >
         {label}
@@ -329,9 +326,7 @@ function CompletedStageCard({
             <Text
               style={{
                 color: "#1D63BC",
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(18),
-                lineHeight: scaleLineHeight(18),
+                ...typography.title.t2,
               }}
             >
               {`Stride-${stageNumber}`}
@@ -580,9 +575,7 @@ function JourneyHeader({
               adjustsFontSizeToFit
               style={{
                 color: "#202124",
-                fontFamily: "Inter-Regular",
-                fontSize: scaleTextSize(17),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large, // nearest to 17
               }}
             >
               Otter Stages
@@ -615,9 +608,7 @@ function JourneyHeader({
               style={{
                 flex: 1,
                 color: "#202124",
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(16),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large,
               }}
             >
               {`At Level ${displayLevel}`}
@@ -628,9 +619,7 @@ function JourneyHeader({
               style={{
                 flex: 0.8,
                 color: "#202124",
-                fontFamily: "Inter-Regular",
-                fontSize: scaleTextSize(16),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large,
                 textAlign: "right",
               }}
             >
@@ -665,7 +654,6 @@ function JourneyHeader({
 }
 
 export default function JourneyTabScreen() {
-  const { textScale } = useTextScale();
   const router = useRouter();
   const params = useLocalSearchParams<{
     completedStage?: string;
@@ -722,9 +710,7 @@ export default function JourneyTabScreen() {
   };
 
   return (
-    <SafeAreaView
-      key={textScale}
-      edges={["top"]}
+    <SafeAreaView edges={["top"]}
       style={{ flex: 1, backgroundColor: "#F2F2F2" }}
     >
       <ScrollView
@@ -756,3 +742,5 @@ export default function JourneyTabScreen() {
     </SafeAreaView>
   );
 }
+
+

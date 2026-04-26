@@ -21,7 +21,7 @@ export function PersonalizeQuestionSection({
   return (
     <View className="gap-5">
       <View className="flex-row items-center gap-3">
-        <Text className="font-['Inter-Bold'] text-[18px] leading-[28px] text-[#6E6E6E]">
+        <Text className=" text-[18px] leading-[28px] text-[#6E6E6E]">
           {title}
         </Text>
         <View className="h-px flex-1 bg-[#D4D8DE]" />
@@ -38,3 +38,4 @@ export function PersonalizeQuestionSection({
     </View>
   );
 }
+

@@ -1,10 +1,8 @@
+import { typography } from "@/theme";
 import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import Svg, { Line, Path } from "react-native-svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 export function ProgressPerformanceCard() {
   return (
@@ -12,9 +10,7 @@ export function ProgressPerformanceCard() {
       <View className="flex-row items-center justify-between">
         <Text
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
             color: "#252B36",
           }}
         >
@@ -23,9 +19,7 @@ export function ProgressPerformanceCard() {
         <View className="flex-row items-center gap-1">
           <Text
             style={{
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(16),
-              lineHeight: scaleLineHeight(24),
+              ...typography.body.large,
               color: "#2B6FD6",
             }}
           >
@@ -71,9 +65,7 @@ export function ProgressPerformanceCard() {
             <Text
               key={day}
               style={{
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(14),
-                lineHeight: scaleLineHeight(21),
+                ...typography.body.small,
                 color: "#6E6E6E",
               }}
             >
@@ -87,9 +79,7 @@ export function ProgressPerformanceCard() {
             <View className="h-3 w-3 rounded-full bg-[#145CB4]" />
             <Text
               style={{
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(14),
-                lineHeight: scaleLineHeight(21),
+                ...typography.body.small,
                 color: "#6E6E6E",
               }}
             >
@@ -100,9 +90,7 @@ export function ProgressPerformanceCard() {
             <View className="h-3 w-3 rounded-full bg-[#4A9B4D]" />
             <Text
               style={{
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(14),
-                lineHeight: scaleLineHeight(21),
+                ...typography.body.small,
                 color: "#6E6E6E",
               }}
             >
@@ -114,3 +102,5 @@ export function ProgressPerformanceCard() {
     </View>
   );
 }
+
+

@@ -1,5 +1,7 @@
+
 import { Image, type ImageSourcePropType, Text, View } from "react-native";
-import { useTextScale } from "../accessibility/TextScaleContext";
+import { typography } from "@/theme";
+
 
 type BadgeComponent = React.ComponentType<{ width?: number; height?: number }>;
 
@@ -32,8 +34,6 @@ export function ProfileHeroCard({
   heroChipText,
   heroSubtitle,
 }: ProfileHeroCardProps) {
-  const { textScale } = useTextScale();
-
   return (
     <View
       className="items-center rounded-[8px] px-5 pb-8 pt-9"
@@ -75,11 +75,10 @@ export function ProfileHeroCard({
         >
           <Text
             style={{
+              ...typography.title.t2,
               color: heroChipText,
-              fontSize: 18 * textScale,
-              lineHeight: 24 * textScale,
             }}
-            className="font-['Inter-Bold']"
+            className=""
           >
             {tier}
           </Text>
@@ -88,10 +87,9 @@ export function ProfileHeroCard({
 
       <Text
         style={{
-          fontSize: 32 * textScale,
-          lineHeight: 40 * textScale,
+          ...typography.headline.h1,
         }}
-        className={`font-['Inter-SemiBold'] text-[#2C2D30] ${
+        className={` text-[#2C2D30] ${
           showMilestone ? "mt-2.5" : "mt-7"
         }`}
       >
@@ -99,14 +97,14 @@ export function ProfileHeroCard({
       </Text>
       <Text
         style={{
+          ...typography.body.large, // nearest to 17
           color: heroSubtitle,
-          fontSize: 17 * textScale,
-          lineHeight: 28 * textScale,
         }}
-        className="mt-2 text-center font-['Inter-Regular']"
+        className="mt-2 text-center"
       >
         {headline}
       </Text>
     </View>
   );
 }
+

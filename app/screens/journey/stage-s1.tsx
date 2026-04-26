@@ -1,12 +1,8 @@
+import { typography } from "@/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../../../components/accessibility/TextScaleContext";
 
 const exerciseImage = require("../../../assets/images/home-feture-image.jpg");
 
@@ -65,9 +61,7 @@ export default function StageS1Screen() {
             style={{
               flex: 1,
               color: "#111827",
-              fontFamily: "Inter-Medium",
-              fontSize: scaleTextSize(16),
-              lineHeight: scaleLineHeight(24),
+              ...typography.body.large,
             }}
           >
             {`Level ${levelNumber}`}
@@ -77,9 +71,7 @@ export default function StageS1Screen() {
             <Text
               style={{
                 color: "#005CC8",
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(16),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large,
               }}
             >
               Skip
@@ -99,9 +91,7 @@ export default function StageS1Screen() {
           <Text
             style={{
               color: "#0052AD",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(30 / 1.6),
-              lineHeight: scaleLineHeight(24),
+              ...typography.title.t2, // nearest to 30 / 1.6
             }}
           >
             {`Stride-${stageNumber}`}
@@ -136,9 +126,7 @@ export default function StageS1Screen() {
             <Text
               style={{
                 color: "#0052AD",
-                fontFamily: "Inter-Bold",
-                fontSize: scaleTextSize(21),
-                lineHeight: scaleLineHeight(24),
+                ...typography.headline.h3, // nearest to 21
               }}
             >
               40%
@@ -150,9 +138,7 @@ export default function StageS1Screen() {
           style={{
             marginTop: 26,
             color: "#24262B",
-            fontFamily: "Inter-Medium",
-            fontSize: scaleTextSize(34),
-            lineHeight: scaleLineHeight(42),
+            ...typography.headline.h1, // nearest to 34
           }}
         >
           Soccer leg push
@@ -162,9 +148,7 @@ export default function StageS1Screen() {
             style={{
               marginTop: 4,
               color: "#0E59B6",
-              fontFamily: "Inter-Medium",
-              fontSize: scaleTextSize(14),
-              lineHeight: scaleLineHeight(20),
+              ...typography.body.small,
             }}
           >
             Replay mode
@@ -174,9 +158,7 @@ export default function StageS1Screen() {
           style={{
             marginTop: 2,
             color: "#24262B",
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(23),
-            lineHeight: scaleLineHeight(30),
+            ...typography.headline.h2, // nearest to 23
           }}
         >
           Lift Right leg up
@@ -231,9 +213,7 @@ export default function StageS1Screen() {
             <Text
               style={{
                 color: "#0052AD",
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(17),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large, // nearest to 17
               }}
             >
               Start Again
@@ -264,9 +244,7 @@ export default function StageS1Screen() {
             <Text
               style={{
                 color: "#0052AD",
-                fontFamily: "Inter-Medium",
-                fontSize: scaleTextSize(17),
-                lineHeight: scaleLineHeight(24),
+                ...typography.body.large, // nearest to 17
               }}
             >
               Pause Exercise
@@ -277,3 +255,5 @@ export default function StageS1Screen() {
     </SafeAreaView>
   );
 }
+
+

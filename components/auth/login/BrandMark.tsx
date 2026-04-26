@@ -1,23 +1,8 @@
-import { Text, View } from "react-native";
+import { Image } from "expo-image";
+import { View } from "react-native";
+import { spacing } from "../../../theme";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import Logo from "../../../assets/images/logo.svg";
-import { colors, spacing } from "../../../theme";
-
-const LOGO_WIDTH = 220;
-const LOGO_HEIGHT = 136;
-
-type BrandMarkProps = {
-  wordmark?: string;
-};
-
-export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
-  useTextScale();
-
+export function BrandMark() {
   return (
     <View
       style={{
@@ -26,18 +11,14 @@ export function BrandMark({ wordmark = "Stride" }: BrandMarkProps) {
         gap: spacing[16],
       }}
     >
-      <Logo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
-      <Text
+      <Image
+        source={require("../../../assets/images/logo-big.png")}
+        contentFit="contain"
         style={{
-          fontSize: scaleTextSize(64),
-          lineHeight: scaleLineHeight(70),
-          fontWeight: "800",
-          color: colors.text.action,
-          letterSpacing: scaleTextSize(-1),
+          width: 243,
+          height: 140,
         }}
-      >
-        {wordmark}
-      </Text>
+      />
     </View>
   );
 }

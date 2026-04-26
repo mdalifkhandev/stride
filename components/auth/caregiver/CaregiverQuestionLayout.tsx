@@ -1,23 +1,12 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
+
 import { SignupProgressHeader } from "../signup/SignupProgressHeader";
 import { AppButton } from "../../ui/AppButton";
 import { AppScreen } from "../../ui/AppScreen";
-import { caregiverQuestionStyles, colors, spacing } from "../../../theme";
+import { caregiverQuestionStyles, colors, spacing, typography } from "../../../theme";
 
 type CaregiverQuestionLayoutProps = PropsWithChildren<{
   currentStep?: number;
@@ -36,8 +25,6 @@ export function CaregiverQuestionLayout({
   children,
   keyboardAware = false,
 }: CaregiverQuestionLayoutProps) {
-  useTextScale();
-
   const content = (
     <AppScreen>
       <View style={caregiverQuestionStyles.screenBody}>
@@ -67,8 +54,7 @@ export function CaregiverQuestionLayout({
                 caregiverQuestionStyles.skipText,
                 {
                   color: colors.text.action,
-                  fontSize: scaleTextSize(20),
-                  lineHeight: scaleLineHeight(30),
+                  ...typography.headline.h3,
                 },
               ]}
             >
@@ -94,3 +80,4 @@ export function CaregiverQuestionLayout({
     </KeyboardAvoidingView>
   );
 }
+

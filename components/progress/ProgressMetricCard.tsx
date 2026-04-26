@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type ProgressMetricCardProps = {
   title: string;
@@ -42,9 +40,7 @@ export function ProgressMetricCard({
         <Icon name={iconName as never} size={18} color="#2B6FD6" />
         <Text
           style={{
-            fontFamily: "Inter-Bold",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
             color: "#252B36",
           }}
         >
@@ -55,9 +51,7 @@ export function ProgressMetricCard({
       <Text
         style={{
           marginTop: 12,
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(16),
-          lineHeight: scaleLineHeight(24),
+          ...typography.body.large,
           color: "#252B36",
         }}
       >
@@ -66,3 +60,5 @@ export function ProgressMetricCard({
     </View>
   );
 }
+
+

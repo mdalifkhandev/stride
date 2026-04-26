@@ -1,12 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Text, TextInput, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../../theme";
+
+import { colors, radius, spacing, textStyles, typography } from "../../../theme";
 
 type SignupFieldProps = {
   label: string;
@@ -25,8 +21,6 @@ export function SignupField({
   keyboardType = "default",
   trailingIcon,
 }: SignupFieldProps) {
-  useTextScale();
-
   return (
     <View style={{ gap: spacing[8] }}>
       <Text
@@ -60,8 +54,7 @@ export function SignupField({
           style={{
             flex: 1,
             color: colors.text.primary,
-            fontSize: scaleTextSize(15),
-            lineHeight: scaleLineHeight(22),
+            ...typography.body.small, // nearest to 15
           }}
         />
         {trailingIcon ? (
@@ -71,3 +64,4 @@ export function SignupField({
     </View>
   );
 }
+

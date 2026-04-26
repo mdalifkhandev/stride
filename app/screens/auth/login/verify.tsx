@@ -4,10 +4,7 @@ import { Href, useRouter } from "expo-router";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 
 import { AuthVerifyHeader } from "../../../../components/auth/login/AuthVerifyHeader";
-import {
-  AuthBackButton,
-  AuthScaffold,
-} from "../../../../components/auth/login/AuthScaffold";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { VerificationCode } from "../../../../components/auth/login/VerificationCode";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { spacing } from "../../../../theme";

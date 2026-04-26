@@ -39,7 +39,6 @@ export default function LoginIndex() {
             {
               textAlign: "center",
               color: colors.text.secondary,
-              lineHeight: 20,
               marginTop: -spacing[8],
             },
           ]}

@@ -1,3 +1,4 @@
+import { typography } from "@/theme";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
@@ -5,12 +6,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 
 import StarIcon from "../../../assets/images/star.svg";
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../../../components/accessibility/TextScaleContext";
 
-const confetti = [
+type ConfettiPiece = {
+  left: `${number}%`;
+  top: number;
+  rotate: `${number}deg`;
+};
+
+const confetti: ConfettiPiece[] = [
   { left: "16%", top: 42, rotate: "24deg" },
   { left: "28%", top: 68, rotate: "-8deg" },
   { left: "40%", top: 46, rotate: "32deg" },
@@ -75,9 +78,7 @@ function MetricRow({ title, icon }: MetricRowProps) {
           marginLeft: 10,
           flex: 1,
           color: "#1E2025",
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(22 / 1.6),
-          lineHeight: scaleLineHeight(26),
+          ...typography.body.small, // nearest to 22 / 1.6
         }}
       >
         {title}
@@ -86,16 +87,13 @@ function MetricRow({ title, icon }: MetricRowProps) {
       <Text
         style={{
           color: "#1E2025",
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(22 / 1.6),
-          lineHeight: scaleLineHeight(26),
+          ...typography.body.small, // nearest to 22 / 1.6
         }}
       >
         450
         <Text
           style={{
             color: "#787D84",
-            fontFamily: "Inter-Medium",
           }}
         >
           /500
@@ -229,9 +227,7 @@ export default function StageS1CompleteScreen() {
               <Text
                 style={{
                   color: "#F0F6FF",
-                  fontFamily: "Inter-Medium",
-                  fontSize: scaleTextSize(36 / 1.6),
-                  lineHeight: scaleLineHeight(28),
+                  ...typography.headline.h2, // nearest to 36 / 1.6
                   zIndex: 1,
                 }}
               >
@@ -241,9 +237,7 @@ export default function StageS1CompleteScreen() {
                 style={{
                   marginTop: -2,
                   color: "#FFFFFF",
-                  fontFamily: "Inter-Bold",
-                  fontSize: scaleTextSize(52 / 1.6),
-                  lineHeight: scaleLineHeight(34),
+                  ...typography.headline.h1, // nearest to 52 / 1.6
                   zIndex: 1,
                 }}
               >
@@ -279,9 +273,7 @@ export default function StageS1CompleteScreen() {
             style={{
               marginTop: 14,
               color: "#0E59B6",
-              fontFamily: "Inter-Medium",
-              fontSize: scaleTextSize(14),
-              lineHeight: scaleLineHeight(20),
+              ...typography.body.small,
               textAlign: "center",
             }}
           >
@@ -304,9 +296,7 @@ export default function StageS1CompleteScreen() {
           <Text
             style={{
               color: "#FFFFFF",
-              fontFamily: "Inter-Bold",
-              fontSize: scaleTextSize(42 / 1.6),
-              lineHeight: scaleLineHeight(38),
+              ...typography.headline.h2, // nearest to 42 / 1.6
             }}
           >
             {isReplay ? "Back to Journey" : "Get Points"}
@@ -316,3 +306,5 @@ export default function StageS1CompleteScreen() {
     </SafeAreaView>
   );
 }
+
+

@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 import { Pressable, Text } from "react-native";
 
-import { useTextScale } from "../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../theme";
+
+import { colors, radius, spacing, typography } from "../../theme";
 
 type AppButtonProps = {
   label: string;
@@ -24,7 +24,6 @@ export function AppButton({
   fullRadius = false,
   disabled = false,
 }: AppButtonProps) {
-  useTextScale();
   const isPrimary = variant === "primary";
 
   return (
@@ -61,7 +60,7 @@ export function AppButton({
       {leftSlot}
       <Text
         style={[
-          textStyles.stateBar,
+          typography.button.large,
           isPrimary
             ? { color: colors.text.onAction }
             : { color: colors.text.action },

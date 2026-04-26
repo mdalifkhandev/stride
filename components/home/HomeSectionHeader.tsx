@@ -1,9 +1,7 @@
+import { typography } from "@/theme";
 import { Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-} from "../accessibility/TextScaleContext";
+
 
 type HomeSectionHeaderProps = {
   title: string;
@@ -20,9 +18,7 @@ export function HomeSectionHeader({
         style={{
           marginTop: 28,
           color: "#0052AD",
-          fontFamily: "Inter-Bold",
-          fontSize: scaleTextSize(18),
-          lineHeight: scaleLineHeight(27),
+          ...typography.title.t2,
         }}
       >
         {title}
@@ -31,9 +27,7 @@ export function HomeSectionHeader({
         style={{
           marginTop: 2,
           color: "#6B7280",
-          fontFamily: "Inter-Regular",
-          fontSize: scaleTextSize(16),
-          lineHeight: scaleLineHeight(24),
+          ...typography.body.large,
         }}
       >
         {subtitle}
@@ -41,3 +35,5 @@ export function HomeSectionHeader({
     </View>
   );
 }
+
+

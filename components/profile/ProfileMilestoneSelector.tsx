@@ -29,7 +29,7 @@ export function ProfileMilestoneSelector({
         borderColor: selectorBorder,
       }}
     >
-      <Text className="font-['Inter-SemiBold'] text-[14px] text-[#252B36]">
+      <Text className=" text-[14px] text-[#252B36]">
         Preview milestone
       </Text>
       <View className="mt-3 flex-row gap-2">
@@ -49,7 +49,7 @@ export function ProfileMilestoneSelector({
               }}
             >
               <Text
-                className="font-['Inter-Bold'] text-[15px]"
+                className=" text-[15px]"
                 style={{ color: selected ? selectorActiveText : selectorText }}
               >
                 {days} Days
@@ -61,3 +61,4 @@ export function ProfileMilestoneSelector({
     </View>
   );
 }
+

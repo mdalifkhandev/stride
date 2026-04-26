@@ -4,10 +4,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 
 import { router } from "expo-router";
 import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader";
-import {
-  AuthBackButton,
-  AuthScaffold,
-} from "../../../../components/auth/login/AuthScaffold";
+import { AuthBackButton, AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { SignupField } from "../../../../components/auth/signup/SignupField";
 import { AppButton } from "../../../../components/ui/AppButton";
 import { spacing } from "../../../../theme";

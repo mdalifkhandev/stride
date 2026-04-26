@@ -1,11 +1,6 @@
 import { Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import Logo from "../../../assets/images/logo.svg";
+import { Image } from "expo-image";
 import { colors, spacing, textStyles } from "../../../theme";
 
 const LOGO_WIDTH = 118;
@@ -22,8 +17,6 @@ export function AuthLogoHeader({
   subtitle,
   compact = false,
 }: AuthLogoHeaderProps) {
-  useTextScale();
-
   return (
     <View
       style={[
@@ -31,29 +24,21 @@ export function AuthLogoHeader({
         compact && { gap: spacing[2] },
       ]}
     >
-      <Logo width={LOGO_WIDTH} height={LOGO_HEIGHT} />
-      <Text
-        style={[
-          textStyles.h2,
-          {
-            color: colors.text.action,
-            fontWeight: "700",
-            fontSize: scaleTextSize(compact ? 32 : 40),
-            lineHeight: scaleLineHeight(compact ? 34 : 40),
-          },
-        ]}
-      >
-        Stride
-      </Text>
+      <Image
+        source={require("../../../assets/images/logo-small.png")}
+        contentFit="contain"
+        style={{ width: 100, height: 50 }}
+      />
+
+      <Text>sdfsdf</Text>
+
       {title ? (
         <Text
           style={[
-            textStyles.titleT2,
+            compact ? textStyles.h2 : textStyles.titleT2, // nearest to 22 when compact
             {
               color: colors.text.primary,
               fontWeight: "700",
-              fontSize: scaleTextSize(compact ? 22 : 18),
-              lineHeight: scaleLineHeight(compact ? 30 : 27),
               marginTop: compact ? spacing[4] : spacing[24],
               textAlign: "center",
             },
@@ -65,11 +50,9 @@ export function AuthLogoHeader({
       {subtitle ? (
         <Text
           style={[
-            textStyles.bodySmall,
+            compact ? textStyles.bodyLarge : textStyles.bodySmall,
             {
               color: colors.text.secondary,
-              fontSize: scaleTextSize(compact ? 16 : 14),
-              lineHeight: scaleLineHeight(compact ? 24 : 21),
               textAlign: "center",
               marginTop: compact ? spacing[8] : spacing[0],
               maxWidth: compact ? 320 : 260,

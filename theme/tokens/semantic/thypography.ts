@@ -1,10 +1,5 @@
 import type { TextStyle } from "react-native";
-import {
-  fontFamily,
-  lineHeight,
-  textSize,
-  textWeight,
-} from "../premetive/text";
+import { fontFamily, lineHeight, textSize, textWeight } from "../premetive/text";
 
 export const Typography = {
   displaySmall: {

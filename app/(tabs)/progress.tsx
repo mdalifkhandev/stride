@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTextScale } from "../../components/accessibility/TextScaleContext";
+
 import { LeaderboardListItem } from "../../components/progress/LeaderboardListItem";
 import { LeaderboardPodium } from "../../components/progress/LeaderboardPodium";
 import { ProfileAwardCard } from "../../components/profile/ProfileAwardCard";
@@ -24,11 +24,10 @@ const fifthAvatar = { uri: "https://i.pravatar.cc/300?img=64" };
 
 export default function ProgressScreen() {
   const [activeTab, setActiveTab] = useState<"progress" | "leaderboard">("progress");
-  const { textScale } = useTextScale();
   const { activityDays, milestone } = useProfileMilestone();
 
   return (
-    <SafeAreaView key={textScale} className="flex-1 bg-[#F5F7FB]">
+    <SafeAreaView className="flex-1 bg-[#F5F7FB]">
       <ScrollView
         contentContainerStyle={{ paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}

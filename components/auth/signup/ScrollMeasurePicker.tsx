@@ -2,12 +2,8 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { ScrollView, Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import { colors, radius, textStyles } from "../../../theme";
+
+import { colors, radius, textStyles, typography } from "../../../theme";
 
 type LegacyScrollMeasurePickerProps = {
   leftValues: readonly string[];
@@ -44,7 +40,6 @@ const VISIBLE_ROWS = 3;
 const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ROWS;
 
 export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
-  useTextScale();
   const spacerHeight = useMemo(() => (CONTAINER_HEIGHT - ITEM_HEIGHT) / 2, []);
 
   const isMultiColumn = "columns" in props;
@@ -155,8 +150,7 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
                   { color: colors.text.secondary, fontWeight: "700" },
                   selected && {
                     color: colors.text.action,
-                    fontSize: scaleTextSize(20),
-                    lineHeight: scaleLineHeight(28),
+                    ...typography.headline.h3,
                   },
                 ]}
               >
@@ -223,3 +217,4 @@ export function ScrollMeasurePicker(props: ScrollMeasurePickerProps) {
     </View>
   );
 }
+

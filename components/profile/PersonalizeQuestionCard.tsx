@@ -55,7 +55,7 @@ export function PersonalizeQuestionCard({
       <View className="flex-row items-start justify-between">
         <View className="flex-row items-center gap-2">
           <Ionicons name="help-circle-outline" size={22} color="#A0A0A0" />
-          <Text className="font-['Inter-Bold'] text-[16px] leading-[24px] text-[#6E6E6E]">
+          <Text className=" text-[16px] leading-[24px] text-[#6E6E6E]">
             Question
           </Text>
         </View>
@@ -69,13 +69,13 @@ export function PersonalizeQuestionCard({
         </Pressable>
       </View>
 
-      <Text className="mt-3 font-['Inter-Bold'] text-[18px] leading-[30px] text-[#252B36]">
+      <Text className="mt-3 text-[18px] leading-[30px] text-[#252B36]">
         {question}
       </Text>
 
       <View className="mt-3 flex-row items-center gap-2">
         <Ionicons name="return-down-back-outline" size={22} color="#A0A0A0" />
-        <Text className="font-['Inter-Bold'] text-[16px] leading-[24px] text-[#6E6E6E]">
+        <Text className=" text-[16px] leading-[24px] text-[#6E6E6E]">
           Answered
         </Text>
       </View>
@@ -89,7 +89,7 @@ export function PersonalizeQuestionCard({
           placeholder="Type your answer"
           autoFocus
           multiline
-          className="mt-3 font-['Inter-Regular'] text-[16px] leading-[24px] text-[#252B36]"
+          className="mt-3 text-[16px] leading-[24px] text-[#252B36]"
           style={{
             minHeight: 44,
             borderBottomWidth: 1,
@@ -102,10 +102,10 @@ export function PersonalizeQuestionCard({
         <View className="mt-2 gap-2">
           {answers.map((answer) => (
             <View key={answer} className="flex-row items-start gap-3">
-              <Text className="font-['Inter-Regular'] text-[20px] leading-[24px] text-[#252B36]">
+              <Text className=" text-[20px] leading-[24px] text-[#252B36]">
                 •
               </Text>
-              <Text className="flex-1 font-['Inter-Bold'] text-[16px] leading-[28px] text-[#252B36]">
+              <Text className="flex-1 text-[16px] leading-[28px] text-[#252B36]">
                 {answer}
               </Text>
             </View>
@@ -115,3 +115,4 @@ export function PersonalizeQuestionCard({
     </View>
   );
 }
+

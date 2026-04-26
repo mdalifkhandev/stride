@@ -1,11 +1,7 @@
 import { Text, TextInput, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import { colors, radius, spacing, textStyles } from "../../../theme";
+
+import { colors, radius, spacing, textStyles, typography } from "../../../theme";
 
 type AuthInputFieldProps = {
   label: string;
@@ -22,8 +18,6 @@ export function AuthInputField({
   onChangeText,
   keyboardType = "default",
 }: AuthInputFieldProps) {
-  useTextScale();
-
   return (
     <View style={{ gap: spacing[8] }}>
       <Text
@@ -32,8 +26,7 @@ export function AuthInputField({
           {
             color: colors.text.primary,
             fontWeight: "700",
-            fontSize: scaleTextSize(18),
-            lineHeight: scaleLineHeight(27),
+            ...typography.title.t2,
           },
         ]}
       >
@@ -55,10 +48,10 @@ export function AuthInputField({
           backgroundColor: colors.surface.primary,
           color: colors.text.primary,
           ...textStyles.bodySmall,
-          fontSize: scaleTextSize(14),
-          lineHeight: scaleLineHeight(21),
+          ...typography.body.small,
         }}
       />
     </View>
   );
 }
+

@@ -2,12 +2,8 @@ import type { PropsWithChildren } from "react";
 
 import { Text, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
-import { caregiverQuestionStyles, colors } from "../../../theme";
+
+import { caregiverQuestionStyles, colors, typography } from "../../../theme";
 
 type CaregiverQuestionSectionProps = PropsWithChildren<{
   title?: string;
@@ -19,8 +15,6 @@ export function CaregiverQuestionSection({
   prompt,
   children,
 }: CaregiverQuestionSectionProps) {
-  useTextScale();
-
   return (
     <View style={caregiverQuestionStyles.section}>
       {title ? (
@@ -29,8 +23,7 @@ export function CaregiverQuestionSection({
             caregiverQuestionStyles.title,
             {
               color: colors.text.primary,
-              fontSize: scaleTextSize(24),
-              lineHeight: scaleLineHeight(36),
+              ...typography.headline.h2,
             },
           ]}
         >
@@ -42,8 +35,7 @@ export function CaregiverQuestionSection({
           caregiverQuestionStyles.prompt,
           {
             color: colors.text.primary,
-            fontSize: scaleTextSize(20),
-            lineHeight: scaleLineHeight(32),
+            ...typography.headline.h3,
           },
         ]}
       >
@@ -53,3 +45,4 @@ export function CaregiverQuestionSection({
     </View>
   );
 }
+

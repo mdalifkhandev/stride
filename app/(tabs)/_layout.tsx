@@ -1,11 +1,9 @@
+import { typography } from "@/theme";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import {
-  scaleTextSize,
-  useTextScale,
-} from "../../components/accessibility/TextScaleContext";
+
 
 const ACTIVE_TINT = "#2B6FD6";
 const INACTIVE_TINT = "#9CA3AF";
@@ -57,7 +55,6 @@ function ProfileIcon({ color, focused, size }: TabIconProps) {
 }
 
 export default function TabLayout() {
-  useTextScale();
   const insets = useSafeAreaInsets();
   const bottomInset =
     Platform.OS === "ios" ? insets.bottom : Math.max(insets.bottom, 10);
@@ -75,8 +72,7 @@ export default function TabLayout() {
           paddingTop: 4,
         },
         tabBarLabelStyle: {
-          fontFamily: "Inter-SemiBold",
-          fontSize: scaleTextSize(12),
+          ...typography.caption.small,
           marginBottom: 2,
         },
         tabBarStyle: {
@@ -120,3 +116,5 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+

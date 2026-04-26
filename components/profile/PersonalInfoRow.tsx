@@ -51,7 +51,7 @@ export function PersonalInfoRow({
     <View className={!isLast ? "border-b border-[#D4D8DE] pb-4" : ""}>
       <View className="flex-row items-start justify-between">
         <View className="flex-1 pr-3">
-          <Text className="font-['Inter-Bold'] text-[18px] leading-[28px] text-[#252B36]">
+          <Text className=" text-[18px] leading-[28px] text-[#252B36]">
             {label}
           </Text>
           {isEditing ? (
@@ -61,7 +61,7 @@ export function PersonalInfoRow({
               onBlur={handleBlur}
               onSubmitEditing={handleBlur}
               autoFocus
-              className="mt-1 font-['Inter-Regular'] text-[16px] leading-[24px] text-[#252B36]"
+              className="mt-1 text-[16px] leading-[24px] text-[#252B36]"
               style={{
                 borderBottomWidth: 1,
                 borderBottomColor: "#D4D8DE",
@@ -73,7 +73,7 @@ export function PersonalInfoRow({
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
-              className="mt-1 font-['Inter-Regular'] text-[16px] leading-[24px] text-[#7A7A7A]"
+              className="mt-1 text-[16px] leading-[24px] text-[#7A7A7A]"
             >
               {value}
             </Text>
@@ -94,3 +94,4 @@ export function PersonalInfoRow({
     </View>
   );
 }
+

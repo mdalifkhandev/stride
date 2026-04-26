@@ -1,12 +1,8 @@
 import { Text, TextInput, View } from "react-native";
 
-import {
-  scaleLineHeight,
-  scaleTextSize,
-  useTextScale,
-} from "../../accessibility/TextScaleContext";
+
 import { SignupField } from "../signup/SignupField";
-import { caregiverQuestionStyles, colors } from "../../../theme";
+import { caregiverQuestionStyles, colors, typography } from "../../../theme";
 
 type CaregiverQuestionTextFieldProps = {
   label: string;
@@ -23,8 +19,6 @@ export function CaregiverQuestionTextField({
   onChangeText,
   multiline = false,
 }: CaregiverQuestionTextFieldProps) {
-  useTextScale();
-
   if (!multiline) {
     return (
       <SignupField
@@ -44,8 +38,7 @@ export function CaregiverQuestionTextField({
             caregiverQuestionStyles.textFieldLabel,
             {
               color: colors.text.primary,
-              fontSize: scaleTextSize(20),
-              lineHeight: scaleLineHeight(32),
+              ...typography.headline.h3,
             },
           ]}
         >
@@ -68,8 +61,7 @@ export function CaregiverQuestionTextField({
             caregiverQuestionStyles.textFieldInput,
             {
               textAlignVertical: "top",
-              fontSize: scaleTextSize(14),
-              lineHeight: scaleLineHeight(21),
+              ...typography.body.small,
             },
           ]}
         />
@@ -77,3 +69,4 @@ export function CaregiverQuestionTextField({
     </View>
   );
 }
+
