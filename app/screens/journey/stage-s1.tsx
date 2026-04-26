@@ -12,8 +12,21 @@ const exerciseImage = require("../../../assets/images/home-feture-image.jpg");
 
 export default function StageS1Screen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ stage?: string }>();
+  const params = useLocalSearchParams<{
+    level?: string;
+    stage?: string;
+    replay?: string;
+    completedStage?: string;
+    currentLevel?: string;
+    currentStage?: string;
+  }>();
+  const levelNumber = Number.parseInt(params.level ?? "1", 10) || 1;
   const stageNumber = Number.parseInt(params.stage ?? "1", 10) || 1;
+  const isReplay = params.replay === "1";
+  const completedStage =
+    Number.parseInt(params.completedStage ?? "0", 10) || 0;
+  const currentLevel = Number.parseInt(params.currentLevel ?? "1", 10) || 1;
+  const currentStage = Number.parseInt(params.currentStage ?? "1", 10) || 1;
 
   return (
     <SafeAreaView
@@ -91,7 +104,7 @@ export default function StageS1Screen() {
               lineHeight: scaleLineHeight(24),
             }}
           >
-            Stride-2
+            {`Stride-${stageNumber}`}
           </Text>
 
           <View
@@ -144,6 +157,19 @@ export default function StageS1Screen() {
         >
           Soccer leg push
         </Text>
+        {isReplay ? (
+          <Text
+            style={{
+              marginTop: 4,
+              color: "#0E59B6",
+              fontFamily: "Inter-Medium",
+              fontSize: scaleTextSize(14),
+              lineHeight: scaleLineHeight(20),
+            }}
+          >
+            Replay mode
+          </Text>
+        ) : null}
         <Text
           style={{
             marginTop: 2,
@@ -229,7 +255,9 @@ export default function StageS1Screen() {
             }}
             accessibilityRole="button"
             onPress={() =>
-              router.push(`/screens/journey/stage-s1-complete?stage=${stageNumber}`)
+              router.push(
+                `/screens/journey/stage-s1-complete?level=${levelNumber}&stage=${stageNumber}&completedStage=${completedStage}&currentLevel=${currentLevel}&currentStage=${currentStage}${isReplay ? "&replay=1" : ""}`,
+              )
             }
           >
             <MaterialCommunityIcons name="pause" size={18} color="#0052AD" />

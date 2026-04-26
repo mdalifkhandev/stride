@@ -24,7 +24,13 @@ const confetti = [
   { left: "84%", top: 120, rotate: "-36deg" },
 ];
 
-function OtterStageIcon({ width = 96, height = 80 }: { width?: number; height?: number }) {
+function OtterStageIcon({
+  width = 96,
+  height = 80,
+}: {
+  width?: number;
+  height?: number;
+}) {
   return (
     <Svg width={width} height={height} viewBox="0 0 39 32" fill="none">
       <Path
@@ -42,7 +48,8 @@ type MetricRowProps = {
 
 function MetricRow({ title, icon }: MetricRowProps) {
   const Icon = icon === "walk" ? Ionicons : MaterialCommunityIcons;
-  const iconName = icon === "walk" ? "walk" : icon === "balance" ? "scale-balance" : "brain";
+  const iconName =
+    icon === "walk" ? "walk" : icon === "balance" ? "scale-balance" : "brain";
 
   return (
     <View
@@ -105,44 +112,10 @@ function MetricRow({ title, icon }: MetricRowProps) {
   );
 }
 
-export default function StageS1CompleteScreen() {
+export default function LevelUpScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{
-    level?: string;
-    stage?: string;
-    replay?: string;
-    completedStage?: string;
-    currentLevel?: string;
-    currentStage?: string;
-  }>();
-  const levelNumber = Number.parseInt(params.level ?? "1", 10) || 1;
-  const stageNumber = Number.parseInt(params.stage ?? "1", 10) || 1;
-  const isReplay = params.replay === "1";
-  const currentCompletedStage =
-    Number.parseInt(params.completedStage ?? "0", 10) || 0;
-  const currentLevel = Number.parseInt(params.currentLevel ?? "1", 10) || 1;
-  const currentStage = Number.parseInt(params.currentStage ?? "1", 10) || 1;
-  const nextCompletedStage = Math.max(currentCompletedStage, stageNumber);
-  const isLevelUpFromLevelOne =
-    !isReplay && levelNumber === 1 && stageNumber >= 5;
-
-  const getJourneyRoute = () => {
-    if (isReplay) {
-      return `/(tabs)/journey?completedStage=${currentCompletedStage}&level=${currentLevel}&stage=${currentStage}`;
-    }
-
-    if (isLevelUpFromLevelOne) {
-      return `/screens/journey/level-up?completedStage=5`;
-    }
-
-    if (levelNumber === 2) {
-      const nextStage = Math.min(Math.max(currentStage, stageNumber + 1), 5);
-      return `/(tabs)/journey?completedStage=${nextCompletedStage}&level=2&stage=${nextStage}`;
-    }
-
-    const nextStage = Math.min(nextCompletedStage + 1, 5);
-    return `/(tabs)/journey?completedStage=${nextCompletedStage}&level=1&stage=${nextStage}`;
-  };
+  const params = useLocalSearchParams<{ completedStage?: string }>();
+  const completedStage = Number.parseInt(params.completedStage ?? "5", 10) || 5;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F2F2F2" }} edges={["top"]}>
@@ -154,7 +127,7 @@ export default function StageS1CompleteScreen() {
           paddingBottom: 24,
         }}
       >
-        <View style={{ height: 320 }}>
+        <View style={{ height: 470 }}>
           {confetti.map((item, index) => (
             <View
               key={`confetti-${index}`}
@@ -165,7 +138,7 @@ export default function StageS1CompleteScreen() {
                 width: 5,
                 height: 14,
                 borderRadius: 2,
-                backgroundColor: "#D8E4F6",
+                backgroundColor: "#F5E9D4",
                 transform: [{ rotate: item.rotate }],
               }}
             />
@@ -175,17 +148,42 @@ export default function StageS1CompleteScreen() {
             <OtterStageIcon width={104} height={86} />
           </View>
 
-          <View style={{ marginTop: 30, alignItems: "center" }}>
+          <Text
+            style={{
+              marginTop: 36,
+              textAlign: "center",
+              color: "#EB6A00",
+              fontFamily: "Inter-Bold",
+              fontSize: scaleTextSize(24),
+              lineHeight: scaleLineHeight(34),
+            }}
+          >
+            Congratulations!
+          </Text>
+          <Text
+            style={{
+              marginTop: 8,
+              textAlign: "center",
+              color: "#EB6A00",
+              fontFamily: "Inter-Bold",
+              fontSize: scaleTextSize(24),
+              lineHeight: scaleLineHeight(34),
+            }}
+          >
+            You&apos;ve Otter leveled up!
+          </Text>
+
+          <View style={{ marginTop: 26, alignItems: "center" }}>
             <View
               style={{
                 width: "78%",
                 height: 70,
                 borderRadius: 18,
-                backgroundColor: "#2B63A8",
+                backgroundColor: "#B56C2B",
                 justifyContent: "center",
                 alignItems: "center",
-                shadowColor: "#204E84",
-                shadowOpacity: 0.18,
+                shadowColor: "#8D5A2C",
+                shadowOpacity: 0.2,
                 shadowRadius: 10,
                 shadowOffset: { width: 0, height: 5 },
                 elevation: 4,
@@ -202,7 +200,7 @@ export default function StageS1CompleteScreen() {
                   borderRightWidth: 18,
                   borderTopColor: "transparent",
                   borderBottomColor: "transparent",
-                  borderRightColor: "#2B63A8",
+                  borderRightColor: "#B56C2B",
                 }}
               />
               <View
@@ -216,7 +214,7 @@ export default function StageS1CompleteScreen() {
                   borderLeftWidth: 18,
                   borderTopColor: "transparent",
                   borderBottomColor: "transparent",
-                  borderLeftColor: "#2B63A8",
+                  borderLeftColor: "#B56C2B",
                 }}
               />
               <View
@@ -227,20 +225,20 @@ export default function StageS1CompleteScreen() {
                   top: 0,
                   bottom: 0,
                   borderRadius: 18,
-                  backgroundColor: "#4593DD",
+                  backgroundColor: "#D48843",
                 }}
               />
 
               <Text
                 style={{
-                  color: "#F0F6FF",
+                  color: "#FFF7EA",
                   fontFamily: "Inter-Medium",
                   fontSize: scaleTextSize(36 / 1.6),
                   lineHeight: scaleLineHeight(28),
                   zIndex: 1,
                 }}
               >
-                {`Stride ${stageNumber}`}
+                Level
               </Text>
               <Text
                 style={{
@@ -252,7 +250,7 @@ export default function StageS1CompleteScreen() {
                   zIndex: 1,
                 }}
               >
-                Complete
+                1
               </Text>
             </View>
           </View>
@@ -267,32 +265,27 @@ export default function StageS1CompleteScreen() {
           >
             <StarIcon width={54} height={54} />
             <StarIcon width={54} height={54} />
-            <View style={{ opacity: 0.34 }}>
-              <StarIcon width={54} height={54} />
-            </View>
+            <StarIcon width={54} height={54} />
           </View>
         </View>
 
-        <View style={{ gap: 12 }}>
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#0E59B6",
+            fontFamily: "Inter-Bold",
+            fontSize: scaleTextSize(38 / 1.6),
+            lineHeight: scaleLineHeight(34),
+          }}
+        >
+          Total Stride Points
+        </Text>
+
+        <View style={{ marginTop: 16, gap: 12 }}>
           <MetricRow title="Mobility" icon="walk" />
           <MetricRow title="Balance" icon="balance" />
           <MetricRow title="Cognition" icon="brain" />
         </View>
-
-        {isReplay ? (
-          <Text
-            style={{
-              marginTop: 14,
-              color: "#0E59B6",
-              fontFamily: "Inter-Medium",
-              fontSize: scaleTextSize(14),
-              lineHeight: scaleLineHeight(20),
-              textAlign: "center",
-            }}
-          >
-            Practice replay complete. No bonus points added.
-          </Text>
-        ) : null}
 
         <Pressable
           style={{
@@ -304,7 +297,11 @@ export default function StageS1CompleteScreen() {
             justifyContent: "center",
           }}
           accessibilityRole="button"
-          onPress={() => router.replace(getJourneyRoute())}
+          onPress={() =>
+            router.replace(
+              `/(tabs)/journey?completedStage=${completedStage}&level=2&stage=1`,
+            )
+          }
         >
           <Text
             style={{
@@ -314,7 +311,7 @@ export default function StageS1CompleteScreen() {
               lineHeight: scaleLineHeight(38),
             }}
           >
-            {isReplay ? "Back to Journey" : "Get Points"}
+            Get Points
           </Text>
         </Pressable>
       </View>

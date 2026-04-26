@@ -26,6 +26,7 @@ type StageNode = {
   y: number;
   status: StageStatus;
   showStart: boolean;
+  startText?: "Start" | "Continue";
 };
 
 type StageStatus = "active" | "locked" | "completed";
@@ -50,19 +51,19 @@ const currentJourney: JourneyProgress = {
 };
 
 const levelOnePositions: StagePosition[] = [
-  { x: 195, y: 54 },
-  { x: 195, y: 212 },
-  { x: 150, y: 370 },
-  { x: 240, y: 528 },
-  { x: 150, y: 686 },
+  { x: 195, y: 84 },
+  { x: 195, y: 242 },
+  { x: 150, y: 400 },
+  { x: 240, y: 558 },
+  { x: 150, y: 716 },
 ];
 
 const levelTwoPositions: StagePosition[] = [
-  { x: 195, y: 42 },
-  { x: 195, y: 200 },
-  { x: 150, y: 358 },
-  { x: 240, y: 516 },
-  { x: 150, y: 674 },
+  { x: 195, y: 90 },
+  { x: 195, y: 222 },
+  { x: 150, y: 380 },
+  { x: 240, y: 538 },
+  { x: 150, y: 696 },
 ];
 
 function getStageStatus({
@@ -107,6 +108,12 @@ function createStageLevel({
       y: position.y,
       status: getStageStatus({ level, stage, progress }),
       showStart: level === progress.level && stage === progress.stage,
+      startText:
+        level === progress.level && stage === progress.stage
+          ? progress.level === 1 && progress.stage === 1
+            ? "Start"
+            : "Continue"
+          : undefined,
     };
   });
 }
@@ -221,7 +228,7 @@ function StageCircle({ stage }: { stage: StageNode }) {
             fontSize={scaleTextSize(8.5)}
             textAnchor="middle"
           >
-            Continue
+            {stage.startText ?? "Continue"}
           </SvgText>
           <Line
             x1={stage.x}
@@ -435,6 +442,9 @@ function StageMap({
         <Defs />
         {stages.slice(0, -1).map((stage, index) => {
           const next = stages[index + 1];
+          const isCompletedSegment =
+            stage.status === "completed" && next.status === "completed";
+
           return (
             <Line
               key={`${stage.id}-line`}
@@ -447,7 +457,7 @@ function StageMap({
               }
               x2={next.x}
               y2={next.y - stageSize / 2}
-              stroke="#747474"
+              stroke={isCompletedSegment ? "#0B58B8" : "#747474"}
               strokeWidth={2.2}
             />
           );
@@ -476,7 +486,7 @@ function StageMap({
             key={`${stage.id}-touch`}
             accessibilityRole="button"
             accessibilityLabel={`${stage.label} stage`}
-            disabled={stage.status !== "active"}
+            disabled={stage.status === "locked"}
             onPress={() => onStagePress?.(stage)}
             style={{
               position: "absolute",
@@ -509,7 +519,9 @@ function OtterStageIcon({
   );
 }
 
-function JourneyHeader() {
+function JourneyHeader({ progress }: { progress: JourneyProgress }) {
+  const activeDots = Math.max(1, progress.stage);
+
   return (
     <View style={{ paddingHorizontal: 16, paddingTop: 6, paddingBottom: 16 }}>
       <View
@@ -600,7 +612,7 @@ function JourneyHeader() {
                 lineHeight: scaleLineHeight(24),
               }}
             >
-              At Level 1
+              {`At Level ${progress.level}`}
             </Text>
             <Text
               numberOfLines={1}
@@ -633,7 +645,7 @@ function JourneyHeader() {
                   width: "8.8%",
                   aspectRatio: 1,
                   borderRadius: 999,
-                  backgroundColor: "#EEF1F4",
+                  backgroundColor: dot < activeDots ? "#0B58B8" : "#EEF1F4",
                 }}
               />
             ))}
@@ -647,14 +659,26 @@ function JourneyHeader() {
 export default function JourneyTabScreen() {
   const { textScale } = useTextScale();
   const router = useRouter();
-  const params = useLocalSearchParams<{ completedStage?: string }>();
+  const params = useLocalSearchParams<{
+    completedStage?: string;
+    level?: string;
+    stage?: string;
+  }>();
   const completedStage = Number.parseInt(params.completedStage ?? "0", 10);
   const safeCompletedStage = Number.isFinite(completedStage)
-    ? Math.max(0, Math.min(completedStage, 4))
+    ? Math.max(0, Math.min(completedStage, 5))
     : 0;
+  const paramLevel = Number.parseInt(params.level ?? "1", 10);
+  const safeLevel: 1 | 2 = paramLevel === 2 ? 2 : 1;
+  const paramStage = Number.parseInt(params.stage ?? "0", 10);
+  const defaultStage =
+    safeLevel === 1 ? Math.min(Math.max(safeCompletedStage + 1, 1), 5) : 1;
+  const safeStage = Number.isFinite(paramStage)
+    ? Math.max(1, Math.min(paramStage, 5))
+    : defaultStage;
   const journeyProgress: JourneyProgress =
-    safeCompletedStage > 0
-      ? { level: 1, stage: safeCompletedStage + 1 }
+    safeCompletedStage > 0 || safeLevel === 2
+      ? { level: safeLevel, stage: safeStage }
       : currentJourney;
   const levelOneStages = createStageLevel({
     level: 1,
@@ -668,10 +692,21 @@ export default function JourneyTabScreen() {
   });
 
   const handleStagePress = (stage: StageNode) => {
-    if (stage.status === "active" && stage.id.startsWith("level-1-s")) {
+    if (stage.status !== "locked" && stage.id.startsWith("level-1-s")) {
       const stageNumber =
         Number.parseInt(stage.label.replace("S-", ""), 10) || 1;
-      router.push(`/screens/journey/stage-s1?stage=${stageNumber}`);
+      const replayFlag = stage.status === "completed" ? "&replay=1" : "";
+      router.push(
+        `/screens/journey/stage-s1?level=1&stage=${stageNumber}&completedStage=${safeCompletedStage}&currentLevel=${journeyProgress.level}&currentStage=${journeyProgress.stage}${replayFlag}`,
+      );
+    }
+    if (stage.status !== "locked" && stage.id.startsWith("level-2-s")) {
+      const stageNumber =
+        Number.parseInt(stage.label.replace("S-", ""), 10) || 1;
+      const replayFlag = stage.status === "completed" ? "&replay=1" : "";
+      router.push(
+        `/screens/journey/stage-s1?level=2&stage=${stageNumber}&completedStage=${safeCompletedStage}&currentLevel=${journeyProgress.level}&currentStage=${journeyProgress.stage}${replayFlag}`,
+      );
     }
   };
 
@@ -688,7 +723,7 @@ export default function JourneyTabScreen() {
           paddingBottom: 24,
         }}
       >
-        <JourneyHeader />
+        <JourneyHeader progress={journeyProgress} />
         <LevelDivider label="Level 1" />
         <StageMap
           stages={levelOneStages}
