@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useEffect, useRef } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { DeviceEventEmitter, ScrollView, Text, View } from 'react-native';
 import { Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -29,6 +29,16 @@ export function GameScreen({ onExit, skipIntro = false }: GameScreenProps) {
     hasAutoStartedRef.current = true;
     game.startGame();
   }, [game.hasStarted, skipIntro]);
+
+  useEffect(() => {
+    const subscription = DeviceEventEmitter.addListener('stride:pause-active-game', () => {
+      if (game.hasStarted && game.roundStatus === 'playing') {
+        game.togglePause();
+      }
+    });
+
+    return () => subscription.remove();
+  }, [game]);
 
   const handleBackPress = () => {
     if (onExit) {

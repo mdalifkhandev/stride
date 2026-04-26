@@ -299,7 +299,7 @@ export function useAccuracyCheckGame() {
 
   const togglePause = useCallback(() => {
     setStatus((currentStatus) => {
-      if (currentStatus === 'active') {
+      if (currentStatus === 'active' || currentStatus === 'countdown') {
         return 'paused';
       }
 

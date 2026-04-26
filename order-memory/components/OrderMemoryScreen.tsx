@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useEffect, useRef } from 'react';
-import { Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
+import { DeviceEventEmitter, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AnswerGrid } from '@/order-memory/components/AnswerGrid';
@@ -86,6 +86,16 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
     hasAutoStartedRef.current = true;
     game.handlePlayNow();
   }, [game.phase, skipIntro]);
+
+  useEffect(() => {
+    const subscription = DeviceEventEmitter.addListener('stride:pause-active-game', () => {
+      if (['ready', 'memorization', 'transition', 'answering'].includes(game.phase)) {
+        game.togglePause();
+      }
+    });
+
+    return () => subscription.remove();
+  }, [game]);
 
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: orderMemoryTheme.palette.background }}>

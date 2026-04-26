@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useEffect, useRef } from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { DeviceEventEmitter, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { TIME_ACCURACY_THEME } from '@/time-accuracy/config';
@@ -29,6 +29,16 @@ export function TimeAccuracyCheckScreen({ onExit, skipIntro = false }: TimeAccur
     hasAutoStartedRef.current = true;
     game.handlePlayNow();
   }, [game.status, skipIntro]);
+
+  useEffect(() => {
+    const subscription = DeviceEventEmitter.addListener('stride:pause-active-game', () => {
+      if (['active', 'countdown'].includes(game.status)) {
+        game.togglePause();
+      }
+    });
+
+    return () => subscription.remove();
+  }, [game]);
 
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: TIME_ACCURACY_THEME.background }}>
