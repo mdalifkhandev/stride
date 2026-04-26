@@ -123,25 +123,20 @@ export default function StageS1CompleteScreen() {
   const currentLevel = Number.parseInt(params.currentLevel ?? "1", 10) || 1;
   const currentStage = Number.parseInt(params.currentStage ?? "1", 10) || 1;
   const nextCompletedStage = Math.max(currentCompletedStage, stageNumber);
-  const isLevelUpFromLevelOne =
-    !isReplay && levelNumber === 1 && stageNumber >= 5;
+  const isLevelUp = !isReplay && stageNumber >= 5;
+  const nextLevel = levelNumber + 1;
 
   const getJourneyRoute = () => {
     if (isReplay) {
       return `/(tabs)/journey?completedStage=${currentCompletedStage}&level=${currentLevel}&stage=${currentStage}`;
     }
 
-    if (isLevelUpFromLevelOne) {
-      return `/screens/journey/level-up?completedStage=5`;
-    }
-
-    if (levelNumber === 2) {
-      const nextStage = Math.min(Math.max(currentStage, stageNumber + 1), 5);
-      return `/(tabs)/journey?completedStage=${nextCompletedStage}&level=2&stage=${nextStage}`;
+    if (isLevelUp) {
+      return `/screens/journey/level-up?completedStage=5&level=${nextLevel}`;
     }
 
     const nextStage = Math.min(nextCompletedStage + 1, 5);
-    return `/(tabs)/journey?completedStage=${nextCompletedStage}&level=1&stage=${nextStage}`;
+    return `/(tabs)/journey?completedStage=${nextCompletedStage}&level=${levelNumber}&stage=${nextStage}`;
   };
 
   return (

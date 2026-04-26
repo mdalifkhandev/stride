@@ -519,8 +519,16 @@ function OtterStageIcon({
   );
 }
 
-function JourneyHeader({ progress }: { progress: JourneyProgress }) {
-  const activeDots = Math.max(1, progress.stage);
+function JourneyHeader({
+  progress,
+  displayLevel,
+}: {
+  progress: JourneyProgress;
+  displayLevel: number;
+}) {
+  const totalLevelDots = otterStageDots.length;
+  const activeDots = Math.max(0, Math.min(displayLevel, totalLevelDots));
+  const levelsLeft = Math.max(0, totalLevelDots - activeDots);
 
   return (
     <View style={{ paddingHorizontal: 16, paddingTop: 6, paddingBottom: 16 }}>
@@ -612,7 +620,7 @@ function JourneyHeader({ progress }: { progress: JourneyProgress }) {
                 lineHeight: scaleLineHeight(24),
               }}
             >
-              {`At Level ${progress.level}`}
+              {`At Level ${displayLevel}`}
             </Text>
             <Text
               numberOfLines={1}
@@ -626,7 +634,7 @@ function JourneyHeader({ progress }: { progress: JourneyProgress }) {
                 textAlign: "right",
               }}
             >
-              10 Left
+              {`${levelsLeft} Left`}
             </Text>
           </View>
 
@@ -669,7 +677,9 @@ export default function JourneyTabScreen() {
     ? Math.max(0, Math.min(completedStage, 5))
     : 0;
   const paramLevel = Number.parseInt(params.level ?? "1", 10);
-  const safeLevel: 1 | 2 = paramLevel === 2 ? 2 : 1;
+  const safeLevel = Number.isFinite(paramLevel)
+    ? Math.max(1, Math.min(paramLevel, otterStageDots.length))
+    : 1;
   const paramStage = Number.parseInt(params.stage ?? "0", 10);
   const defaultStage =
     safeLevel === 1 ? Math.min(Math.max(safeCompletedStage + 1, 1), 5) : 1;
@@ -680,6 +690,7 @@ export default function JourneyTabScreen() {
     safeCompletedStage > 0 || safeLevel === 2
       ? { level: safeLevel, stage: safeStage }
       : currentJourney;
+  const headerLevel = Math.max(0, journeyProgress.level - 1);
   const levelOneStages = createStageLevel({
     level: 1,
     positions: levelOnePositions,
@@ -723,7 +734,7 @@ export default function JourneyTabScreen() {
           paddingBottom: 24,
         }}
       >
-        <JourneyHeader progress={journeyProgress} />
+        <JourneyHeader progress={journeyProgress} displayLevel={headerLevel} />
         <LevelDivider label="Level 1" />
         <StageMap
           stages={levelOneStages}

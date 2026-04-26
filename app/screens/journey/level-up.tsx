@@ -114,8 +114,9 @@ function MetricRow({ title, icon }: MetricRowProps) {
 
 export default function LevelUpScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ completedStage?: string }>();
+  const params = useLocalSearchParams<{ completedStage?: string; level?: string }>();
   const completedStage = Number.parseInt(params.completedStage ?? "5", 10) || 5;
+  const nextLevel = Math.max(1, Number.parseInt(params.level ?? "2", 10) || 2);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F2F2F2" }} edges={["top"]}>
@@ -250,7 +251,7 @@ export default function LevelUpScreen() {
                   zIndex: 1,
                 }}
               >
-                1
+                {nextLevel}
               </Text>
             </View>
           </View>
@@ -299,7 +300,7 @@ export default function LevelUpScreen() {
           accessibilityRole="button"
           onPress={() =>
             router.replace(
-              `/(tabs)/journey?completedStage=${completedStage}&level=2&stage=1`,
+              `/(tabs)/journey?completedStage=${completedStage}&level=${nextLevel}&stage=1`,
             )
           }
         >

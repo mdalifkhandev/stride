@@ -70,7 +70,7 @@ export default function StageS1Screen() {
               lineHeight: scaleLineHeight(24),
             }}
           >
-            Level 1
+            {`Level ${levelNumber}`}
           </Text>
 
           <Pressable accessibilityRole="button">
