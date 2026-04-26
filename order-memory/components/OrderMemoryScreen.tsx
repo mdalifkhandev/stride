@@ -77,6 +77,13 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
       : isFinalRound || game.phase === 'gameOver'
         ? 'Play Again'
         : 'Next Round';
+  const shouldAutoAdvanceRound =
+    game.phase === 'roundComplete' &&
+    game.roundResult?.isSuccess === true &&
+    !isFinalRound;
+  const shouldShowRoundResult =
+    game.phase === 'gameOver' ||
+    (game.phase === 'roundComplete' && game.roundResult?.isSuccess === false);
 
   useEffect(() => {
     if (!skipIntro || hasAutoStartedRef.current || game.phase !== 'howToPlay') {
@@ -97,6 +104,18 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
     return () => subscription.remove();
   }, [game]);
 
+  useEffect(() => {
+    if (!shouldAutoAdvanceRound) {
+      return undefined;
+    }
+
+    const timeoutId = setTimeout(() => {
+      game.handleNextRound();
+    }, 900);
+
+    return () => clearTimeout(timeoutId);
+  }, [game, shouldAutoAdvanceRound]);
+
   return (
     <SafeAreaView className="flex-1" style={{ backgroundColor: orderMemoryTheme.palette.background }}>
       <HowToPlayModal onPlayNow={game.handlePlayNow} theme={orderMemoryTheme} visible={game.phase === 'howToPlay'} />
@@ -106,7 +125,7 @@ export function OrderMemoryScreen({ onExit, skipIntro = false }: OrderMemoryScre
         primaryActionLabel={primaryActionLabel}
         result={game.roundResult}
         theme={orderMemoryTheme}
-        visible={game.phase === 'roundComplete' || game.phase === 'gameOver'}
+        visible={shouldShowRoundResult}
       />
 
       <View
