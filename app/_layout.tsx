@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useFonts } from "expo-font";
 
 import { ProfileMilestoneProvider } from "../components/profile/ProfileMilestoneContext";
 import "./../global.css";
 
-SplashScreen.preventAutoHideAsync();
+void SplashScreen.preventAutoHideAsync().catch(() => {
+  // Ignore when activity is temporarily unavailable during reloads.
+});
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +23,9 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (fontsLoaded) {
-      SplashScreen.hideAsync();
+      void SplashScreen.hideAsync().catch(() => {
+        // Ignore transient MissingActivity errors during dev reloads.
+      });
     }
   }, [fontsLoaded]);
 

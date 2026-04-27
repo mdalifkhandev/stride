@@ -2,16 +2,12 @@ import { typography } from "@/theme";
 import { Text, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 
-
 type ProgressGaugeCardProps = {
   score: number;
   maxScore: number;
 };
 
-export function ProgressGaugeCard({
-  score,
-  maxScore,
-}: ProgressGaugeCardProps) {
+export function ProgressGaugeCard({ score, maxScore }: ProgressGaugeCardProps) {
   const percent = Math.max(0, Math.min(score / maxScore, 1));
   const radius = 74;
   const circumference = Math.PI * radius;
@@ -66,7 +62,11 @@ export function ProgressGaugeCard({
                 color: "#145CB4",
               }}
             >
-              <Text style={{ ...typography.label.large }}>{score}</Text>
+              <Text
+                style={{ ...typography.headline.h2, fontFamily: "Inter-Bold" }}
+              >
+                {score}
+              </Text>
               <Text style={{ ...typography.title.t2, color: "#6E6E6E" }}>
                 {" "}
                 pt
@@ -78,12 +78,12 @@ export function ProgressGaugeCard({
         <View className="mt-2 rounded-full bg-[#E7F0FB] px-5 py-3">
           <Text
             style={{
-              ...typography.body.large,
+              ...typography.label.ssm,
               color: "#4A4F57",
             }}
           >
             Only{" "}
-            <Text style={{ ...typography.body.large, color: "#24262B" }}>
+            <Text style={{ fontFamily: "Inter-Bold", color: "#24262B" }}>
               {maxScore - score}pt
             </Text>{" "}
             to your next stage!
@@ -93,5 +93,3 @@ export function ProgressGaugeCard({
     </View>
   );
 }
-
-

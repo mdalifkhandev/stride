@@ -2,11 +2,14 @@ import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { LeaderboardListItem } from "../../components/progress/LeaderboardListItem";
-import { LeaderboardPodium } from "../../components/progress/LeaderboardPodium";
+import Progres1 from "@/assets/images/progress1.svg";
+import Progres3 from "@/assets/images/progress2.svg";
+import Progres2 from "@/assets/images/progress3.svg";
 import { ProfileAwardCard } from "../../components/profile/ProfileAwardCard";
 import { ProfileHeroCard } from "../../components/profile/ProfileHeroCard";
 import { useProfileMilestone } from "../../components/profile/ProfileMilestoneContext";
+import { LeaderboardListItem } from "../../components/progress/LeaderboardListItem";
+import { LeaderboardPodium } from "../../components/progress/LeaderboardPodium";
 import { ProgressActivityCard } from "../../components/progress/ProgressActivityCard";
 import { ProgressGaugeCard } from "../../components/progress/ProgressGaugeCard";
 import { ProgressMetricCard } from "../../components/progress/ProgressMetricCard";
@@ -23,7 +26,9 @@ const fourthAvatar = { uri: "https://i.pravatar.cc/300?img=70" };
 const fifthAvatar = { uri: "https://i.pravatar.cc/300?img=64" };
 
 export default function ProgressScreen() {
-  const [activeTab, setActiveTab] = useState<"progress" | "leaderboard">("progress");
+  const [activeTab, setActiveTab] = useState<"progress" | "leaderboard">(
+    "progress",
+  );
   const { activityDays, milestone } = useProfileMilestone();
 
   return (
@@ -45,12 +50,12 @@ export default function ProgressScreen() {
                 <ProgressMetricCard
                   title="Mobility"
                   value="450/500"
-                  icon="walk"
+                  icon={<Progres1 />}
                 />
                 <ProgressMetricCard
                   title="Balance"
                   value="450/500"
-                  icon="balance"
+                  icon={<Progres2 />}
                 />
               </View>
 
@@ -58,7 +63,7 @@ export default function ProgressScreen() {
                 <ProgressMetricCard
                   title="Cognition"
                   value="450/500"
-                  icon="brain"
+                  icon={<Progres3 />}
                   fullWidth
                 />
               </View>

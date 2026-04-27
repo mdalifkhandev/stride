@@ -1,5 +1,8 @@
 import { Modal, Pressable, View } from "react-native";
 
+import Progres1 from "@/assets/images/progress1.svg";
+import Progres2 from "@/assets/images/progress2.svg";
+import Progres3 from "@/assets/images/progress3.svg";
 import { ProgressGaugeCard } from "../progress/ProgressGaugeCard";
 import { ProgressMetricCard } from "../progress/ProgressMetricCard";
 
@@ -8,10 +11,7 @@ type HomeStridePopupProps = {
   onClose: () => void;
 };
 
-export function HomeStridePopup({
-  visible,
-  onClose,
-}: HomeStridePopupProps) {
+export function HomeStridePopup({ visible, onClose }: HomeStridePopupProps) {
   return (
     <Modal
       visible={visible}
@@ -53,15 +53,23 @@ export function HomeStridePopup({
           <ProgressGaugeCard score={700} maxScore={1500} />
 
           <View style={{ marginTop: 12, flexDirection: "row", gap: 12 }}>
-            <ProgressMetricCard title="Mobility" value="450/500" icon="walk" />
-            <ProgressMetricCard title="Balance" value="450/500" icon="balance" />
+            <ProgressMetricCard
+              title="Mobility"
+              value="450/500"
+              icon={<Progres1 />}
+            />
+            <ProgressMetricCard
+              title="Balance"
+              value="450/500"
+              icon={<Progres3 />}
+            />
           </View>
 
           <View style={{ marginTop: 12 }}>
             <ProgressMetricCard
               title="Cognition"
               value="450/500"
-              icon="brain"
+              icon={<Progres2 />}
               fullWidth
             />
           </View>

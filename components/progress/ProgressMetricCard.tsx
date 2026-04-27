@@ -1,12 +1,11 @@
-import { typography } from "@/theme";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { textStyles, typography } from "@/theme";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
-
 
 type ProgressMetricCardProps = {
   title: string;
   value: string;
-  icon: "walk" | "balance" | "brain";
+  icon: React.ReactNode | "walk" | "balance" | "brain";
   fullWidth?: boolean;
 };
 
@@ -16,31 +15,28 @@ export function ProgressMetricCard({
   icon,
   fullWidth = false,
 }: ProgressMetricCardProps) {
-  const Icon =
-    icon === "balance"
-      ? MaterialCommunityIcons
-      : icon === "brain"
-        ? MaterialCommunityIcons
-        : Ionicons;
-
   const iconName =
-    icon === "balance"
-      ? "scale-balance"
-      : icon === "brain"
-        ? "brain"
-        : "walk";
+    icon === "balance" ? "scale-balance" : icon === "brain" ? "brain" : "walk";
+  const renderedIcon =
+    typeof icon === "string" ? (
+      <View className="h-9 w-9 items-center justify-center rounded-xl bg-[#EEF5FD]">
+        <MaterialCommunityIcons name={iconName} size={20} color="#145CB4" />
+      </View>
+    ) : (
+      icon
+    );
 
   return (
     <View
-      className={`rounded-[18px] border border-[#B9BEC7] bg-white px-4 py-4 shadow-sm ${
+      className={`rounded-[16px] border border-[#B9BEC7] bg-white px-4 py-4 shadow-sm p-3 ${
         fullWidth ? "w-full" : "flex-1"
       }`}
     >
       <View className="flex-row items-center gap-2">
-        <Icon name={iconName as never} size={18} color="#2B6FD6" />
+        {renderedIcon}
         <Text
           style={{
-            ...typography.title.t2,
+            ...textStyles.labelSmall,
             color: "#252B36",
           }}
         >
@@ -48,17 +44,23 @@ export function ProgressMetricCard({
         </Text>
       </View>
 
-      <Text
-        style={{
-          marginTop: 12,
-          ...typography.body.large,
-          color: "#252B36",
-        }}
-      >
-        {value}
+      <Text className="mt-3">
+        <Text
+          style={{
+            ...typography.label.small,
+          }}
+        >
+          {value.split("/")[0] ?? value}
+        </Text>
+
+        <Text
+          style={{
+            ...typography.label.ssm,
+          }}
+        >
+          {value.includes("/") ? `/${value.split("/")[1]}` : ""}
+        </Text>
       </Text>
     </View>
   );
 }
-
-
