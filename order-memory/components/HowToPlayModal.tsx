@@ -22,12 +22,12 @@ export function HowToPlayModal({ onPlayNow, theme, visible }: HowToPlayModalProp
   const handScale = useRef(new Animated.Value(1)).current;
   const iconOpacity = useRef(new Animated.Value(1)).current;
   const iconSlideProgress = useRef(new Animated.Value(0)).current;
-  const demoWidth = 246;
-  const buttonGap = 12;
-  const buttonRowGap = 10;
+  const demoWidth = 276;
+  const buttonGap = 14;
+  const buttonRowGap = 12;
   const buttonWidth = (demoWidth - buttonGap) / 2;
-  const buttonHeight = 40;
-  const handSize = 22;
+  const buttonHeight = 46;
+  const handSize = 26;
   const iconSlideDistance = 330;
   const iconSlideDuration = 2200;
   const sequenceStepDuration = 2500;
@@ -193,11 +193,11 @@ export function HowToPlayModal({ onPlayNow, theme, visible }: HowToPlayModalProp
           }}>
           <View className="mb-2 self-center rounded-full px-4 py-2" style={{ backgroundColor: 'rgba(15, 82, 186, 0.1)' }}>
             <Text className="text-[12px] font-bold uppercase tracking-[1px]" style={{ color: theme.palette.primary }}>
-              Quick Guide
+              How To Play
             </Text>
           </View>
-          <Text className="text-[34px] font-black leading-[40px] text-[#0040A1] py-2">How To Play</Text>
-          <Text className="py-2 text-[18px] font-semibold leading-[26px]" style={{ color: theme.palette.secondary }}>
+          {/* <Text className="text-[34px] font-black leading-[40px] text-[#0040A1] py-2">How To Play</Text> */}
+          <Text className="py-2 text-center text-[18px] font-semibold leading-[26px]" style={{ color: theme.palette.secondary }}>
             {theme.gameName}
           </Text>
 
@@ -205,40 +205,40 @@ export function HowToPlayModal({ onPlayNow, theme, visible }: HowToPlayModalProp
             Watch each symbol appear. When the sequence ends, tap them back in the same order.
           </Text>
 
-          <View className="mt-7 items-center rounded-[28px] px-4 py-4" style={{ backgroundColor: theme.palette.panelAlt }}>
+          <View className="mt-7 items-center rounded-[28px] px-5 py-5" style={{ backgroundColor: theme.palette.panelAlt }}>
             <View
-              className="w-full items-center justify-center rounded-[24px] border bg-white px-4 py-4"
+              className="w-full items-center justify-center rounded-[24px] border bg-white px-5 py-5"
               style={{ borderColor: 'rgba(195,198,214,0.28)' }}>
-              <View className="h-14 w-full items-center justify-center overflow-hidden">
+              <View className="h-[68px] w-full items-center justify-center overflow-hidden">
                 {demoMode === 'watch' ? (
                   <Animated.View
-                    className="h-14 w-14 items-center justify-center rounded-[18px] bg-[#F2F4F5]"
+                    className="h-[68px] w-[68px] items-center justify-center rounded-[20px] bg-[#F2F4F5]"
                     style={{
                       opacity: movingIconOpacity,
                       transform: [{ translateX: iconTranslateX }],
                     }}>
                     {sequenceItems[activeSequenceIndex] ? (
-                      <GardenIcon icon={sequenceItems[activeSequenceIndex]} size={32} />
+                      <GardenIcon icon={sequenceItems[activeSequenceIndex]} size={40} />
                     ) : null}
                   </Animated.View>
                 ) : (
-                  <View className="h-14 w-14 items-center justify-center rounded-[18px] bg-[#F2F4F5]">
-                    <Text className="text-[20px] font-bold" style={{ color: theme.palette.secondary }}>
+                  <View className="h-[68px] w-[68px] items-center justify-center rounded-[20px] bg-[#F2F4F5]">
+                    <Text className="text-[24px] font-bold" style={{ color: theme.palette.secondary }}>
                       ?
                     </Text>
                   </View>
                 )}
               </View>
 
-              <Text className="mt-3 text-center text-[15px] font-medium leading-5 text-[#191C1D]">
+              <Text className="mt-4 text-center text-[18px] font-medium leading-6 text-[#191C1D]">
                 {demoMode === 'watch' ? 'Remember this sequence' : 'Tap the sequence in order'}
               </Text>
 
-              <View className="mt-3 flex-row gap-2">
+              <View className="mt-4 flex-row gap-[9px]">
                 {sequenceItems.map((item, index) => (
                   <View
                     key={item.id}
-                    className="h-[8px] w-[8px] rounded-full"
+                    className="h-[9px] w-[9px] rounded-full"
                     style={{
                       backgroundColor: index <= activeSequenceIndex ? theme.palette.secondary : '#E1E3E4',
                     }}
@@ -263,7 +263,7 @@ export function HowToPlayModal({ onPlayNow, theme, visible }: HowToPlayModalProp
                         borderColor: isActiveTap ? theme.palette.primary : 'rgba(195,198,214,0.34)',
                         borderWidth: isActiveTap ? 2 : 1,
                       }}>
-                      <Text className="text-center text-[13px] font-semibold" style={{ color: theme.palette.text }}>
+                      <Text className="text-center text-[16px] font-semibold" numberOfLines={1} style={{ color: theme.palette.text }}>
                         {item.label}
                       </Text>
                     </View>
