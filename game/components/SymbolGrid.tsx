@@ -24,7 +24,7 @@ function SymbolTile({ cell, iconSize, onCellPress, theme, tileSize }: SymbolTile
   const icon = theme.icons.find((item) => item.id === cell.iconId);
   const isHit = cell.status === 'hit';
   const isMiss = cell.status === 'miss';
-  const iconColor = isHit ? theme.palette.secondary : isMiss ? '#BA1A1A' : '#B8C0D4';
+  const iconColor = isHit ? theme.palette.primary : isMiss ? '#BA1A1A' : '#B8C0D4';
   const scale = useRef(new Animated.Value(1)).current;
   const shake = useRef(new Animated.Value(0)).current;
 
@@ -52,41 +52,45 @@ function SymbolTile({ cell, iconSize, onCellPress, theme, tileSize }: SymbolTile
       <Pressable
         accessibilityLabel={`Symbol ${icon?.label ?? cell.iconId}`}
         accessibilityRole="button"
-        className="items-center justify-center rounded-xl border-2 border-gray-200 bg-white p-4"
         key={cell.id}
         onPress={() => onCellPress(cell.id)}
         style={({ pressed }) => ({
-          width: tileSize,
-          height: tileSize,
-          backgroundColor: isHit ? theme.palette.success : isMiss ? theme.palette.danger : '#FFFFFF',
-          borderColor: isHit
-            ? 'rgba(71, 101, 84, 0.3)'
-            : isMiss
-              ? '#BA1A1A'
-              : 'rgba(195, 198, 214, 0.2)',
-          borderWidth: isMiss ? 2 : 1.5,
           opacity: pressed ? 0.88 : 1,
           transform: [{ scale: pressed ? 0.98 : 1 }],
-          shadowColor: '#000000',
-          shadowOpacity: 0.05,
-          shadowRadius: 3,
-          shadowOffset: { width: 0, height: 1 },
-          elevation: 2,
         })}>
-        {icon ? <GardenIcon color={iconColor} icon={icon} size={iconSize} /> : null}
-        {isHit ? (
-          <View
-            className="absolute items-center justify-center rounded-full"
-            style={{
-              top: -8,
-              right: -8,
-              width: 18,
-              height: 18,
-              backgroundColor: theme.palette.secondary,
-            }}>
-            <MaterialCommunityIcons color="#FFFFFF" name="check" size={10} />
-          </View>
-        ) : null}
+        <View
+          className="items-center justify-center rounded-xl bg-white p-4"
+          style={{
+            width: tileSize,
+            height: tileSize,
+            backgroundColor: isMiss ? theme.palette.danger : '#FFFFFF',
+            borderColor: isHit
+              ? theme.palette.primary
+              : isMiss
+                ? '#BA1A1A'
+                : 'rgba(195, 198, 214, 0.2)',
+            borderWidth: isHit || isMiss ? 2 : 1.5,
+            shadowColor: '#000000',
+            shadowOpacity: 0.05,
+            shadowRadius: 3,
+            shadowOffset: { width: 0, height: 1 },
+            elevation: 2,
+          }}>
+          {icon ? <GardenIcon color={iconColor} icon={icon} size={iconSize} /> : null}
+          {isHit ? (
+            <View
+              className="absolute items-center justify-center rounded-full"
+              style={{
+                top: -10,
+                right: -10,
+                width: 24,
+                height: 24,
+                backgroundColor: theme.palette.primary,
+              }}>
+              <MaterialCommunityIcons color="#FFFFFF" name="check" size={15} />
+            </View>
+          ) : null}
+        </View>
       </Pressable>
     </Animated.View>
   );
@@ -98,7 +102,7 @@ export function SymbolGrid({ cells, columns, onCellPress, theme }: SymbolGridPro
   const gap = 16;
   const gridWidth = Math.max(screenWidth - horizontalPadding, 0);
   const tileSize = Math.max(Math.floor((gridWidth - gap * (columns - 1)) / columns), 56);
-  const iconSize = columns === 5 ? 22 : 30;
+  const iconSize = Math.floor(tileSize * (columns === 5 ? 0.42 : 0.48));
   const rows = Array.from({ length: Math.ceil(cells.length / columns) }, (_, index) =>
     cells.slice(index * columns, index * columns + columns)
   );

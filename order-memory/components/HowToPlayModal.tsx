@@ -192,18 +192,17 @@ export function HowToPlayModal({ onPlayNow, theme, visible }: HowToPlayModalProp
             elevation: 16,
           }}>
           <View className="mb-2 self-center rounded-full px-4 py-2" style={{ backgroundColor: 'rgba(15, 82, 186, 0.1)' }}>
-            <Text className="text-[12px] font-bold uppercase tracking-[1.2px]" style={{ color: theme.palette.primary }}>
+            <Text className="text-[12px] font-bold uppercase tracking-[1px]" style={{ color: theme.palette.primary }}>
               Quick Guide
             </Text>
           </View>
-          <Text className="text-[34px] font-black leading-[40px] text-[#0040A1] py-4">How To Play</Text>
+          <Text className="text-[34px] font-black leading-[40px] text-[#0040A1] py-2">How To Play</Text>
           <Text className="py-2 text-[18px] font-semibold leading-[26px]" style={{ color: theme.palette.secondary }}>
             {theme.gameName}
           </Text>
 
           <Text className="py-2 text-[18px] leading-[30px]" style={{ color: theme.palette.text }}>
-            Watch each symbol appear one by one. When the full sequence ends, tap the same symbols back in
-            the exact order.
+            Watch each symbol appear. When the sequence ends, tap them back in the same order.
           </Text>
 
           <View className="mt-7 items-center rounded-[28px] px-4 py-4" style={{ backgroundColor: theme.palette.panelAlt }}>
@@ -302,9 +301,9 @@ export function HowToPlayModal({ onPlayNow, theme, visible }: HowToPlayModalProp
               ) : null}
             </View>
 
-            <Text className="mt-4 text-center text-[14px] font-medium leading-5" style={{ color: theme.palette.text }}>
+            {/* <Text className="mt-4 text-center text-[14px] font-medium leading-5" style={{ color: theme.palette.text }}>
               Watch the sequence, then tap the names back in the same order.
-            </Text>
+            </Text> */}
           </View>
 
           <Pressable accessibilityRole="button" className="mt-8 overflow-hidden rounded-[22px]" onPress={onPlayNow}>
