@@ -27,11 +27,17 @@ export const textWeight = {
   light: "300",
   regular: "400",
   medium: "500",
-  semiBold: "700",
+  semiBold: "600",
   bold: "700",
 };
 
 export const fontFamily = {
   primary: "Inter-Regular",
   secondary: "Inter-Regular",
+  primaryBold: "Inter-Bold",
+  secondaryBold: "Inter-Bold",
+  primarySemiBold: "Inter-SemiBold",
+  secondarySemiBold: "Inter-SemiBold",
+  primaryMedium: "Inter-Medium",
+  secondaryMedium: "Inter-Medium",
 };

@@ -5,7 +5,6 @@ import { Image, Pressable, Text, View } from "react-native";
 import FeatureTopLeftIcon from "../../assets/images/home-image-top-left.svg";
 import LevelIcon from "../../assets/images/home-lavel-icon.svg";
 
-
 const featuredImage = require("../../assets/images/home-feture-image.jpg");
 
 type HomeFeatureCardProps = {
@@ -18,22 +17,42 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
       onPress={onPress}
       style={{
         marginTop: 18,
-        borderRadius: 22,
+        borderRadius: 12,
         backgroundColor: "#FFFFFF",
         padding: 12,
         shadowColor: "#0B3B7A",
         shadowOpacity: 0.08,
-        shadowRadius: 18,
+        shadowRadius: 12,
         shadowOffset: { width: 0, height: 8 },
         elevation: 4,
       }}
     >
-      <View style={{ overflow: "hidden", borderRadius: 18 }}>
+      <View
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: 8,
+          height: 340,
+        }}
+      >
         <Image
           source={featuredImage}
           style={{ width: "100%", height: 340 }}
           resizeMode="cover"
-          blurRadius={4}
+        />
+        <LinearGradient
+          pointerEvents="none"
+          colors={["rgba(0, 29, 61, 0.60)", "rgba(102, 102, 102, 0.00)"]}
+          locations={[0.0037, 0.5802]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+          }}
         />
 
         <View
@@ -44,14 +63,14 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
             width: 40,
             height: 40,
             borderRadius: 999,
-            backgroundColor: "#8ac1fe80",
+            backgroundColor: "#8ac1fe40",
             alignItems: "center",
             justifyContent: "center",
             borderColor: "#ffffff70",
             borderWidth: 1,
           }}
         >
-          <FeatureTopLeftIcon width={20} height={20} />
+          <FeatureTopLeftIcon width={24} height={24} />
         </View>
 
         <View
@@ -70,11 +89,11 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
             borderWidth: 1,
           }}
         >
-          <LevelIcon width={16} height={16} />
+          <LevelIcon width={20} height={20} />
           <Text
             style={{
               color: "#FFFFFF",
-              ...typography.caption.small, // nearest to 13
+              ...typography.label.small, // nearest to 13
             }}
           >
             2 Level
@@ -82,6 +101,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
         </View>
 
         <LinearGradient
+          pointerEvents="none"
           style={{
             position: "absolute",
             left: 0,
@@ -99,7 +119,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
           <Text
             style={{
               color: "#FFFFFF",
-              ...typography.title.t2,
+              ...typography.label.xl,
             }}
           >
             Push Up
@@ -108,7 +128,10 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
             style={{
               marginTop: 4,
               color: "#EEF4FF",
-              ...typography.body.small, // nearest to 15
+              fontSize: 14,
+              lineHeight: 21,
+              fontFamily: "Inter-Regular",
+              // ...typography.label.ssm, // nearest to 15
             }}
           >
             Let&apos;s Begin Stride - 2
@@ -132,7 +155,7 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
         <Text
           style={{
             color: "#0052AD",
-            ...typography.body.large,
+            ...typography.button.large,
             letterSpacing: 0.4,
           }}
         >
@@ -142,5 +165,3 @@ export function HomeFeatureCard({ onPress }: HomeFeatureCardProps) {
     </Pressable>
   );
 }
-
-

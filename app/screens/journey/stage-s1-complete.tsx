@@ -78,7 +78,7 @@ function MetricRow({ title, icon }: MetricRowProps) {
           marginLeft: 10,
           flex: 1,
           color: "#1E2025",
-          ...typography.body.small, // nearest to 22 / 1.6
+          ...typography.body.small, // nearest to 22
         }}
       >
         {title}
@@ -87,7 +87,7 @@ function MetricRow({ title, icon }: MetricRowProps) {
       <Text
         style={{
           color: "#1E2025",
-          ...typography.body.small, // nearest to 22 / 1.6
+          ...typography.body.small, // nearest to 22
         }}
       >
         450
@@ -227,7 +227,7 @@ export default function StageS1CompleteScreen() {
               <Text
                 style={{
                   color: "#F0F6FF",
-                  ...typography.headline.h2, // nearest to 36 / 1.6
+                  ...typography.headline.h2, // nearest to 36
                   zIndex: 1,
                 }}
               >
@@ -237,7 +237,7 @@ export default function StageS1CompleteScreen() {
                 style={{
                   marginTop: -2,
                   color: "#FFFFFF",
-                  ...typography.headline.h1, // nearest to 52 / 1.6
+                  ...typography.headline.h1, // nearest to 52
                   zIndex: 1,
                 }}
               >
@@ -296,7 +296,7 @@ export default function StageS1CompleteScreen() {
           <Text
             style={{
               color: "#FFFFFF",
-              ...typography.headline.h2, // nearest to 42 / 1.6
+              ...typography.headline.h2, // nearest to 42
             }}
           >
             {isReplay ? "Back to Journey" : "Get Points"}
@@ -306,5 +306,3 @@ export default function StageS1CompleteScreen() {
     </SafeAreaView>
   );
 }
-
-

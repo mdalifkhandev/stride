@@ -3,8 +3,6 @@ import { ReactNode } from "react";
 
 import { Pressable, Text, View } from "react-native";
 
-
-
 type HomeBrainGameCardProps = {
   title: string;
   icon: ReactNode;
@@ -48,7 +46,7 @@ export function HomeBrainGameCard({
           style={{
             flex: 1,
             color: "#0052AD",
-            ...typography.headline.h3,
+            ...typography.label.large,
           }}
         >
           {title}
@@ -57,5 +55,3 @@ export function HomeBrainGameCard({
     </Pressable>
   );
 }
-
-

@@ -141,62 +141,67 @@ export const typography = {
   },
 } as const;
 
-function makeScaledTextStyle(
-  base: TextStyle,
-  color: string,
-): TextStyle {
-  return {
-    ...base,
-    color,
-  };
-}
-
 export const textStyles = {
-  get h1() {
-    return makeScaledTextStyle(typography.headline.h1, colors.text.primary);
-  },
-  get h2() {
-    return makeScaledTextStyle(typography.headline.h2, colors.text.primary);
-  },
-  get h3() {
-    return makeScaledTextStyle(typography.headline.h3, colors.text.primary);
-  },
-  get titleSmall() {
-    return makeScaledTextStyle(typography.title.small, colors.text.primary);
-  },
-  get titleT2() {
-    return makeScaledTextStyle(typography.title.t2, colors.text.primary);
-  },
-  get titleT3() {
-    return makeScaledTextStyle(typography.title.t3, colors.text.primary);
-  },
-  get bodyLarge() {
-    return makeScaledTextStyle(typography.body.large, colors.text.primary);
-  },
-  get bodySmall() {
-    return makeScaledTextStyle(typography.body.small, colors.text.primary);
-  },
-  get bodyXsm() {
-    return makeScaledTextStyle(typography.body.xsm, colors.text.secondary);
-  },
-  get captionLarge() {
-    return makeScaledTextStyle(typography.caption.large, colors.text.secondary);
-  },
-  get captionXL() {
-    return makeScaledTextStyle(typography.caption.xl, colors.text.secondary);
-  },
-  get captionSmall() {
-    return makeScaledTextStyle(typography.caption.small, colors.text.secondary);
-  },
-  get labelLarge() {
-    return makeScaledTextStyle(typography.label.large, colors.text.primary);
-  },
-  get labelSmall() {
-    return makeScaledTextStyle(typography.label.small, colors.text.primary);
-  },
-  get stateBar() {
-    return makeScaledTextStyle(typography.stateBar.small, colors.text.primary);
-  },
+  h1: {
+    ...typography.headline.h1,
+    color: colors.text.primary,
+  } as TextStyle,
+  h2: {
+    ...typography.headline.h2,
+    color: colors.text.primary,
+  } as TextStyle,
+  h3: {
+    ...typography.headline.h3,
+    color: colors.text.primary,
+  } as TextStyle,
+  titleSmall: {
+    ...typography.title.small,
+    color: colors.text.primary,
+  } as TextStyle,
+  titleT2: {
+    ...typography.title.t2,
+    color: colors.text.primary,
+  } as TextStyle,
+  titleT3: {
+    ...typography.title.t3,
+    color: colors.text.primary,
+  } as TextStyle,
+  bodyLarge: {
+    ...typography.body.large,
+    color: colors.text.primary,
+  } as TextStyle,
+  bodySmall: {
+    ...typography.body.small,
+    color: colors.text.primary,
+  } as TextStyle,
+  bodyXsm: {
+    ...typography.body.xsm,
+    color: colors.text.secondary,
+  } as TextStyle,
+  captionLarge: {
+    ...typography.caption.large,
+    color: colors.text.secondary,
+  } as TextStyle,
+  captionXL: {
+    ...typography.caption.xl,
+    color: colors.text.secondary,
+  } as TextStyle,
+  captionSmall: {
+    ...typography.caption.small,
+    color: colors.text.secondary,
+  } as TextStyle,
+  labelLarge: {
+    ...typography.label.large,
+    color: colors.text.primary,
+  } as TextStyle,
+  labelSmall: {
+    ...typography.label.small,
+    color: colors.text.primary,
+  } as TextStyle,
+  stateBar: {
+    ...typography.stateBar.small,
+    color: colors.text.primary,
+  } as TextStyle,
 } as const;
 
 export const buttonStyles = StyleSheet.create({

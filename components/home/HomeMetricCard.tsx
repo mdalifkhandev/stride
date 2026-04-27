@@ -3,8 +3,6 @@ import { ReactNode } from "react";
 
 import { Pressable, Text, View } from "react-native";
 
-
-
 type HomeMetricCardProps = {
   title: string;
   value: string;
@@ -54,10 +52,12 @@ export function HomeMetricCard({
           {icon}
           <Text
             style={{
-              color: accentColor,
-              ...typography.caption.small, // nearest to 13
-              letterSpacing: 0.8,
+              fontSize: 14,
+              lineHeight: 25.5,
+              letterSpacing: 0.68,
               textTransform: "uppercase",
+              fontFamily: "Inter-Bold",
+              color: accentColor,
             }}
           >
             {title}
@@ -69,13 +69,17 @@ export function HomeMetricCard({
         <Text
           style={{
             color: accentColor,
-            ...typography.headline.h1,
+            fontSize: 48,
+            lineHeight: 34.8,
+            fontFamily: "Inter-Bold",
           }}
         >
           {value}
         </Text>
         {valueAdornment ? (
-          <View style={{ marginLeft: 6, marginBottom: 8 }}>{valueAdornment}</View>
+          <View style={{ marginLeft: 6, marginBottom: 8 }}>
+            {valueAdornment}
+          </View>
         ) : null}
         {suffix ? (
           <Text
@@ -105,5 +109,3 @@ export function HomeMetricCard({
     </Pressable>
   );
 }
-
-

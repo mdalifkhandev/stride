@@ -1,5 +1,10 @@
 import type { TextStyle } from "react-native";
-import { fontFamily, lineHeight, textSize, textWeight } from "../premetive/text";
+import {
+  fontFamily,
+  lineHeight,
+  textSize,
+  textWeight,
+} from "../premetive/text";
 
 export const Typography = {
   displaySmall: {
@@ -10,70 +15,70 @@ export const Typography = {
   } as TextStyle,
 
   H1: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[32],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[48],
   } as TextStyle,
 
   H2: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[24],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[36],
   } as TextStyle,
 
   H3: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[20],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[30],
   } as TextStyle,
 
   titleSmall: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[14],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[21],
   } as TextStyle,
 
   titleT2: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[18],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[27],
   } as TextStyle,
 
   titleT3: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[18],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[27],
   } as TextStyle,
 
   labelSSM: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[14],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[21],
   } as TextStyle,
 
   labelLarge: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[20],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[30],
   } as TextStyle,
 
   labelSmall: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[18],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[27],
   } as TextStyle,
 
   labelXL: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[20],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[30],
@@ -108,14 +113,14 @@ export const Typography = {
   } as TextStyle,
 
   captionLarge: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[14],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[21],
   } as TextStyle,
 
   captionSmallBold: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[12],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[18],
@@ -136,28 +141,28 @@ export const Typography = {
   } as TextStyle,
 
   buttonLarge: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[20],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[30],
   } as TextStyle,
 
   buttonSmall: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[16],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[24],
   } as TextStyle,
 
   buttonIcon: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primarySemiBold,
     fontSize: textSize[12],
     fontWeight: textWeight.semiBold,
     lineHeight: lineHeight[18],
   } as TextStyle,
 
   stateBarSmall: {
-    fontFamily: fontFamily.primary,
+    fontFamily: fontFamily.primaryMedium,
     fontSize: textSize[16],
     fontWeight: textWeight.medium,
     lineHeight: lineHeight[24],

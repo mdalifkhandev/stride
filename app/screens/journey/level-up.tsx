@@ -85,7 +85,7 @@ function MetricRow({ title, icon }: MetricRowProps) {
           marginLeft: 10,
           flex: 1,
           color: "#1E2025",
-          ...typography.body.small, // nearest to 22 / 1.6
+          ...typography.body.small, // nearest to 22
         }}
       >
         {title}
@@ -94,7 +94,7 @@ function MetricRow({ title, icon }: MetricRowProps) {
       <Text
         style={{
           color: "#1E2025",
-          ...typography.body.small, // nearest to 22 / 1.6
+          ...typography.body.small, // nearest to 22
         }}
       >
         450
@@ -233,7 +233,7 @@ export default function LevelUpScreen() {
               <Text
                 style={{
                   color: "#FFF7EA",
-                  ...typography.headline.h2, // nearest to 36 / 1.6
+                  ...typography.headline.h2, // nearest to 36
                   zIndex: 1,
                 }}
               >
@@ -243,7 +243,7 @@ export default function LevelUpScreen() {
                 style={{
                   marginTop: -2,
                   color: "#FFFFFF",
-                  ...typography.headline.h1, // nearest to 52 / 1.6
+                  ...typography.headline.h1, // nearest to 52
                   zIndex: 1,
                 }}
               >
@@ -270,7 +270,7 @@ export default function LevelUpScreen() {
           style={{
             textAlign: "center",
             color: "#0E59B6",
-            ...typography.headline.h2, // nearest to 38 / 1.6
+            ...typography.headline.h2, // nearest to 38
           }}
         >
           Total Stride Points
@@ -301,7 +301,7 @@ export default function LevelUpScreen() {
           <Text
             style={{
               color: "#FFFFFF",
-              ...typography.headline.h2, // nearest to 42 / 1.6
+              ...typography.headline.h2, // nearest to 42
             }}
           >
             Get Points
@@ -311,5 +311,3 @@ export default function LevelUpScreen() {
     </SafeAreaView>
   );
 }
-
-

@@ -10,7 +10,7 @@ import { AuthLogoHeader } from "../../../../components/auth/login/AuthLogoHeader
 import { AuthOptionCard } from "../../../../components/auth/login/AuthOptionCard";
 import { AuthScaffold } from "../../../../components/auth/login/AuthScaffold";
 import { AppButton } from "../../../../components/ui/AppButton";
-import { colors, spacing, textStyles } from "../../../../theme";
+import { colors, spacing, textStyles, typography } from "../../../../theme";
 
 export default function LoginIndex() {
   const router = useRouter();
@@ -29,7 +29,10 @@ export default function LoginIndex() {
     <AuthScaffold contentAlignment="top" header={<AuthLogoHeader compact />}>
       <View style={{ gap: spacing[16] }}>
         <Text
-          style={[textStyles.h1, { textAlign: "center", fontWeight: "700" }]}
+          style={[
+            { textAlign: "center", fontWeight: "700" },
+            typography.headline.h3,
+          ]}
         >
           Welcome Back!
         </Text>

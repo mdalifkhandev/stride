@@ -91,7 +91,7 @@ export default function StageS1Screen() {
           <Text
             style={{
               color: "#0052AD",
-              ...typography.title.t2, // nearest to 30 / 1.6
+              ...typography.title.t2, // nearest to 30
             }}
           >
             {`Stride-${stageNumber}`}
@@ -255,5 +255,3 @@ export default function StageS1Screen() {
     </SafeAreaView>
   );
 }
-
-

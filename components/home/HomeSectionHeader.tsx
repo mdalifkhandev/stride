@@ -1,24 +1,19 @@
 import { typography } from "@/theme";
 import { Text, View } from "react-native";
 
-
-
 type HomeSectionHeaderProps = {
   title: string;
   subtitle: string;
 };
 
-export function HomeSectionHeader({
-  title,
-  subtitle,
-}: HomeSectionHeaderProps) {
+export function HomeSectionHeader({ title, subtitle }: HomeSectionHeaderProps) {
   return (
     <View>
       <Text
         style={{
           marginTop: 28,
           color: "#0052AD",
-          ...typography.title.t2,
+          ...typography.label.xl,
         }}
       >
         {title}
@@ -27,7 +22,7 @@ export function HomeSectionHeader({
         style={{
           marginTop: 2,
           color: "#6B7280",
-          ...typography.body.large,
+          ...typography.caption.xl,
         }}
       >
         {subtitle}
@@ -35,5 +30,3 @@ export function HomeSectionHeader({
     </View>
   );
 }
-
-

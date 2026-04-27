@@ -30,8 +30,6 @@ export function AuthLogoHeader({
         style={{ width: 100, height: 50 }}
       />
 
-      <Text>sdfsdf</Text>
-
       {title ? (
         <Text
           style={[

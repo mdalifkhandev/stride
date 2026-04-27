@@ -1,14 +1,12 @@
-import { textStyles } from "@/theme";
+import { textStyles, typography } from "@/theme";
 import { Text, View } from "react-native";
-
-
 
 export function HomeGreeting() {
   return (
     <View>
       <Text
         style={{
-          ...textStyles.h3,
+          ...textStyles.h1,
           color: "#1E2430",
         }}
       >
@@ -16,7 +14,7 @@ export function HomeGreeting() {
       </Text>
       <Text
         style={{
-          ...textStyles.bodyLarge,
+          ...typography.label.xl,
           marginTop: 18,
           color: "#0052AD",
           fontWeight: "700",
@@ -27,4 +25,3 @@ export function HomeGreeting() {
     </View>
   );
 }
-

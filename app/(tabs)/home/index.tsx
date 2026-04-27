@@ -27,7 +27,8 @@ export default function HomeScreen() {
   };
 
   return (
-    <LinearGradient colors={[
+    <LinearGradient
+      colors={[
         "rgba(0, 82, 173, 0.20)",
         "rgba(255, 255, 255, 0.20)",
         "#F8F9FC",
@@ -54,7 +55,7 @@ export default function HomeScreen() {
                 value="48%"
                 backgroundColor="#EAF5E9"
                 accentColor="#3E9748"
-                icon={<GrowthIcon width={20} height={20} />}
+                icon={<GrowthIcon width={24} height={24} />}
                 valueAdornment={<TrendUpIcon width={60} height={30} />}
                 onPress={() => setShowStridePopup(true)}
               />
@@ -64,7 +65,7 @@ export default function HomeScreen() {
                 suffix="Days"
                 backgroundColor="#FFF4E8"
                 accentColor="#FF7A00"
-                icon={<FlameIcon width={20} height={20} />}
+                icon={<FlameIcon width={24} height={24} />}
                 award={<TrophyIcon width={68} height={68} />}
                 onPress={() => router.push("/screens/home/journey")}
               />
@@ -82,17 +83,17 @@ export default function HomeScreen() {
             <View style={{ marginTop: 18, gap: 18 }}>
               <HomeBrainGameCard
                 title="Symbol Tap"
-                icon={<SymbolTapIcon width={68} height={68} />}
+                icon={<SymbolTapIcon />}
                 onPress={() => openGame("symbol")}
               />
               <HomeBrainGameCard
                 title="Order Memory"
-                icon={<OrderMemoryIcon width={68} height={68} />}
+                icon={<OrderMemoryIcon />}
                 onPress={() => openGame("order")}
               />
               <HomeBrainGameCard
                 title="Accuracy Check"
-                icon={<AccuracyCheckIcon width={68} height={68} />}
+                icon={<AccuracyCheckIcon />}
                 onPress={() => openGame("time")}
               />
             </View>
